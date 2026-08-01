@@ -652,56 +652,6 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(90deg, var(--c-cia), var(--c-yellow));
 }
 
-/* Tech Stack */
-.tech-grid-blocks {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 14px;
-}
-.tech-block {
-  background: var(--c-bg-2);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-lg);
-  padding: 18px 20px;
-}
-.tech-block-header h4 {
-  font-size: 13px;
-  color: var(--c-text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.tech-block-list {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.tech-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--c-line);
-  font-size: 13px;
-}
-.tech-row:last-child { border-bottom: none; }
-.tech-name { color: var(--c-text); font-weight: 500; }
-.tech-num { color: var(--c-cia); font-weight: 700; font-family: "Ubuntu Mono", monospace; }
-.tech-stack-list { display: flex; flex-wrap: wrap; gap: 6px; }
-.tech-tag {
-  background: var(--c-bg-3);
-  border: 1px solid var(--c-line);
-  padding: 4px 10px;
-  border-radius: 99px;
-  font-size: 11px;
-  color: var(--c-text);
-}
-.tech-count {
-  background: var(--c-cia);
-  color: var(--c-bg);
-  padding: 0 5px;
-  border-radius: 99px;
-  margin-left: 4px;
-  font-weight: 700;
-}
-
 /* Provider Tech */
 .provider-tech-grid {
   display: grid;
@@ -1030,6 +980,150 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
 }
 
+
+.world-map-container {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 18px;
+  padding: 16px;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  overflow: hidden;
+  background-image: 
+    radial-gradient(circle at 30% 30%, rgba(96,189,145,0.04), transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(255,222,89,0.03), transparent 50%);
+}
+.world-map-container:active { cursor: grabbing; }
+.world-map-svg {
+  width: 100%;
+  height: 540px;
+  display: block;
+}
+.continents { transition: opacity 0.2s; }
+
+.bubble-city {
+  fill: var(--c-cia);
+  fill-opacity: 0.3;
+  stroke: var(--c-cia);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: fill-opacity 0.15s;
+}
+.bubble-city:hover {
+  fill-opacity: 0.6;
+  stroke-width: 2.5;
+}
+.bubble-city.top {
+  stroke: var(--c-yellow);
+  stroke-width: 2;
+}
+.bubble-label {
+  fill: var(--c-text);
+  font-size: 9px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+  font-family: "Manrope", sans-serif;
+}
+.bubble-count {
+  fill: var(--c-text);
+  font-size: 9px;
+  font-weight: 800;
+  text-anchor: middle;
+  pointer-events: none;
+  font-family: "Manrope", sans-serif;
+}
+
+.map-controls {
+  display: flex; gap: 6px;
+}
+.map-btn {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  color: var(--c-text-2);
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  display: grid; place-items: center;
+  transition: all 0.12s;
+}
+.map-btn:hover {
+  border-color: var(--c-cia);
+  color: var(--c-cia);
+  background: rgba(96,189,145,0.08);
+}
+
+.map-tooltip {
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13,13,36,0.95);
+  border: 1px solid var(--c-cia);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--c-text);
+  font-size: 12px;
+  pointer-events: none;
+  display: none;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  min-width: 240px;
+  max-width: 320px;
+}
+.map-tooltip.show { display: block; }
+.map-tooltip h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--c-cia);
+  margin-bottom: 6px;
+}
+.map-tooltip .tt-providers {
+  font-size: 11px;
+  color: var(--c-text-2);
+  line-height: 1.5;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.map-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.map-stat {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.map-stat-label {
+  font-size: 10px;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.map-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--c-text);
+}
+.map-stat-sub {
+  font-size: 11px;
+  color: var(--c-text-3);
+  margin-top: 2px;
+}
+
+.section-tag-row { display: flex; align-items: center; gap: 10px; }
+.section-label-text { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; color: var(--c-text); }
+
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -1106,9 +1200,10 @@ a { color: inherit; text-decoration: none; }
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         Overview
       </a>
-      <a class="nav-item" href="#cloud-asia-map">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        Asia Map
+      
+      <a class="nav-item" href="#cloud-world-map">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        World Map
       </a>
       <a class="nav-item" href="#os-leaderboard">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
@@ -1234,7 +1329,62 @@ a { color: inherit; text-decoration: none; }
       </div>
     </section>
 
-    
+
+    <!-- WORLD CLOUD MAP (TOP) -->
+    <section class="section" id="cloud-world-map">
+      <div class="hero-row">
+        <div class="section-label-row">
+          <div class="section-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="section-label-text">World Cloud Infrastructure Map</div>
+        </div>
+        <div class="map-controls">
+          <button class="map-btn" onclick="resetMapView()" title="Reset view">⌖</button>
+          <button class="map-btn" onclick="zoomIn()" title="Zoom in">+</button>
+          <button class="map-btn" onclick="zoomOut()" title="Zoom out">−</button>
+        </div>
+      </div>
+      <p class="section-sub">Geographic distribution of cloud providers. <strong>Drag to pan</strong>, <strong>scroll to zoom</strong>. Bubble size = number of providers serving that location.</p>
+
+      <div class="world-map-container" id="worldMapContainer">
+        <svg class="world-map-svg" id="worldMapSvg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="bubbleGlow">
+              <stop offset="0%" stop-color="#60bd91" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#60bd91" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          
+          <g id="mapContent">
+            <g class="continents" fill="rgba(96,189,145,0.05)" stroke="rgba(96,189,145,0.25)" stroke-width="0.8">
+              <path d="M 60 110 L 110 100 L 160 105 L 200 130 L 220 160 L 230 200 L 215 240 L 200 280 L 175 300 L 155 290 L 130 270 L 100 245 L 75 215 L 60 180 Z"/>
+              <path d="M 175 300 L 200 320 L 215 340 L 220 360 L 210 370 L 195 360 L 180 340 Z"/>
+              <path d="M 220 360 L 240 350 L 260 360 L 270 395 L 265 425 L 250 450 L 230 460 L 215 440 L 215 400 L 215 370 Z"/>
+              <path d="M 410 145 L 445 130 L 480 135 L 510 150 L 520 175 L 505 195 L 480 200 L 450 195 L 425 180 L 410 165 Z"/>
+              <path d="M 425 215 L 460 205 L 490 220 L 510 250 L 510 290 L 490 325 L 470 345 L 445 340 L 425 310 L 415 270 L 415 240 Z"/>
+              <path d="M 510 195 L 555 190 L 580 200 L 580 230 L 555 245 L 525 235 L 510 215 Z"/>
+              <path d="M 510 145 L 555 130 L 605 125 L 670 130 L 720 145 L 750 175 L 740 210 L 700 225 L 650 220 L 605 200 L 555 180 L 525 165 L 510 155 Z"/>
+              <path d="M 555 220 L 600 220 L 615 250 L 605 285 L 575 305 L 555 290 L 545 260 L 545 235 Z"/>
+              <path d="M 715 250 L 755 240 L 775 270 L 770 305 L 745 320 L 715 310 L 700 280 Z"/>
+              <path d="M 660 165 L 750 160 L 790 175 L 805 200 L 800 225 L 770 245 L 740 250 L 720 240 L 700 220 L 680 200 L 660 180 Z"/>
+              <path d="M 750 350 L 820 340 L 870 360 L 880 395 L 855 415 L 815 420 L 775 410 L 750 390 Z"/>
+              <path d="M 905 425 L 920 415 L 925 440 L 915 460 L 900 450 Z"/>
+              <path d="M 405 145 L 425 140 L 425 160 L 410 165 Z"/>
+              <path d="M 510 330 L 525 320 L 530 350 L 520 365 L 510 360 Z"/>
+              <path d="M 790 195 L 805 180 L 815 200 L 810 220 L 800 215 Z"/>
+              <path d="M 715 320 L 760 315 L 800 320 L 805 340 L 780 350 L 740 345 L 715 335 Z"/>
+              <path d="M 745 295 L 760 290 L 770 320 L 760 340 L 745 330 Z"/>
+            </g>
+            <g id="mapBubbles"></g>
+          </g>
+        </svg>
+        <div class="map-tooltip" id="mapTooltip"></div>
+      </div>
+      
+      <div class="map-stats" id="mapStats"></div>
+    </section>
+
     <!-- OPEN SOURCE LEADERBOARD -->
     <section class="section" id="os-leaderboard">
       <div class="hero-row">
@@ -1367,37 +1517,7 @@ a { color: inherit; text-decoration: none; }
     </section>
 
     
-    <!-- CLOUD ASIA MAP -->
-    <section class="section" id="cloud-asia-map">
-      <div class="hero-row">
-        <div class="section-label-row">
-          <div class="section-icon">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div class="section-label-text">Cloud Asia Map</div>
-        </div>
-      </div>
-      <p class="section-sub">Geographic distribution of cloud providers across Asia Pacific. Bubble size = number of providers serving the region.</p>
-      <div class="asia-map-container" id="asiaMap"></div>
-      <div class="asia-map-legend">
-        <div class="legend-item">
-          <span class="legend-bubble" style="width:12px;height:12px"></span>
-          <span>1-2 providers</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-bubble" style="width:20px;height:20px"></span>
-          <span>3-5 providers</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-bubble" style="width:30px;height:30px"></span>
-          <span>6-10 providers</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-bubble" style="width:44px;height:44px"></span>
-          <span>11+ providers</span>
-        </div>
-      </div>
-    </section>
+    
 
 <!-- DIRECTORY -->
     <section class="section" id="directory">
@@ -2013,199 +2133,42 @@ document.addEventListener('keydown', e => {
 });
 
 
-
-// Technology explanations
-const TECH_EXPLAIN = {
-  "KVM": "Kernel-based Virtual Machine. Open source hypervisor built into Linux kernel. Industry standard for cloud providers.",
-  "Xen": "Xen Project hypervisor. Open source, pioneered AWS EC2 in 2006. Less common in modern clouds.",
-  "Hyper-V": "Microsoft hypervisor. Proprietary, used by Azure. Windows Server-based.",
-  "VMware vSphere": "VMware enterprise hypervisor. Industry standard but proprietary. Used in private cloud.",
-  "AWS Nitro System": "Custom AWS hypervisor built on KVM with hardware offload for network/storage/security. Proprietary.",
-  "OpenStack": "Open source cloud platform. Powers many sovereign clouds (Catalyst NZ, Macquarie, AUCloud, Vault).",
-  "Proxmox VE": "Open source virtualization platform based on KVM and LXC. Strong in European providers.",
-  "containerd": "Industry-standard container runtime. CNCF graduated project. Powers most K8s clusters.",
-  "Docker": "Most popular container runtime. Daemon-based. Open source (Moby project).",
-  "Firecracker": "AWS-developed microVM for Lambda/serverless. Apache 2.0 licensed.",
-  "gVisor": "Google's user-space kernel for sandboxed containers. Used in GKE.",
-  "Ceph": "Distributed object/block/file storage. Open source (LGPL). Powers OpenStack clouds.",
-  "S3-compatible": "Amazon S3 API standard. Implemented by most clouds (OpenStack Swift, MinIO, RADOS Gateway).",
-  "Neutron": "OpenStack networking component. Provides SDN, VPC, load balancer as a service.",
-  "Calico": "CNCF project for container networking. Cilium is eBPF-based alternative.",
-  "EKS": "AWS Elastic Kubernetes Service. Managed upstream Kubernetes.",
-  "AKS": "Azure Kubernetes Service. Managed upstream Kubernetes.",
-  "GKE": "Google Kubernetes Engine. Pioneer in managed K8s.",
-  "OKE": "Oracle Kubernetes Engine. Managed upstream K8s on OCI.",
-  "Graviton": "AWS custom Arm-based CPU (Neoverse V1/V2). 64-core variants. Power M6g/C6g/R6g instances.",
-  "Trainium": "AWS custom ML training chip. Used in Trn1/Trn2 instances. Optimized for deep learning.",
-  "Inferentia": "AWS custom ML inference accelerator. Powers Inf1/Inf2 instances.",
-  "Cobalt": "Microsoft custom Arm-based CPU (Neoverse N2). Power Cobalt 100 VMs.",
-  "Maia": "Microsoft custom AI accelerator (100-series). For Azure OpenAI workloads.",
-  "TPU": "Google Tensor Processing Unit. Custom AI accelerator (v5e/v6e).",
-  "Yitian 710": "Alibaba custom Arm CPU (128 cores, 5 GHz). Power ECS Yitian instances.",
-  "Kunpeng": "Huawei custom Arm CPU. Power Kunpeng ECS instances in China regions.",
-  "Tau T2A": "Google Arm-based VM type. Neoverse A710 cores. Used for cost-efficient workloads.",
-  "Axion": "Google custom Arm CPU (Neoverse V2). Latest generation.",
-};
-
-const REGION_COORDS = {
-  // Asia Pacific
-  "Indonesia":      { x: 540, y: 410, region: "Southeast Asia" },
-  "Singapore":      { x: 520, y: 380, region: "Southeast Asia" },
-  "Vietnam":        { x: 555, y: 360, region: "Southeast Asia" },
-  "Thailand":       { x: 515, y: 345, region: "Southeast Asia" },
-  "Malaysia":       { x: 520, y: 370, region: "Southeast Asia" },
-  "Philippines":    { x: 580, y: 360, region: "Southeast Asia" },
-  "Hong Kong":      { x: 590, y: 330, region: "Greater China" },
-  "Taiwan":         { x: 605, y: 335, region: "Greater China" },
-  "China":          { x: 555, y: 305, region: "Greater China" },
-  "Japan":          { x: 645, y: 290, region: "East Asia" },
-  "South Korea":    { x: 625, y: 290, region: "East Asia" },
-  "India":          { x: 460, y: 335, region: "South Asia" },
-  "Australia":      { x: 670, y: 460, region: "Oceania" },
-  "New Zealand":    { x: 760, y: 490, region: "Oceania" },
-  "UAE":            { x: 305, y: 330, region: "Middle East" },
-  "Saudi Arabia":   { x: 305, y: 320, region: "Middle East" },
-  "Qatar":          { x: 320, y: 330, region: "Middle East" },
-  "South Africa":   { x: 320, y: 540, region: "Africa" },
-  "Brazil":         { x: 140, y: 440, region: "Latin America" },
-  "Germany":        { x: 290, y: 220, region: "Europe" },
-  "France":         { x: 275, y: 225, region: "Europe" },
-  "Finland":        { x: 320, y: 195, region: "Europe" },
-  "Netherlands":    { x: 285, y: 215, region: "Europe" },
-  "USA":            { x: 80, y: 280, region: "North America" },
-  "Lithuania":      { x: 320, y: 205, region: "Europe" },
-  "Israel":         { x: 320, y: 295, region: "Middle East" },
-  "Mauritius":      { x: 380, y: 525, region: "Africa" },
-};
-
-function buildCloudAsiaMap() {
-  const container = document.getElementById('asiaMap');
-  if (!container) return;
-  
-  // Aggregate providers per country
-  const byCountry = {};
-  DATA.rows.forEach(r => {
-    const c = r.country;
-    if (!c) return;
-    if (!byCountry[c]) byCountry[c] = new Set();
-    byCountry[c].add(r.provider);
-  });
-  
-  // Convert to array with coords
-  const countries = Object.entries(byCountry)
-    .filter(([c]) => REGION_COORDS[c])
-    .map(([c, provs]) => ({
-      country: c,
-      region: REGION_COORDS[c].region,
-      count: provs.size,
-      providers: Array.from(provs),
-      x: REGION_COORDS[c].x,
-      y: REGION_COORDS[c].y,
-    }))
-    .sort((a,b) => b.count - a.count);
-  
-  // Group by region
-  const byRegion = {};
-  countries.forEach(c => {
-    if (!byRegion[c.region]) byRegion[c.region] = 0;
-    byRegion[c.region] += c.count;
-  });
-  
-  // SVG dimensions
-  const W = 800;
-  const H = 500;
-  
-  // Region center points (aggregate)
-  const REGION_CENTERS = {
-    "Southeast Asia": { x: 540, y: 380, name: "SE Asia" },
-    "Greater China": { x: 580, y: 320, name: "China" },
-    "East Asia": { x: 635, y: 290, name: "E Asia" },
-    "South Asia": { x: 460, y: 335, name: "S Asia" },
-    "Oceania": { x: 715, y: 475, name: "Oceania" },
-    "Middle East": { x: 312, y: 320, name: "M.East" },
-    "Africa": { x: 320, y: 540, name: "Africa" },
-    "Latin America": { x: 140, y: 440, name: "LatAm" },
-    "Europe": { x: 305, y: 215, name: "Europe" },
-    "North America": { x: 80, y: 280, name: "N America" },
+function addTechTooltips() {
+  const EXPLAIN = {
+    "KVM": "Kernel-based Virtual Machine. Open source hypervisor built into Linux kernel. Industry standard.",
+    "Xen": "Xen Project hypervisor. Open source. Less common in modern clouds.",
+    "Hyper-V": "Microsoft hypervisor. Proprietary, used by Azure.",
+    "VMware vSphere": "VMware enterprise hypervisor. Proprietary.",
+    "AWS Nitro System": "Custom AWS hypervisor built on KVM. Proprietary.",
+    "OpenStack": "Open source cloud platform. Powers sovereign clouds.",
+    "Proxmox VE": "Open source virtualization based on KVM and LXC.",
+    "containerd": "Industry-standard container runtime. CNCF graduated.",
+    "Docker": "Most popular container runtime. Daemon-based. Open source.",
+    "Firecracker": "AWS-developed microVM for Lambda. Apache 2.0.",
+    "gVisor": "Google user-space kernel for sandboxed containers.",
+    "Ceph": "Distributed object/block/file storage. Open source (LGPL).",
+    "S3-compatible": "Amazon S3 API standard. Implemented by most clouds.",
+    "Neutron": "OpenStack networking component.",
+    "Calico": "CNCF project for container networking.",
+    "EKS": "AWS Elastic Kubernetes Service.",
+    "AKS": "Azure Kubernetes Service.",
+    "GKE": "Google Kubernetes Engine.",
+    "OKE": "Oracle Kubernetes Engine.",
+    "Graviton": "AWS custom Arm-based CPU (Neoverse V1/V2).",
+    "Trainium": "AWS custom ML training chip.",
+    "Inferentia": "AWS custom ML inference accelerator.",
+    "Cobalt": "Microsoft custom Arm-based CPU (Neoverse N2).",
+    "Maia": "Microsoft custom AI accelerator.",
+    "TPU": "Google Tensor Processing Unit.",
+    "Yitian 710": "Alibaba custom Arm CPU (128 cores).",
+    "Kunpeng": "Huawei custom Arm CPU.",
+    "Tau T2A": "Google Arm-based VM type (Neoverse A710).",
+    "Axion": "Google custom Arm CPU (Neoverse V2)."
   };
   
-  // Build SVG
-  const maxCount = Math.max(...Object.values(byRegion), 1);
-  
-  const regionCircles = Object.entries(byRegion).map(([r, c]) => {
-    const center = REGION_CENTERS[r];
-    const radius = 15 + (c / maxCount) * 35;
-    return `
-      <circle class="bubble" cx="${center.x}" cy="${center.y}" r="${radius}" data-radius="${radius + 4}"/>
-      <text class="bubble-label" x="${center.x}" y="${center.y - 4}">${center.name}</text>
-      <text class="bubble-count" x="${center.x}" y="${center.y + 14}">${c}</text>
-    `;
-  }).join('');
-  
-  // Country markers (small dots for each country)
-  const countryMarkers = countries.slice(0, 30).map(c => {
-    const r = 3 + (c.count / maxCount) * 6;
-    return `<circle class="bubble" cx="${c.x}" cy="${c.y}" r="${r}" opacity="0.6" data-country="${c.country}" data-providers="${c.providers.join(', ')}"/>`;
-  }).join('');
-  
-  // Simplified Asia outline (rough hand-drawn shape)
-  const outlinePath = `
-    M 350 200 
-    Q 380 180 420 195 Q 460 210 480 230 Q 510 260 540 270
-    Q 560 285 580 290 Q 600 295 620 290 Q 640 285 660 280 Q 680 275 690 280
-    Q 720 290 750 320 Q 770 350 770 380 Q 770 410 760 440 Q 750 470 720 490
-    Q 700 510 670 510 Q 650 510 620 500 Q 590 490 560 480
-    Q 530 470 510 450 Q 490 430 470 410 Q 440 395 410 380
-    Q 380 365 370 340 Q 360 320 360 290 Q 360 260 350 230 Z
-  `;
-  
-  container.innerHTML = `
-    <div class="asia-map">
-      <svg class="asia-map-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <radialGradient id="regionGlow">
-            <stop offset="0%" stop-color="rgba(96,189,145,0.3)"/>
-            <stop offset="100%" stop-color="rgba(96,189,145,0)"/>
-          </radialGradient>
-        </defs>
-        
-        <!-- Background grid -->
-        <line x1="0" y1="100" x2="${W}" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="0" y1="200" x2="${W}" y2="200" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="0" y1="300" x2="${W}" y2="300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="0" y1="400" x2="${W}" y2="400" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="200" y1="0" x2="200" y2="${H}" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="400" y1="0" x2="400" y2="${H}" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        <line x1="600" y1="0" x2="600" y2="${H}" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-        
-        <!-- Asia outline (approximate) -->
-        <path d="${outlinePath}" fill="rgba(96,189,145,0.03)" stroke="rgba(96,189,145,0.2)" stroke-width="1.5" stroke-dasharray="4 4"/>
-        
-        <!-- Region bubbles -->
-        ${regionCircles}
-        
-        <!-- Country markers -->
-        ${countryMarkers}
-      </svg>
-    </div>
-  `;
-  
-  // Add tooltips via JS
-  container.querySelectorAll('[data-providers]').forEach(el => {
-    const country = el.getAttribute('data-country');
-    const providers = el.getAttribute('data-providers');
-    el.addEventListener('click', () => {
-      alert(`${country}: ${providers.split(', ').length} providers\n\n${providers.split(', ').join('\n')}`);
-    });
-  });
-}
-
-// Build tooltips for tech items
-function addTechTooltips() {
   document.querySelectorAll('.tech-name').forEach(el => {
     const text = el.textContent.trim();
-    // Find matching explanation
-    for (const [key, explanation] of Object.entries(TECH_EXPLAIN)) {
+    for (const [key, explanation] of Object.entries(EXPLAIN)) {
       if (text.includes(key)) {
         el.title = explanation;
         el.style.cursor = 'help';
@@ -2214,6 +2177,265 @@ function addTechTooltips() {
       }
     }
   });
+}
+
+
+const CITY_COORDS = {
+  "Jakarta": [-6.21, 106.85], "Cibitung": [-6.27, 107.08], "Surabaya": [-7.26, 112.75], "Medan": [3.60, 98.67], "Yogyakarta": [-7.80, 110.37], "Bekasi": [-6.24, 106.98], "Bandung": [-6.92, 107.62], "Makassar": [-5.15, 119.43], "Denpasar": [-8.67, 115.21], "Manado": [1.47, 124.84], "Balikpapan": [-1.24, 116.85],
+  "Singapore": [1.35, 103.82],
+  "Kuala Lumpur": [3.14, 101.69], "Penang": [5.42, 100.33], "Cyberjaya": [2.92, 101.66],
+  "Hanoi": [21.03, 105.85], "Ho Chi Minh City": [10.82, 106.63], "Da Nang": [16.05, 108.20],
+  "Bangkok": [13.76, 100.50],
+  "Manila": [14.60, 120.98],
+  "Hong Kong": [22.32, 114.17], "Shanghai": [31.23, 121.47], "Beijing": [39.90, 116.41], "Shenzhen": [22.54, 114.06], "Guangzhou": [23.13, 113.26], "Taipei": [25.03, 121.57], "Taichung": [24.15, 120.67], "Chengdu": [30.57, 104.07], "Hangzhou": [30.27, 120.16],
+  "Tokyo": [35.68, 139.65], "Osaka": [34.69, 135.50], "Ishikawa": [36.56, 136.66],
+  "Seoul": [37.57, 126.98], "Busan": [35.18, 129.08], "Seongnam": [37.44, 127.14], "Pangyo": [37.39, 127.11], "Gasan": [37.47, 127.12], "Gangnam": [37.50, 127.05],
+  "Mumbai": [19.08, 72.88], "Bangalore": [12.97, 77.59], "Delhi": [28.70, 77.10], "Chennai": [13.08, 80.27], "Noida": [28.54, 77.39], "Hyderabad": [17.39, 78.49],
+  "Sydney": [-33.87, 151.21], "Melbourne": [-37.81, 144.96], "Canberra": [-35.28, 149.13], "Perth": [-31.95, 115.86], "Adelaide": [-34.93, 138.60], "Brisbane": [-27.47, 153.03],
+  "Wellington": [-41.29, 174.78], "Auckland": [-36.85, 174.76], "Hamilton": [-37.79, 175.28], "Christchurch": [-43.53, 172.64],
+  "Dubai": [25.20, 55.27], "Riyadh": [24.71, 46.68], "Jeddah": [21.49, 39.19], "Dammam": [26.42, 50.09], "Doha": [25.29, 51.53], "Tel Aviv": [32.09, 34.78],
+  "Cape Town": [-33.92, 18.42], "Johannesburg": [-26.20, 28.05], "Nairobi": [-1.29, 36.82], "Lagos": [6.52, 3.38], "Cairo": [30.04, 31.24], "Centurion": [-25.86, 28.19],
+  "São Paulo": [-23.55, -46.63], "Rio de Janeiro": [-22.91, -43.17], "Fortaleza": [-3.72, -38.54], "Belo Horizonte": [-19.92, -43.93], "Curitiba": [-25.43, -49.27],
+  "Ashburn": [39.04, -77.49], "Hillsboro": [45.52, -122.99], "Phoenix": [33.45, -112.07], "Newark": [40.74, -74.17], "Atlanta": [33.75, -84.39], "Dallas": [32.78, -96.80], "Fremont": [37.55, -121.99], "Los Angeles": [34.05, -118.24], "Seattle": [47.61, -122.33], "San Jose": [37.34, -121.89], "Miami": [25.76, -80.19], "Silicon Valley": [37.44, -122.14], "Chicago": [41.88, -87.63], "New York": [40.71, -74.01], "St. Louis": [38.63, -90.20], "Vint Hill": [38.73, -77.65],
+  "Toronto": [43.65, -79.38], "Montreal": [45.50, -73.57], "Beauharnois": [45.32, -73.87],
+  "Queretaro": [20.59, -100.39], "Mexico City": [19.43, -99.13],
+  "London": [51.51, -0.13], "Amsterdam": [52.37, 4.90], "Frankfurt": [50.11, 8.68], "Paris": [48.86, 2.35], "Madrid": [40.42, -3.70], "Stockholm": [59.33, 18.07], "Warsaw": [52.23, 21.01], "Roubaix": [50.69, 3.17], "Strasbourg": [48.57, 7.75], "Gravelines": [50.99, 2.13], "Falkenstein": [50.48, 12.37], "Nuremberg": [49.45, 11.08], "Düsseldorf": [51.23, 6.77], "Munich": [48.14, 11.58], "Helsinki": [60.17, 24.94], "Zurich": [47.38, 8.54], "Marseille": [43.30, 5.37], "Milan": [45.46, 9.19],
+  "Bandung": [-6.92, 107.62]
+};
+
+function parseDCLocations(dcStr) {
+  if (!dcStr) return [];
+  return dcStr.split(',').map(p => p.trim().split('(')[0].trim()).filter(c => c);
+}
+
+function cityToSvg(lat, lng) {
+  const W = 1000, H = 500;
+  const x = (lng + 180) * (W / 360);
+  const y = (90 - lat) * (H / 180);
+  return { x, y };
+}
+
+function buildWorldCloudMap() {
+  const techByProvider = {};
+  DATA.rows.forEach(r => {
+    if (r.tech_stack && r.tech_stack.dc_locations && !techByProvider[r.provider]) {
+      techByProvider[r.provider] = r.tech_stack.dc_locations;
+    }
+  });
+  
+  // Aggregate city -> providers
+  const cityProviders = {};
+  for (const provider in techByProvider) {
+    const cities = parseDCLocations(techByProvider[provider]);
+    cities.forEach(c => {
+      if (!cityProviders[c]) cityProviders[c] = [];
+      if (!cityProviders[c].includes(provider)) cityProviders[c].push(provider);
+    });
+  }
+  
+  // Convert to coords
+  const mapCities = [];
+  for (const city in cityProviders) {
+    if (CITY_COORDS[city]) {
+      const [lat, lng] = CITY_COORDS[city];
+      const { x, y } = cityToSvg(lat, lng);
+      mapCities.push({
+        city, x, y, lat, lng,
+        providers: cityProviders[city],
+        count: cityProviders[city].length
+      });
+    }
+  }
+  
+  // Sort by count, top 5 get "top" class
+  mapCities.sort((a,b) => b.count - a.count);
+  
+  // Render bubbles
+  const W = 1000, H = 500;
+  const maxCount = Math.max(...mapCities.map(c => c.count), 1);
+  const minRadius = 4, maxRadius = 16;
+  
+  const bubbles = mapCities.map((c, i) => {
+    const r = minRadius + (c.count / maxCount) * (maxRadius - minRadius);
+    const isTop = i < 5;
+    const labelText = isTop ? c.city : '';
+    const countText = c.count + (isTop ? '' : '');
+    return `
+      <circle class="bubble-city ${isTop ? 'top' : ''}" 
+              cx="${c.x}" cy="${c.y}" r="${r}" 
+              data-city="${c.city}" 
+              data-providers="${c.providers.join(', ')}"
+              data-count="${c.count}"/>
+      ${labelText ? `<text class="bubble-label" x="${c.x}" y="${c.y - r - 4}">${labelText}</text>` : ''}
+      ${isTop ? `<text class="bubble-count" x="${c.x}" y="${c.y + 4}">${c.count}</text>` : ''}
+    `;
+  }).join('');
+  
+  document.getElementById('mapBubbles').innerHTML = bubbles;
+  
+  // Stats summary
+  const totalCities = mapCities.length;
+  const totalProviders = Object.keys(techByProvider).length;
+  const topCity = mapCities[0];
+  const statsHtml = `
+    <div class="map-stat">
+      <div class="map-stat-label">Cities Served</div>
+      <div class="map-stat-value">${totalCities}</div>
+    </div>
+    <div class="map-stat">
+      <div class="map-stat-label">Total Providers</div>
+      <div class="map-stat-value">${totalProviders}</div>
+    </div>
+    <div class="map-stat">
+      <div class="map-stat-label">Top Hub City</div>
+      <div class="map-stat-value">${topCity.city}</div>
+      <div class="map-stat-sub">${topCity.count} providers · (${topCity.lat.toFixed(1)}, ${topCity.lng.toFixed(1)})</div>
+    </div>
+    <div class="map-stat">
+      <div class="map-stat-label">APAC Coverage</div>
+      <div class="map-stat-value">${mapCities.filter(c => c.lng > 60 && c.lng < 180 && c.lat > -45 && c.lat < 55).length}</div>
+      <div class="map-stat-sub">Asia-Pacific cities</div>
+    </div>
+  `;
+  document.getElementById('mapStats').innerHTML = statsHtml;
+  
+  // Add hover/click tooltips
+  const tooltip = document.getElementById('mapTooltip');
+  document.querySelectorAll('.bubble-city').forEach(el => {
+    const city = el.getAttribute('data-city');
+    const providers = el.getAttribute('data-providers').split(', ');
+    const count = el.getAttribute('data-count');
+    
+    el.addEventListener('mouseenter', e => {
+      tooltip.innerHTML = `
+        <h4>${city}</h4>
+        <div class="tt-providers"><strong>${count} providers:</strong><br>${providers.join('<br>')}</div>
+      `;
+      tooltip.classList.add('show');
+    });
+    el.addEventListener('mousemove', e => {
+      const rect = document.getElementById('worldMapContainer').getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top - 20;
+      tooltip.style.left = Math.max(10, Math.min(rect.width - 320, x)) + 'px';
+      tooltip.style.top = Math.max(10, y) + 'px';
+    });
+    el.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+  
+  // Pan/Zoom support
+  setupMapInteraction();
+}
+
+// PAN & ZOOM
+let mapState = { scale: 1, tx: 0, ty: 0, dragging: false, lastX: 0, lastY: 0 };
+
+function setupMapInteraction() {
+  const svg = document.getElementById('worldMapSvg');
+  const content = document.getElementById('mapContent');
+  const container = document.getElementById('worldMapContainer');
+  
+  function applyTransform() {
+    content.setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
+  }
+  
+  // Drag
+  container.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('bubble-city')) return; // allow hover
+    mapState.dragging = true;
+    mapState.lastX = e.clientX;
+    mapState.lastY = e.clientY;
+    container.style.cursor = 'grabbing';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!mapState.dragging) return;
+    const dx = e.clientX - mapState.lastX;
+    const dy = e.clientY - mapState.lastY;
+    mapState.tx += dx;
+    mapState.ty += dy;
+    mapState.lastX = e.clientX;
+    mapState.lastY = e.clientY;
+    applyTransform();
+  });
+  
+  document.addEventListener('mouseup', () => {
+    mapState.dragging = false;
+    container.style.cursor = 'grab';
+  });
+  
+  // Zoom (mouse wheel)
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const rect = container.getBoundingClientRect();
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    
+    // Convert to SVG coords
+    const svgRect = svg.getBoundingClientRect();
+    const svgX = (px / svgRect.width) * 1000;
+    const svgY = (py / svgRect.height) * 500;
+    
+    const delta = e.deltaY > 0 ? 0.9 : 1.1;
+    const newScale = Math.max(1, Math.min(5, mapState.scale * delta));
+    
+    // Adjust translation to zoom around mouse position
+    mapState.tx = svgX - (svgX - mapState.tx) * (newScale / mapState.scale);
+    mapState.ty = svgY - (svgY - mapState.ty) * (newScale / mapState.scale);
+    mapState.scale = newScale;
+    applyTransform();
+  });
+  
+  // Touch support
+  let touchStart = null;
+  let touchStartDist = null;
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      mapState.lastX = touchStart.x;
+      mapState.lastY = touchStart.y;
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchStartDist = Math.sqrt(dx*dx + dy*dy);
+    }
+  });
+  
+  container.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && touchStart) {
+      const dx = e.touches[0].clientX - mapState.lastX;
+      const dy = e.touches[0].clientY - mapState.lastY;
+      mapState.tx += dx;
+      mapState.ty += dy;
+      mapState.lastX = e.touches[0].clientX;
+      mapState.lastY = e.touches[0].clientY;
+      applyTransform();
+    }
+  });
+  
+  container.addEventListener('touchend', () => { touchStart = null; });
+}
+
+function resetMapView() {
+  mapState = { scale: 1, tx: 0, ty: 0, dragging: false, lastX: 0, lastY: 0 };
+  document.getElementById('mapContent').setAttribute('transform', '');
+}
+
+function zoomIn() {
+  const newScale = Math.min(5, mapState.scale * 1.3);
+  mapState.tx = 500 - (500 - mapState.tx) * (newScale / mapState.scale);
+  mapState.ty = 250 - (250 - mapState.ty) * (newScale / mapState.scale);
+  mapState.scale = newScale;
+  document.getElementById('mapContent').setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
+}
+
+function zoomOut() {
+  const newScale = Math.max(1, mapState.scale * 0.77);
+  mapState.tx = 500 - (500 - mapState.tx) * (newScale / mapState.scale);
+  mapState.ty = 250 - (250 - mapState.ty) * (newScale / mapState.scale);
+  mapState.scale = newScale;
+  document.getElementById('mapContent').setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
 }
 
 const menuToggle = document.getElementById('menuToggle');
@@ -2232,8 +2454,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
 
 buildOSLeaderboard();
 buildTechStackBlocks();
+buildWorldCloudMap();
 addTechTooltips();
-buildCloudAsiaMap();
 buildProviderTechCards();
 buildCountryCards();
 buildTechGrid();
