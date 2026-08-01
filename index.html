@@ -1142,6 +1142,94 @@ a { color: inherit; text-decoration: none; }
 .city-popup .ct { font-size: 11px; color: #b1b1c4; margin-bottom: 4px; }
 .city-popup .ct-providers { font-size: 11px; color: #b1b1c4; line-height: 1.5; margin-top: 6px; max-height: 130px; overflow-y: auto; }
 
+
+/* City markers - always on top of country polygons */
+.leaflet-marker-pane { z-index: 700 !important; }
+.leaflet-overlay-pane { z-index: 500 !important; }
+.leaflet-shadow-pane { z-index: 600 !important; }
+.leaflet-popup-pane { z-index: 800 !important; }
+/* CRITICAL: Force marker z-index above tooltip */
+.leaflet-marker-pane { z-index: 750 !important; }
+.leaflet-marker-icon { z-index: 1000 !important; }
+.leaflet-tooltip-pane { z-index: 700 !important; }
+.leaflet-overlay-pane { z-index: 400 !important; }
+
+/* City marker styles */
+.cloud-city-marker {
+  position: relative;
+}
+.cloud-city-marker {
+  position: relative;
+  pointer-events: auto;
+}
+.cloud-city-marker .marker-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--c-cia);
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--c-cia), 0 0 10px var(--c-cia);
+  position: relative;
+  z-index: 10;
+}
+.cloud-city-marker.large .marker-dot {
+  width: 18px;
+  height: 18px;
+  background: var(--c-yellow);
+  box-shadow: 0 0 0 2px var(--c-yellow), 0 0 14px var(--c-yellow);
+}
+
+/* Sonar pulse animation */
+.cloud-city-marker .sonar-pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px; height: 14px;
+  background: var(--c-cia);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: sonar-pulse 2.4s ease-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+.cloud-city-marker.large .sonar-pulse {
+  background: var(--c-yellow);
+  animation-duration: 1.8s;
+}
+.cloud-city-marker .sonar-pulse-2 {
+  animation-delay: 0.8s;
+}
+.cloud-city-marker .sonar-pulse-3 {
+  animation-delay: 1.6s;
+}
+
+@keyframes sonar-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(4.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4.5);
+    opacity: 0;
+  }
+}
+
+/* Override Leaflet circleMarker for consistency */
+.cloud-city-circle {
+  fill: var(--c-cia);
+  fill-opacity: 0.9;
+  stroke: #0a0a1a;
+  stroke-width: 2;
+  cursor: pointer;
+}
+.cloud-city-circle.large {
+  fill: var(--c-yellow);
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -2306,22 +2394,26 @@ function buildLeafletMap() {
     })
     .catch(err => console.error('GeoJSON load error:', err));
   
-  // City markers
+  // City markers with sonar pulse animation
   Object.entries(CITY_PROVIDER_DATA).forEach(([city, providers]) => {
     if (CITY_COORDS[city]) {
       const [lat, lng] = CITY_COORDS[city];
       const count = providers.length;
-      const radius = Math.max(4, Math.min(14, 3 + count * 0.8));
       const isLarge = count >= 8;
+      const size = isLarge ? 16 : 12;
       
-      const marker = L.circleMarker([lat, lng], {
-        radius: radius,
-        fillColor: isLarge ? '#ffde59' : '#60bd91',
-        color: '#0a0a1a',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.9,
-      }).addTo(map);
+      // Custom HTML icon with sonar pulse
+      const icon = L.divIcon({
+        className: 'cloud-city-marker' + (isLarge ? ' large' : ''),
+        html: '<div class="sonar-pulse"></div>' +
+              '<div class="sonar-pulse sonar-pulse-2"></div>' +
+              '<div class="sonar-pulse sonar-pulse-3"></div>' +
+              '<div class="marker-dot"></div>',
+        iconSize: [size, size],
+        iconAnchor: [size/2, size/2],
+      });
+      
+      const marker = L.marker([lat, lng], { icon: icon, zIndexOffset: 1000 }).addTo(map);
       
       const popupContent = '<div class="city-popup">' +
         '<h4>' + city + '</h4>' +
