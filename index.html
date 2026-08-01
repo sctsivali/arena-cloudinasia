@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VMLeaderboard — Asia Pacific Cloud Pricing</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
 <!-- Manrope font (CloudinAsia brand font, from Google Fonts) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -981,19 +983,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 
-.world-map-container {
-  background: var(--c-bg-2);
-  border: 1px solid var(--c-line);
-  border-radius: 18px;
-  padding: 16px;
-  position: relative;
-  cursor: grab;
-  user-select: none;
-  overflow: hidden;
-  background-image: 
-    radial-gradient(circle at 30% 30%, rgba(96,189,145,0.04), transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(255,222,89,0.03), transparent 50%);
-}
+
 .world-map-container:active { cursor: grabbing; }
 .world-map-svg {
   width: 100%;
@@ -1123,6 +1113,34 @@ a { color: inherit; text-decoration: none; }
 .section-tag-row { display: flex; align-items: center; gap: 10px; }
 .section-label-text { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; color: var(--c-text); }
 
+
+
+/* World Map - Leaflet based */
+.world-map-container { background: var(--c-bg-2); border: 1px solid var(--c-line); border-radius: 18px; padding: 0; overflow: hidden; position: relative; }
+#leafletMap { background: #06061a !important; }
+.map-legend { display: flex; gap: 14px; margin-top: 14px; justify-content: center; flex-wrap: wrap; padding: 12px; background: var(--c-bg-2); border: 1px solid var(--c-line); border-radius: 10px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--c-text-2); }
+.legend-bubble { width: 18px; height: 14px; border-radius: 3px; }
+.leaflet-container { background: #06061a !important; outline: 0 !important; }
+.leaflet-tile-pane { opacity: 0.7; filter: invert(1) hue-rotate(180deg) brightness(0.95) saturate(0.5) contrast(0.95); }
+.leaflet-control-attribution { background: rgba(13,13,36,0.92) !important; color: #b1b1c4 !important; font-size: 10px !important; padding: 2px 8px !important; }
+.leaflet-control-attribution a { color: #60bd91 !important; }
+.leaflet-control-zoom a { background: rgba(13,13,36,0.95) !important; color: #fafafa !important; border-color: #1f1f2d !important; }
+.leaflet-control-zoom a:hover { background: rgba(96,189,145,0.15) !important; color: #60bd91 !important; }
+.country-tooltip {
+  background: rgba(13,13,36,0.96); border: 1px solid #60bd91; color: #fafafa;
+  font-family: Manrope, sans-serif; padding: 10px 14px; border-radius: 10px; font-size: 12px;
+  max-width: 320px; backdrop-filter: blur(8px);
+}
+.country-tooltip h4 { color: #60bd91; font-weight: 800; margin-bottom: 6px; font-size: 13px; }
+.country-tooltip .prov-list { font-size: 11px; color: #b1b1c4; line-height: 1.6; max-height: 130px; overflow-y: auto; }
+.country-tooltip .prov-list strong { color: #ffde59; }
+.city-popup {
+  font-family: Manrope, sans-serif; min-width: 220px;
+}
+.city-popup h4 { color: #60bd91; margin-bottom: 6px; font-weight: 800; font-size: 14px; }
+.city-popup .ct { font-size: 11px; color: #b1b1c4; margin-bottom: 4px; }
+.city-popup .ct-providers { font-size: 11px; color: #b1b1c4; line-height: 1.5; margin-top: 6px; max-height: 130px; overflow-y: auto; }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -1330,6 +1348,8 @@ a { color: inherit; text-decoration: none; }
     </section>
 
 
+    
+    
     <!-- WORLD CLOUD MAP (TOP) -->
     <section class="section" id="cloud-world-map">
       <div class="hero-row">
@@ -1339,53 +1359,40 @@ a { color: inherit; text-decoration: none; }
           </div>
           <div class="section-label-text">World Cloud Infrastructure Map</div>
         </div>
-        <div class="map-controls">
-          <button class="map-btn" onclick="resetMapView()" title="Reset view">⌖</button>
-          <button class="map-btn" onclick="zoomIn()" title="Zoom in">+</button>
-          <button class="map-btn" onclick="zoomOut()" title="Zoom out">−</button>
-        </div>
       </div>
-      <p class="section-sub">Geographic distribution of cloud providers. <strong>Drag to pan</strong>, <strong>scroll to zoom</strong>. Bubble size = number of providers serving that location.</p>
+      <p class="section-sub">Geographic distribution of cloud providers. <strong>Drag to pan</strong>, <strong>scroll to zoom</strong>. Country colors = provider count (brighter = more providers).</p>
 
       <div class="world-map-container" id="worldMapContainer">
-        <svg class="world-map-svg" id="worldMapSvg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <radialGradient id="bubbleGlow">
-              <stop offset="0%" stop-color="#60bd91" stop-opacity="0.4"/>
-              <stop offset="100%" stop-color="#60bd91" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          
-          <g id="mapContent">
-            <g class="continents" fill="rgba(96,189,145,0.05)" stroke="rgba(96,189,145,0.25)" stroke-width="0.8">
-              <path d="M 60 110 L 110 100 L 160 105 L 200 130 L 220 160 L 230 200 L 215 240 L 200 280 L 175 300 L 155 290 L 130 270 L 100 245 L 75 215 L 60 180 Z"/>
-              <path d="M 175 300 L 200 320 L 215 340 L 220 360 L 210 370 L 195 360 L 180 340 Z"/>
-              <path d="M 220 360 L 240 350 L 260 360 L 270 395 L 265 425 L 250 450 L 230 460 L 215 440 L 215 400 L 215 370 Z"/>
-              <path d="M 410 145 L 445 130 L 480 135 L 510 150 L 520 175 L 505 195 L 480 200 L 450 195 L 425 180 L 410 165 Z"/>
-              <path d="M 425 215 L 460 205 L 490 220 L 510 250 L 510 290 L 490 325 L 470 345 L 445 340 L 425 310 L 415 270 L 415 240 Z"/>
-              <path d="M 510 195 L 555 190 L 580 200 L 580 230 L 555 245 L 525 235 L 510 215 Z"/>
-              <path d="M 510 145 L 555 130 L 605 125 L 670 130 L 720 145 L 750 175 L 740 210 L 700 225 L 650 220 L 605 200 L 555 180 L 525 165 L 510 155 Z"/>
-              <path d="M 555 220 L 600 220 L 615 250 L 605 285 L 575 305 L 555 290 L 545 260 L 545 235 Z"/>
-              <path d="M 715 250 L 755 240 L 775 270 L 770 305 L 745 320 L 715 310 L 700 280 Z"/>
-              <path d="M 660 165 L 750 160 L 790 175 L 805 200 L 800 225 L 770 245 L 740 250 L 720 240 L 700 220 L 680 200 L 660 180 Z"/>
-              <path d="M 750 350 L 820 340 L 870 360 L 880 395 L 855 415 L 815 420 L 775 410 L 750 390 Z"/>
-              <path d="M 905 425 L 920 415 L 925 440 L 915 460 L 900 450 Z"/>
-              <path d="M 405 145 L 425 140 L 425 160 L 410 165 Z"/>
-              <path d="M 510 330 L 525 320 L 530 350 L 520 365 L 510 360 Z"/>
-              <path d="M 790 195 L 805 180 L 815 200 L 810 220 L 800 215 Z"/>
-              <path d="M 715 320 L 760 315 L 800 320 L 805 340 L 780 350 L 740 345 L 715 335 Z"/>
-              <path d="M 745 295 L 760 290 L 770 320 L 760 340 L 745 330 Z"/>
-            </g>
-            <g id="mapBubbles"></g>
-          </g>
-        </svg>
-        <div class="map-tooltip" id="mapTooltip"></div>
+        <div id="leafletMap" style="width:100%; height:560px; border-radius:14px;"></div>
+      </div>
+      
+      <div class="map-legend">
+        <div class="legend-item">
+          <span class="legend-bubble" style="background:#1a2438; border:1px solid #2a3a4a"></span>
+          <span>0 providers</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-bubble" style="background:#2a4a3a; border:1px solid #60bd91"></span>
+          <span>1-3 providers</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-bubble" style="background:#60bd91; border:1px solid #80d0ab"></span>
+          <span>4-8 providers</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-bubble" style="background:#80d0ab; border:1px solid #a8e3c2"></span>
+          <span>9-13 providers</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-bubble" style="background:#ffde59; border:1px solid #ffde59"></span>
+          <span>14+ providers (cloud hub)</span>
+        </div>
       </div>
       
       <div class="map-stats" id="mapStats"></div>
     </section>
 
-    <!-- OPEN SOURCE LEADERBOARD -->
+<!-- OPEN SOURCE LEADERBOARD -->
     <section class="section" id="os-leaderboard">
       <div class="hero-row">
         <div class="section-label-row">
@@ -2180,263 +2187,6 @@ function addTechTooltips() {
 }
 
 
-const CITY_COORDS = {
-  "Jakarta": [-6.21, 106.85], "Cibitung": [-6.27, 107.08], "Surabaya": [-7.26, 112.75], "Medan": [3.60, 98.67], "Yogyakarta": [-7.80, 110.37], "Bekasi": [-6.24, 106.98], "Bandung": [-6.92, 107.62], "Makassar": [-5.15, 119.43], "Denpasar": [-8.67, 115.21], "Manado": [1.47, 124.84], "Balikpapan": [-1.24, 116.85],
-  "Singapore": [1.35, 103.82],
-  "Kuala Lumpur": [3.14, 101.69], "Penang": [5.42, 100.33], "Cyberjaya": [2.92, 101.66],
-  "Hanoi": [21.03, 105.85], "Ho Chi Minh City": [10.82, 106.63], "Da Nang": [16.05, 108.20],
-  "Bangkok": [13.76, 100.50],
-  "Manila": [14.60, 120.98],
-  "Hong Kong": [22.32, 114.17], "Shanghai": [31.23, 121.47], "Beijing": [39.90, 116.41], "Shenzhen": [22.54, 114.06], "Guangzhou": [23.13, 113.26], "Taipei": [25.03, 121.57], "Taichung": [24.15, 120.67], "Chengdu": [30.57, 104.07], "Hangzhou": [30.27, 120.16],
-  "Tokyo": [35.68, 139.65], "Osaka": [34.69, 135.50], "Ishikawa": [36.56, 136.66],
-  "Seoul": [37.57, 126.98], "Busan": [35.18, 129.08], "Seongnam": [37.44, 127.14], "Pangyo": [37.39, 127.11], "Gasan": [37.47, 127.12], "Gangnam": [37.50, 127.05],
-  "Mumbai": [19.08, 72.88], "Bangalore": [12.97, 77.59], "Delhi": [28.70, 77.10], "Chennai": [13.08, 80.27], "Noida": [28.54, 77.39], "Hyderabad": [17.39, 78.49],
-  "Sydney": [-33.87, 151.21], "Melbourne": [-37.81, 144.96], "Canberra": [-35.28, 149.13], "Perth": [-31.95, 115.86], "Adelaide": [-34.93, 138.60], "Brisbane": [-27.47, 153.03],
-  "Wellington": [-41.29, 174.78], "Auckland": [-36.85, 174.76], "Hamilton": [-37.79, 175.28], "Christchurch": [-43.53, 172.64],
-  "Dubai": [25.20, 55.27], "Riyadh": [24.71, 46.68], "Jeddah": [21.49, 39.19], "Dammam": [26.42, 50.09], "Doha": [25.29, 51.53], "Tel Aviv": [32.09, 34.78],
-  "Cape Town": [-33.92, 18.42], "Johannesburg": [-26.20, 28.05], "Nairobi": [-1.29, 36.82], "Lagos": [6.52, 3.38], "Cairo": [30.04, 31.24], "Centurion": [-25.86, 28.19],
-  "São Paulo": [-23.55, -46.63], "Rio de Janeiro": [-22.91, -43.17], "Fortaleza": [-3.72, -38.54], "Belo Horizonte": [-19.92, -43.93], "Curitiba": [-25.43, -49.27],
-  "Ashburn": [39.04, -77.49], "Hillsboro": [45.52, -122.99], "Phoenix": [33.45, -112.07], "Newark": [40.74, -74.17], "Atlanta": [33.75, -84.39], "Dallas": [32.78, -96.80], "Fremont": [37.55, -121.99], "Los Angeles": [34.05, -118.24], "Seattle": [47.61, -122.33], "San Jose": [37.34, -121.89], "Miami": [25.76, -80.19], "Silicon Valley": [37.44, -122.14], "Chicago": [41.88, -87.63], "New York": [40.71, -74.01], "St. Louis": [38.63, -90.20], "Vint Hill": [38.73, -77.65],
-  "Toronto": [43.65, -79.38], "Montreal": [45.50, -73.57], "Beauharnois": [45.32, -73.87],
-  "Queretaro": [20.59, -100.39], "Mexico City": [19.43, -99.13],
-  "London": [51.51, -0.13], "Amsterdam": [52.37, 4.90], "Frankfurt": [50.11, 8.68], "Paris": [48.86, 2.35], "Madrid": [40.42, -3.70], "Stockholm": [59.33, 18.07], "Warsaw": [52.23, 21.01], "Roubaix": [50.69, 3.17], "Strasbourg": [48.57, 7.75], "Gravelines": [50.99, 2.13], "Falkenstein": [50.48, 12.37], "Nuremberg": [49.45, 11.08], "Düsseldorf": [51.23, 6.77], "Munich": [48.14, 11.58], "Helsinki": [60.17, 24.94], "Zurich": [47.38, 8.54], "Marseille": [43.30, 5.37], "Milan": [45.46, 9.19],
-  "Bandung": [-6.92, 107.62]
-};
-
-function parseDCLocations(dcStr) {
-  if (!dcStr) return [];
-  return dcStr.split(',').map(p => p.trim().split('(')[0].trim()).filter(c => c);
-}
-
-function cityToSvg(lat, lng) {
-  const W = 1000, H = 500;
-  const x = (lng + 180) * (W / 360);
-  const y = (90 - lat) * (H / 180);
-  return { x, y };
-}
-
-function buildWorldCloudMap() {
-  const techByProvider = {};
-  DATA.rows.forEach(r => {
-    if (r.tech_stack && r.tech_stack.dc_locations && !techByProvider[r.provider]) {
-      techByProvider[r.provider] = r.tech_stack.dc_locations;
-    }
-  });
-  
-  // Aggregate city -> providers
-  const cityProviders = {};
-  for (const provider in techByProvider) {
-    const cities = parseDCLocations(techByProvider[provider]);
-    cities.forEach(c => {
-      if (!cityProviders[c]) cityProviders[c] = [];
-      if (!cityProviders[c].includes(provider)) cityProviders[c].push(provider);
-    });
-  }
-  
-  // Convert to coords
-  const mapCities = [];
-  for (const city in cityProviders) {
-    if (CITY_COORDS[city]) {
-      const [lat, lng] = CITY_COORDS[city];
-      const { x, y } = cityToSvg(lat, lng);
-      mapCities.push({
-        city, x, y, lat, lng,
-        providers: cityProviders[city],
-        count: cityProviders[city].length
-      });
-    }
-  }
-  
-  // Sort by count, top 5 get "top" class
-  mapCities.sort((a,b) => b.count - a.count);
-  
-  // Render bubbles
-  const W = 1000, H = 500;
-  const maxCount = Math.max(...mapCities.map(c => c.count), 1);
-  const minRadius = 4, maxRadius = 16;
-  
-  const bubbles = mapCities.map((c, i) => {
-    const r = minRadius + (c.count / maxCount) * (maxRadius - minRadius);
-    const isTop = i < 5;
-    const labelText = isTop ? c.city : '';
-    const countText = c.count + (isTop ? '' : '');
-    return `
-      <circle class="bubble-city ${isTop ? 'top' : ''}" 
-              cx="${c.x}" cy="${c.y}" r="${r}" 
-              data-city="${c.city}" 
-              data-providers="${c.providers.join(', ')}"
-              data-count="${c.count}"/>
-      ${labelText ? `<text class="bubble-label" x="${c.x}" y="${c.y - r - 4}">${labelText}</text>` : ''}
-      ${isTop ? `<text class="bubble-count" x="${c.x}" y="${c.y + 4}">${c.count}</text>` : ''}
-    `;
-  }).join('');
-  
-  document.getElementById('mapBubbles').innerHTML = bubbles;
-  
-  // Stats summary
-  const totalCities = mapCities.length;
-  const totalProviders = Object.keys(techByProvider).length;
-  const topCity = mapCities[0];
-  const statsHtml = `
-    <div class="map-stat">
-      <div class="map-stat-label">Cities Served</div>
-      <div class="map-stat-value">${totalCities}</div>
-    </div>
-    <div class="map-stat">
-      <div class="map-stat-label">Total Providers</div>
-      <div class="map-stat-value">${totalProviders}</div>
-    </div>
-    <div class="map-stat">
-      <div class="map-stat-label">Top Hub City</div>
-      <div class="map-stat-value">${topCity.city}</div>
-      <div class="map-stat-sub">${topCity.count} providers · (${topCity.lat.toFixed(1)}, ${topCity.lng.toFixed(1)})</div>
-    </div>
-    <div class="map-stat">
-      <div class="map-stat-label">APAC Coverage</div>
-      <div class="map-stat-value">${mapCities.filter(c => c.lng > 60 && c.lng < 180 && c.lat > -45 && c.lat < 55).length}</div>
-      <div class="map-stat-sub">Asia-Pacific cities</div>
-    </div>
-  `;
-  document.getElementById('mapStats').innerHTML = statsHtml;
-  
-  // Add hover/click tooltips
-  const tooltip = document.getElementById('mapTooltip');
-  document.querySelectorAll('.bubble-city').forEach(el => {
-    const city = el.getAttribute('data-city');
-    const providers = el.getAttribute('data-providers').split(', ');
-    const count = el.getAttribute('data-count');
-    
-    el.addEventListener('mouseenter', e => {
-      tooltip.innerHTML = `
-        <h4>${city}</h4>
-        <div class="tt-providers"><strong>${count} providers:</strong><br>${providers.join('<br>')}</div>
-      `;
-      tooltip.classList.add('show');
-    });
-    el.addEventListener('mousemove', e => {
-      const rect = document.getElementById('worldMapContainer').getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top - 20;
-      tooltip.style.left = Math.max(10, Math.min(rect.width - 320, x)) + 'px';
-      tooltip.style.top = Math.max(10, y) + 'px';
-    });
-    el.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
-  });
-  
-  // Pan/Zoom support
-  setupMapInteraction();
-}
-
-// PAN & ZOOM
-let mapState = { scale: 1, tx: 0, ty: 0, dragging: false, lastX: 0, lastY: 0 };
-
-function setupMapInteraction() {
-  const svg = document.getElementById('worldMapSvg');
-  const content = document.getElementById('mapContent');
-  const container = document.getElementById('worldMapContainer');
-  
-  function applyTransform() {
-    content.setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
-  }
-  
-  // Drag
-  container.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('bubble-city')) return; // allow hover
-    mapState.dragging = true;
-    mapState.lastX = e.clientX;
-    mapState.lastY = e.clientY;
-    container.style.cursor = 'grabbing';
-  });
-  
-  document.addEventListener('mousemove', (e) => {
-    if (!mapState.dragging) return;
-    const dx = e.clientX - mapState.lastX;
-    const dy = e.clientY - mapState.lastY;
-    mapState.tx += dx;
-    mapState.ty += dy;
-    mapState.lastX = e.clientX;
-    mapState.lastY = e.clientY;
-    applyTransform();
-  });
-  
-  document.addEventListener('mouseup', () => {
-    mapState.dragging = false;
-    container.style.cursor = 'grab';
-  });
-  
-  // Zoom (mouse wheel)
-  container.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const rect = container.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
-    
-    // Convert to SVG coords
-    const svgRect = svg.getBoundingClientRect();
-    const svgX = (px / svgRect.width) * 1000;
-    const svgY = (py / svgRect.height) * 500;
-    
-    const delta = e.deltaY > 0 ? 0.9 : 1.1;
-    const newScale = Math.max(1, Math.min(5, mapState.scale * delta));
-    
-    // Adjust translation to zoom around mouse position
-    mapState.tx = svgX - (svgX - mapState.tx) * (newScale / mapState.scale);
-    mapState.ty = svgY - (svgY - mapState.ty) * (newScale / mapState.scale);
-    mapState.scale = newScale;
-    applyTransform();
-  });
-  
-  // Touch support
-  let touchStart = null;
-  let touchStartDist = null;
-  container.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      mapState.lastX = touchStart.x;
-      mapState.lastY = touchStart.y;
-    } else if (e.touches.length === 2) {
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      touchStartDist = Math.sqrt(dx*dx + dy*dy);
-    }
-  });
-  
-  container.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    if (e.touches.length === 1 && touchStart) {
-      const dx = e.touches[0].clientX - mapState.lastX;
-      const dy = e.touches[0].clientY - mapState.lastY;
-      mapState.tx += dx;
-      mapState.ty += dy;
-      mapState.lastX = e.touches[0].clientX;
-      mapState.lastY = e.touches[0].clientY;
-      applyTransform();
-    }
-  });
-  
-  container.addEventListener('touchend', () => { touchStart = null; });
-}
-
-function resetMapView() {
-  mapState = { scale: 1, tx: 0, ty: 0, dragging: false, lastX: 0, lastY: 0 };
-  document.getElementById('mapContent').setAttribute('transform', '');
-}
-
-function zoomIn() {
-  const newScale = Math.min(5, mapState.scale * 1.3);
-  mapState.tx = 500 - (500 - mapState.tx) * (newScale / mapState.scale);
-  mapState.ty = 250 - (250 - mapState.ty) * (newScale / mapState.scale);
-  mapState.scale = newScale;
-  document.getElementById('mapContent').setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
-}
-
-function zoomOut() {
-  const newScale = Math.max(1, mapState.scale * 0.77);
-  mapState.tx = 500 - (500 - mapState.tx) * (newScale / mapState.scale);
-  mapState.ty = 250 - (250 - mapState.ty) * (newScale / mapState.scale);
-  mapState.scale = newScale;
-  document.getElementById('mapContent').setAttribute('transform', `translate(${mapState.tx}, ${mapState.ty}) scale(${mapState.scale})`);
-}
 
 const menuToggle = document.getElementById('menuToggle');
 if (menuToggle) {
@@ -2454,8 +2204,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
 
 buildOSLeaderboard();
 buildTechStackBlocks();
-buildWorldCloudMap();
-addTechTooltips();
 buildProviderTechCards();
 buildCountryCards();
 buildTechGrid();
@@ -2463,6 +2211,150 @@ buildOSSPanel();
 buildDirectory();
 populateFilters();
 buildArena();
+</script>
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+const COUNTRY_PROVIDER_DATA = {"China": {"providers": ["Alibaba Cloud", "Baidu AI Cloud", "CITIC CPC", "China Unicom Cloud", "Huawei Cloud", "JD Cloud", "Kingsoft Cloud", "Tencent Cloud", "UCloud", "Volcano Engine"], "count": 10}, "Indonesia": {"providers": ["BiznetGio", "CloudKilat", "DomaiNesia", "Herza Cloud", "IDCloudHost", "JagoanHosting", "Qwords", "Rumahweb"], "count": 8}, "Vietnam": {"providers": ["FPT Smart Cloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Viettel IDC"], "count": 4}, "USA": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Anyscale", "DigitalOcean", "Fireworks AI", "Google Cloud Qatar", "Google Cloud UAE", "Linode (Akamai)", "Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "Novita AI", "Vultr"], "count": 13}, "Malaysia": {"providers": ["Exabytes", "Shinjiru VPS"], "count": 2}, "Germany": {"providers": ["Contabo", "Hetzner Cloud"], "count": 2}, "Lithuania": {"providers": ["Hostinger"], "count": 1}, "India": {"providers": ["Cloud4C", "Cyfuture Cloud", "NeevCloud", "NxtGen Cloud"], "count": 4}, "Japan": {"providers": ["GMO Cloud", "IDC Frontier", "IIJ GIO", "KDDI Cloud", "NTT Enterprise Cloud", "Sakura Cloud", "SoftBank White Cloud"], "count": 7}, "South Korea": {"providers": ["Douzone Cloud", "Gabia Cloud", "KT Cloud", "Kakao Cloud", "LG CNS Cloud", "NAVER Cloud", "NHN Cloud", "SK C&C Cloud Z", "Samsung SDS"], "count": 9}, "Taiwan": {"providers": ["Chief Cloud", "Far EasTone Cloud", "HiCloud", "eCloudvalley"], "count": 4}, "Hong Kong": {"providers": ["HKT Enterprise Cloud"], "count": 1}, "Australia": {"providers": ["AUCloud", "Macquarie Cloud", "Vault Cloud"], "count": 3}, "New Zealand": {"providers": ["Catalyst Cloud"], "count": 1}, "Brazil": {"providers": ["Bravulink", "HostDime Brazil", "King.Host", "Locaweb Cloud"], "count": 4}, "Saudi Arabia": {"providers": ["stc Cloud"], "count": 1}, "South Africa": {"providers": ["Internet Solutions Africa", "Liquid Telecom", "Telkom Cloud SA"], "count": 3}, "Netherlands": {"providers": ["Cerebrium"], "count": 1}, "France": {"providers": ["OVH"], "count": 1}, "Finland": {"providers": ["UpCloud"], "count": 1}, "IL": {"providers": ["Kamatera"], "count": 1}};
+const CITY_PROVIDER_DATA = {"Jakarta": ["IDCloudHost", "BiznetGio", "JagoanHosting", "Qwords", "CloudKilat", "DomaiNesia", "Rumahweb", "Dewaweb", "IndonesianCloud", "Eranyacloud", "Google Cloud (GCP)", "Alibaba Cloud", "Tencent Cloud", "Herza Cloud", "Hostinger ID", "Oracle Cloud", "Cloud4C", "Hostinger"], "Surabaya": ["IDCloudHost", "BiznetGio", "Qwords", "Eranyacloud"], "Medan": ["IDCloudHost"], "Makassar": ["IDCloudHost"], "Denpasar": ["IDCloudHost", "BiznetGio"], "Balikpapan": ["IDCloudHost"], "Manado": ["IDCloudHost"], "Bandung": ["IDCloudHost", "Qwords"], "Yogyakarta": ["IDCloudHost", "JagoanHosting", "DomaiNesia", "Rumahweb"], "Cibitung": ["BiznetGio"], "Bekasi": ["BiznetGio"], "Singapore": ["CloudKilat", "Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "OVH", "UpCloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Herza Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger", "Volcano Engine"], "US East": ["AWS"], "US West": ["AWS"], "Asia Pacific": ["AWS"], "EU": ["AWS"], "Canada": ["AWS"], "South America": ["AWS"], "Mexico": ["AWS"], "Middle East": ["AWS"], "Africa": ["AWS"], "East US": ["Microsoft Azure"], "West US": ["Microsoft Azure"], "Central US": ["Microsoft Azure"], "Canada Central": ["Microsoft Azure"], "Brazil South": ["Microsoft Azure"], "North Europe": ["Microsoft Azure"], "West Europe": ["Microsoft Azure"], "UK South": ["Microsoft Azure"], "France Central": ["Microsoft Azure"], "Germany West Central": ["Microsoft Azure"], "Sweden Central": ["Microsoft Azure"], "Switzerland North": ["Microsoft Azure"], "Norway East": ["Microsoft Azure"], "Italy North": ["Microsoft Azure"], "Spain Central": ["Microsoft Azure"], "Poland Central": ["Microsoft Azure"], "East Asia": ["Microsoft Azure"], "Southeast Asia": ["Microsoft Azure"], "Japan East": ["Microsoft Azure"], "Japan West": ["Microsoft Azure"], "Korea Central": ["Microsoft Azure"], "Korea South": ["Microsoft Azure"], "Australia East": ["Microsoft Azure"], "Australia Southeast": ["Microsoft Azure"], "Central India": ["Microsoft Azure"], "South India": ["Microsoft Azure"], "West India": ["Microsoft Azure"], "UAE North": ["Microsoft Azure"], "Qatar Central": ["Microsoft Azure"], "Israel Central": ["Microsoft Azure"], "South Africa North": ["Microsoft Azure"], "Iowa": ["Google Cloud (GCP)"], "Oregon": ["Google Cloud (GCP)"], "Virginia": ["Google Cloud (GCP)"], "South Carolina": ["Google Cloud (GCP)"], "Las Vegas": ["Google Cloud (GCP)"], "Dallas": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Kamatera", "Cloud4C"], "Montreal": ["Google Cloud (GCP)", "Oracle Cloud"], "Toronto": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Kamatera", "Oracle Cloud", "Cloud4C"], "São Paulo": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Contabo", "Hostinger ID", "Contabo Brazil", "Locaweb Cloud", "Oracle Cloud", "Bravulink", "Cloud4C", "HostDime Brazil", "Hostinger", "King.Host"], "Santiago": ["Google Cloud (GCP)", "Huawei Cloud", "Oracle Cloud"], "Belgium": ["Google Cloud (GCP)"], "Netherlands": ["Google Cloud (GCP)"], "London": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger"], "Frankfurt": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger"], "Finland": ["Google Cloud (GCP)"], "Denmark": ["Google Cloud (GCP)"], "Zurich": ["Google Cloud (GCP)", "Oracle Cloud"], "Milan": ["Google Cloud (GCP)", "Oracle Cloud"], "Paris": ["Google Cloud (GCP)", "Vultr", "Oracle Cloud"], "Madrid": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Oracle Cloud", "Cloud4C"], "Tel Aviv": ["Google Cloud (GCP)", "Kamatera", "Oracle Cloud"], "Doha": ["Google Cloud (GCP)"], "Saudi Arabia": ["Google Cloud (GCP)"], "Mumbai": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "OVH", "Alibaba Cloud", "Tencent Cloud", "UCloud", "E2E Networks", "NxtGen Cloud", "Cyfuture Cloud", "NeevCloud", "Hostinger ID", "Oracle Cloud", "Cloud4C", "Hostinger"], "Delhi": ["Google Cloud (GCP)", "NxtGen Cloud", "NeevCloud"], "Hong Kong": ["Google Cloud (GCP)", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Kingsoft Cloud", "HKT Enterprise Cloud", "Cloud4C", "Volcano Engine", "CITIC CPC", "China Unicom Cloud"], "Taiwan": ["Google Cloud (GCP)"], "Tokyo": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Contabo", "SAKURA Internet", "IDC Frontier", "NTT Enterprise Cloud", "KDDI Cloud", "IIJ GIO", "GMO Cloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Oracle Cloud", "Equinix Metal", "Cloud4C", "SoftBank White Cloud", "Volcano Engine"], "Osaka": ["Google Cloud (GCP)", "SAKURA Internet", "NTT Enterprise Cloud", "KDDI Cloud", "IIJ GIO", "GMO Cloud", "Oracle Cloud"], "Seoul": ["Google Cloud (GCP)", "Vultr", "KT Cloud", "NHN Cloud", "Kakao Cloud", "NAVER Cloud", "LG CNS Cloud", "SK C&C Cloud Z", "Samsung SDS", "Douzone Cloud", "Gabia Cloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "Oracle Cloud", "Volcano Engine"], "Sydney": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "OVH", "UpCloud", "Alibaba Cloud", "Macquarie Cloud", "Oracle Cloud", "Equinix Metal", "AUCloud", "Cloud4C", "Vault Cloud"], "Melbourne": ["Google Cloud (GCP)", "Macquarie Cloud", "Oracle Cloud", "AUCloud"], "New York": ["DigitalOcean", "Vultr", "UpCloud", "Kamatera", "Cloud4C"], "San Francisco": ["DigitalOcean"], "Amsterdam": ["DigitalOcean", "Vultr", "Linode (Akamai)", "UpCloud", "Kamatera", "Hostinger ID", "Oracle Cloud", "Hostinger"], "Bangalore": ["DigitalOcean", "E2E Networks", "NxtGen Cloud", "NeevCloud"], "Chicago": ["Vultr", "UpCloud", "Cloud4C"], "Los Angeles": ["Vultr", "Linode (Akamai)", "Kamatera"], "Miami": ["Vultr"], "Seattle": ["Vultr", "Linode (Akamai)", "Contabo"], "Silicon Valley": ["Vultr", "Equinix Metal"], "Atlanta": ["Vultr", "Linode (Akamai)"], "Stockholm": ["Vultr", "Linode (Akamai)", "UpCloud", "Oracle Cloud"], "Warsaw": ["Vultr", "Contabo"], "Mexico City": ["Vultr", "Huawei Cloud", "Cloud4C"], "Newark": ["Linode (Akamai)"], "Fremont": ["Linode (Akamai)"], "Falkenstein": ["Hetzner Cloud"], "Nuremberg": ["Hetzner Cloud", "Contabo"], "Helsinki": ["Hetzner Cloud", "UpCloud"], "Ashburn": ["Hetzner Cloud", "Contabo", "Oracle Cloud", "Equinix Metal"], "Hillsboro": ["Hetzner Cloud", "OVH"], "Düsseldorf": ["Contabo"], "St. Louis": ["Contabo"], "Jaipur": ["Contabo"], "Roubaix": ["OVH"], "Strasbourg": ["OVH"], "Gravelines": ["OVH"], "Beauharnois": ["OVH"], "Vint Hill": ["OVH"], "San Jose": ["UpCloud", "Oracle Cloud"], "Ishikawa": ["SAKURA Internet"], "Busan": ["KT Cloud", "NHN Cloud", "Kakao Cloud", "NAVER Cloud", "LG CNS Cloud", "Douzone Cloud"], "Pangyo": ["NHN Cloud"], "Seongnam": ["Kakao Cloud"], "Kuala Lumpur": ["Alibaba Cloud", "Herza Cloud", "Cloud4C", "Shinjiru VPS"], "Dubai": ["Alibaba Cloud", "Oracle Cloud"], "Bangkok": ["Tencent Cloud", "Huawei Cloud", "Cloud4C", "Volcano Engine"], "Johannesburg": ["Huawei Cloud", "Liquid Telecom", "Internet Solutions Africa", "Cloud4C"], "Lima": ["Huawei Cloud"], "Sao Paulo": ["Huawei Cloud"], "Buenos Aires": ["Huawei Cloud"], "Beijing": ["JD Cloud", "UCloud", "Kingsoft Cloud", "Volcano Engine", "China Unicom Cloud"], "Shanghai": ["JD Cloud", "UCloud", "Kingsoft Cloud", "Volcano Engine", "CITIC CPC", "China Unicom Cloud"], "Shenzhen": ["JD Cloud", "UCloud", "Volcano Engine", "CITIC CPC"], "Guangzhou": ["JD Cloud", "UCloud", "Volcano Engine", "China Unicom Cloud"], "Hanoi": ["Viettel IDC", "FPT Smart Cloud", "VNG Cloud (GreenNode)", "HiCloud", "VNG Cloud"], "Ho Chi Minh City": ["Viettel IDC", "FPT Smart Cloud", "VNG Cloud (GreenNode)", "HiCloud", "VNG Cloud"], "Da Nang": ["Viettel IDC"], "Taipei": ["Far EasTone Cloud", "eCloudvalley", "Chief Cloud"], "Noida": ["E2E Networks", "Cyfuture Cloud"], "Chennai": ["E2E Networks", "Oracle Cloud"], "Canberra": ["Macquarie Cloud", "AUCloud", "Vault Cloud"], "Wellington": ["Catalyst Cloud"], "Auckland": ["Catalyst Cloud", "Cloud4C"], "Hamilton": ["Catalyst Cloud"], "Kapuni": ["Catalyst Cloud"], "Christchurch": ["Catalyst Cloud"], "Riyadh": ["stc Cloud"], "Jeddah": ["stc Cloud", "Oracle Cloud"], "Dammam": ["stc Cloud"], "Bahrain": ["stc Cloud"], "Nairobi": ["Liquid Telecom", "Internet Solutions Africa"], "Cape Town": ["Liquid Telecom", "Internet Solutions Africa", "Telkom Cloud SA"], "Lagos": ["Liquid Telecom"], "Cairo": ["Liquid Telecom", "Cloud4C"], "Manila": ["Herza Cloud", "Cloud4C"], "Rio de Janeiro": ["Locaweb Cloud", "HostDime Brazil"], "Phoenix": ["Oracle Cloud"], "Queretaro": ["Oracle Cloud"], "Vinhedo": ["Oracle Cloud"], "Marseille": ["Oracle Cloud"], "Hyderabad": ["Oracle Cloud"], "US": ["RunPod", "Lambda Labs"], "Europe": ["RunPod"], "Las Vegas)": ["Lambda Labs"], "Asia-Pacific": ["Lambda Labs"], "Global": ["Vast.ai", "Modal Labs", "Cerebrium", "Novita AI", "Anyscale", "Fireworks AI"], "Adelaide": ["AUCloud"], "Perth": ["AUCloud"], "Penang": ["Exabytes"], "Cyberjaya": ["Exabytes"], "Fortaleza": ["HostDime Brazil"], "Curitiba": ["King.Host"], "Centurion": ["Telkom Cloud SA"], "Taichung": ["Chief Cloud"]};
+const CITY_COORDS = {"Jakarta": [-6.21, 106.85], "Cibitung": [-6.27, 107.08], "Surabaya": [-7.26, 112.75], "Medan": [3.6, 98.67], "Yogyakarta": [-7.8, 110.37], "Bekasi": [-6.24, 106.98], "Bandung": [-6.92, 107.62], "Makassar": [-5.15, 119.43], "Denpasar": [-8.67, 115.21], "Manado": [1.47, 124.84], "Balikpapan": [-1.24, 116.85], "Singapore": [1.35, 103.82], "Kuala Lumpur": [3.14, 101.69], "Penang": [5.42, 100.33], "Cyberjaya": [2.92, 101.66], "Hanoi": [21.03, 105.85], "Ho Chi Minh City": [10.82, 106.63], "Da Nang": [16.05, 108.2], "Bangkok": [13.76, 100.5], "Manila": [14.6, 120.98], "Hong Kong": [22.32, 114.17], "Shanghai": [31.23, 121.47], "Beijing": [39.9, 116.41], "Shenzhen": [22.54, 114.06], "Guangzhou": [23.13, 113.26], "Taipei": [25.03, 121.57], "Taichung": [24.15, 120.67], "Tokyo": [35.68, 139.65], "Osaka": [34.69, 135.5], "Ishikawa": [36.56, 136.66], "Seoul": [37.57, 126.98], "Busan": [35.18, 129.08], "Mumbai": [19.08, 72.88], "Bangalore": [12.97, 77.59], "Delhi": [28.7, 77.1], "Chennai": [13.08, 80.27], "Noida": [28.54, 77.39], "Hyderabad": [17.39, 78.49], "Sydney": [-33.87, 151.21], "Melbourne": [-37.81, 144.96], "Canberra": [-35.28, 149.13], "Perth": [-31.95, 115.86], "Adelaide": [-34.93, 138.6], "Wellington": [-41.29, 174.78], "Auckland": [-36.85, 174.76], "Christchurch": [-43.53, 172.64], "Dubai": [25.2, 55.27], "Riyadh": [24.71, 46.68], "Jeddah": [21.49, 39.19], "Dammam": [26.42, 50.09], "Doha": [25.29, 51.53], "Tel Aviv": [32.09, 34.78], "Cape Town": [-33.92, 18.42], "Johannesburg": [-26.2, 28.05], "Nairobi": [-1.29, 36.82], "Lagos": [6.52, 3.38], "Cairo": [30.04, 31.24], "Centurion": [-25.86, 28.19], "São Paulo": [-23.55, -46.63], "Rio de Janeiro": [-22.91, -43.17], "Fortaleza": [-3.72, -38.54], "Belo Horizonte": [-19.92, -43.93], "Curitiba": [-25.43, -49.27], "Ashburn": [39.04, -77.49], "Hillsboro": [45.52, -122.99], "Phoenix": [33.45, -112.07], "Newark": [40.74, -74.17], "Atlanta": [33.75, -84.39], "Dallas": [32.78, -96.8], "Fremont": [37.55, -121.99], "Los Angeles": [34.05, -118.24], "Seattle": [47.61, -122.33], "San Jose": [37.34, -121.89], "Miami": [25.76, -80.19], "Chicago": [41.88, -87.63], "New York": [40.71, -74.01], "St. Louis": [38.63, -90.2], "Vint Hill": [38.73, -77.65], "Toronto": [43.65, -79.38], "Montreal": [45.5, -73.57], "Beauharnois": [45.32, -73.87], "Queretaro": [20.59, -100.39], "Mexico City": [19.43, -99.13], "London": [51.51, -0.13], "Amsterdam": [52.37, 4.9], "Frankfurt": [50.11, 8.68], "Paris": [48.86, 2.35], "Madrid": [40.42, -3.7], "Stockholm": [59.33, 18.07], "Warsaw": [52.23, 21.01], "Roubaix": [50.69, 3.17], "Strasbourg": [48.57, 7.75], "Gravelines": [50.99, 2.13], "Falkenstein": [50.48, 12.37], "Nuremberg": [49.45, 11.08], "Düsseldorf": [51.23, 6.77], "Munich": [48.14, 11.58], "Helsinki": [60.17, 24.94], "Zurich": [47.38, 8.54], "Marseille": [43.3, 5.37], "Milan": [45.46, 9.19]};
+
+const COUNTRY_NAME_MAP = {
+  "USA": "United States of America",
+  "US": "United States of America",
+  "IL": "Israel",
+  "Hong Kong": "Hong Kong",
+  "South Korea": "South Korea",
+  "UAE": "United Arab Emirates",
+  "Saudi Arabia": "Saudi Arabia",
+  "Qatar": "Qatar",
+  "Vietnam": "Vietnam"
+};
+
+function getCountryFill(count) {
+  if (count === 0) return '#1a2438';
+  if (count <= 3) return '#2a4a3a';
+  if (count <= 8) return '#60bd91';
+  if (count <= 13) return '#80d0ab';
+  return '#ffde59';
+}
+
+function buildLeafletMap() {
+  const map = L.map('leafletMap', {
+    center: [15, 110],
+    zoom: 3,
+    minZoom: 2,
+    maxZoom: 8,
+    worldCopyJump: true,
+    zoomControl: true,
+    scrollWheelZoom: true,
+  });
+  
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap · Cloud in Asia',
+    maxZoom: 19,
+  }).addTo(map);
+  
+  fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
+    .then(r => r.json())
+    .then(geoData => {
+      geoData.features.forEach(feature => {
+        const name = feature.properties.ADMIN || feature.properties.name;
+        const mappedName = COUNTRY_NAME_MAP[name] || name;
+        const data = COUNTRY_PROVIDER_DATA[mappedName];
+        feature.properties._count = data ? data.count : 0;
+        feature.properties._providers = data ? data.providers : [];
+      });
+      
+      L.geoJSON(geoData, {
+        style: feature => ({
+          fillColor: getCountryFill(feature.properties._count),
+          weight: 1,
+          color: '#0a0a1a',
+          fillOpacity: 0.85,
+        }),
+        onEachFeature: (feature, layer) => {
+          const props = feature.properties;
+          const tooltipContent = props._count > 0
+            ? '<h4>' + (props.ADMIN || props.name) + '</h4><div class="prov-list"><strong>' + props._count + ' providers:</strong><br>' + props._providers.slice(0, 10).join('<br>') + (props._providers.length > 10 ? '<br>+' + (props._viders || props._providers.length - 10) + ' more' : '') + '</div>'
+            : '<h4>' + (props.ADMIN || props.name) + '</h4><div class="prov-list">No cloud providers</div>';
+          
+          layer.bindTooltip(tooltipContent, {
+            className: 'country-tooltip',
+            sticky: true,
+            direction: 'top',
+            offset: [0, -10]
+          });
+          
+          layer.on({
+            mouseover: function() {
+              this.setStyle({ weight: 2.5, color: '#60bd91', fillOpacity: 1 });
+            },
+            mouseout: function() {
+              this.setStyle({ weight: 1, color: '#0a0a1a', fillOpacity: 0.85 });
+            },
+            click: function() {
+              if (props._count > 0) {
+                map.fitBounds(this.getBounds(), { padding: [60, 60] });
+              }
+            }
+          });
+        }
+      }).addTo(map);
+    })
+    .catch(err => console.error('GeoJSON load error:', err));
+  
+  // City markers
+  Object.entries(CITY_PROVIDER_DATA).forEach(([city, providers]) => {
+    if (CITY_COORDS[city]) {
+      const [lat, lng] = CITY_COORDS[city];
+      const count = providers.length;
+      const radius = Math.max(4, Math.min(14, 3 + count * 0.8));
+      const isLarge = count >= 8;
+      
+      const marker = L.circleMarker([lat, lng], {
+        radius: radius,
+        fillColor: isLarge ? '#ffde59' : '#60bd91',
+        color: '#0a0a1a',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.9,
+      }).addTo(map);
+      
+      const popupContent = '<div class="city-popup">' +
+        '<h4>' + city + '</h4>' +
+        '<div class="ct">' + count + ' provider' + (count > 1 ? 's' : '') + ' here</div>' +
+        '<div class="ct-providers">' + providers.slice(0, 12).join('<br>') + (providers.length > 12 ? '<br>+' + (providers.length - 12) + ' more' : '') + '</div>' +
+        '</div>';
+      marker.bindPopup(popupContent);
+    }
+  });
+  
+  // Stats
+  const totalCountries = Object.keys(COUNTRY_PROVIDER_DATA).length;
+  const totalProviders = new Set();
+  Object.values(COUNTRY_PROVIDER_DATA).forEach(p => p.providers.forEach(pr => totalProviders.add(pr)));
+  const totalCities = Object.keys(CITY_PROVIDER_DATA).length;
+  const topCountry = Object.entries(COUNTRY_PROVIDER_DATA).sort((a,b) => b[1].count - a[1].count)[0];
+  
+  document.getElementById('mapStats').innerHTML =
+    '<div class="map-stat"><div class="map-stat-label">Provider HQ Countries</div><div class="map-stat-value">' + totalCountries + '</div></div>' +
+    '<div class="map-stat"><div class="map-stat-label">Distinct Providers</div><div class="map-stat-value">' + totalProviders.size + '</div></div>' +
+    '<div class="map-stat"><div class="map-stat-label">Top HQ Country</div><div class="map-stat-value">' + topCountry[0] + '</div><div class="map-stat-sub">' + topCountry[1].count + ' providers</div></div>' +
+    '<div class="map-stat"><div class="map-stat-label">DC Locations</div><div class="map-stat-value">' + totalCities + '</div><div class="map-stat-sub">cities with cloud DCs</div></div>';
+}
+
+if (typeof L !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(buildLeafletMap, 100));
+  } else {
+    setTimeout(buildLeafletMap, 100);
+  }
+} else {
+  window.addEventListener('load', () => setTimeout(buildLeafletMap, 200));
+}
 </script>
 
 </body>
