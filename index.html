@@ -1942,15 +1942,34 @@ function buildOSSPanel() {
 function buildArena() {
   const counts = {};
   DATA.rows.forEach(r => {
-    if (!counts[r.provider]) counts[r.provider] = { tiers: 0, min: Infinity, oss: 0, countries: new Set(), types: new Set(), sovereign: 0 };
-    counts[r.provider].tiers++;
-    if (r.price_usd_per_month < counts[r.provider].min) counts[r.provider].min = r.price_usd_per_month;
-    if (r.tech_open_source) counts[r.provider].oss++;
-    counts[r.provider].countries.add(r.country);
-    counts[r.provider].types.add(r.provider_type);
-    if (r.data_residency === 'local') counts[r.provider].sovereign++;
+    if (!counts[r.provider]) counts[r.provider] = { 
+      tiers: 0, min: Infinity, max_ram: 0, max_storage: 0, oss: 0, 
+      countries: new Set(), types: new Set(), sovereign: 0, dcs: 0,
+      dc_locations: new Set(), gpu: 0, open_source_score: r.open_source_score || 0
+    };
+    const c = counts[r.provider];
+    c.tiers++;
+    if (r.price_usd_per_month < c.min) c.min = r.price_usd_per_month;
+    if (r.ram_gb > c.max_ram) c.max_ram = r.ram_gb;
+    if (r.storage_gb > c.max_storage) c.max_storage = r.storage_gb;
+    if (r.tech_open_source) c.oss++;
+    c.countries.add(r.country);
+    c.types.add(r.provider_type);
+    if (r.data_residency === 'local') c.sovereign++;
+    if (r.dc_location) c.dc_locations.add(r.dc_location);
+    if (r.gpu && r.gpu !== 'none') c.gpu++;
+    // Use computed variety_score from data
+    if (r.variety_score > c.open_source_score) {} // skip
+  });
+  
+  // Aggregate DC count from data
+  DATA.rows.forEach(r => {
+    if (counts[r.provider]) {
+      counts[r.provider].dcs = Math.max(counts[r.provider].dcs, r.dc_count || 0);
+    }
   });
 
+  // Sort by tier count (more tiers = more comprehensive)
   const top = Object.entries(counts)
     .sort((a,b) => b[1].tiers - a[1].tiers)
     .slice(0, 10);
@@ -1959,12 +1978,32 @@ function buildArena() {
   const allMax = Math.max(...top.map(([k,v]) => v.tiers));
 
   const arena = top.map(([provider, info]) => {
+    // Price score (cheaper = better, normalize against cheapest)
     const priceScore = Math.max(0, Math.min(100, 100 - ((info.min - allMin) / allMin) * 50));
+    
+    // Coverage score (tier count normalized)
     const coverageScore = Math.min(100, (info.tiers / allMax) * 100);
+    
+    // OSS score (% of OS-based tiers)
     const ossScore = info.tiers > 0 ? (info.oss / info.tiers) * 100 : 0;
-    const varietyScore = Math.min(100, info.types.size * 30);
-    const sovereignScore = Math.min(100, (info.sovereign / info.tiers) * 100 + (info.countries.size > 1 ? 20 : 0));
-    const overall = (priceScore * 0.25 + coverageScore * 0.2 + ossScore * 0.15 + varietyScore * 0.2 + sovereignScore * 0.2);
+    
+    // Variety score (provider type + DC count + GPU)
+    const typeScore = Math.min(60, info.types.size * 20);
+    const dcScore = Math.min(30, info.dcs * 1.5);
+    const gpuScore = info.gpu > 0 ? Math.min(20, info.gpu * 4) : 0;
+    const varietyScore = Math.min(100, typeScore + dcScore + gpuScore);
+    
+    // Sovereign score (local data residency)
+    const sovereignScore = Math.min(100, (info.sovereign / info.tiers) * 100);
+    
+    // Weighted overall
+    const overall = (
+      priceScore * 0.20 + 
+      coverageScore * 0.18 + 
+      ossScore * 0.18 + 
+      varietyScore * 0.22 + 
+      sovereignScore * 0.22
+    );
 
     return { provider, priceScore, coverageScore, ossScore, varietyScore, sovereignScore, overall, info };
   });
@@ -1972,45 +2011,51 @@ function buildArena() {
   const body = document.getElementById('arenaBody');
   body.innerHTML = arena.map(a => `
     <tr>
-      <td class="provider-cell">${a.provider}</td>
+      <td class="provider-cell">
+        <div class="arena-provider-name">${a.provider}</div>
+        <div class="arena-provider-meta">${a.info.dcs} DCs · ${a.info.countries.size} countries</div>
+      </td>
       <td>
-        <div class="arena-cell-label">Cheapest</div>
+        <div class="arena-cell-label">From</div>
         <div class="score">$${a.info.min.toFixed(2)}</div>
         <div class="arena-bar-container">
           <div class="arena-bar-fill" style="width:${a.priceScore.toFixed(0)}%"></div>
         </div>
       </td>
       <td>
-        <div class="arena-cell-label">Countries</div>
-        <div class="score">${a.info.countries.size}</div>
+        <div class="arena-cell-label">Tiers</div>
+        <div class="score">${a.info.tiers}</div>
         <div class="arena-bar-container">
           <div class="arena-bar-fill" style="width:${a.coverageScore.toFixed(0)}%"></div>
         </div>
       </td>
       <td>
         <div class="arena-cell-label">OSS %</div>
-        <div class="score">${Math.round(a.ossScore)}</div>
+        <div class="score">${Math.round(a.ossScore)}<span class="arena-pct">%</span></div>
         <div class="arena-bar-container">
-          <div class="arena-bar-fill" style="width:${a.ossScore.toFixed(0)}%"></div>
+          <div class="arena-bar-fill oss-bar" style="width:${a.ossScore.toFixed(0)}%"></div>
         </div>
       </td>
       <td>
-        <div class="arena-cell-label">Variety</div>
-        <div class="score">${a.info.types.size}</div>
+        <div class="arena-cell-label">DCs</div>
+        <div class="score">${a.info.dcs}</div>
         <div class="arena-bar-container">
-          <div class="arena-bar-fill" style="width:${a.varietyScore.toFixed(0)}%"></div>
+          <div class="arena-bar-fill variety-bar" style="width:${Math.min(100, a.info.dcs * 2).toFixed(0)}%"></div>
         </div>
       </td>
       <td>
         <div class="arena-cell-label">Local %</div>
-        <div class="score">${Math.round(a.sovereignScore)}</div>
+        <div class="score">${Math.round(a.sovereignScore)}<span class="arena-pct">%</span></div>
         <div class="arena-bar-container">
-          <div class="arena-bar-fill" style="width:${a.sovereignScore.toFixed(0)}%"></div>
+          <div class="arena-bar-fill sovereign-bar" style="width:${a.sovereignScore.toFixed(0)}%"></div>
         </div>
       </td>
       <td>
         <div class="arena-cell-label">Overall</div>
-        <div class="score" style="font-size:18px">${Math.round(a.overall)}</div>
+        <div class="score overall-score">${Math.round(a.overall)}</div>
+        <div class="arena-overall-bar">
+          <div class="arena-overall-fill" style="width:${a.overall.toFixed(0)}%"></div>
+        </div>
       </td>
     </tr>
   `).join('');
