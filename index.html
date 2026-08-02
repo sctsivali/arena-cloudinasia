@@ -1501,6 +1501,114 @@ a { color: inherit; text-decoration: none; }
   .tech-logo-svg { width: 44px; height: 44px; }
 }
 
+
+/* Tech Stack - Split Open Source vs Proprietary */
+.tech-split-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.tech-split-col {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 16px;
+  padding: 20px;
+}
+.open-source-col {
+  border-top: 3px solid var(--c-cia);
+}
+.proprietary-col {
+  border-top: 3px solid var(--c-warn);
+}
+.tech-split-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--c-line);
+}
+.tech-split-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+.open-source-col .tech-split-icon {
+  background: rgba(96, 189, 145, 0.12);
+  color: var(--c-cia);
+}
+.proprietary-col .tech-split-icon {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--c-warn);
+}
+.tech-split-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--c-text);
+  margin: 0 0 2px 0;
+}
+.tech-split-subtitle {
+  font-size: 11px;
+  color: var(--c-text-3);
+  margin: 0;
+}
+.tech-split-badge {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+.os-badge {
+  background: rgba(96, 189, 145, 0.15);
+  color: var(--c-cia);
+}
+.prop-badge {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--c-warn);
+}
+
+.tech-split-group {
+  margin-bottom: 20px;
+}
+.tech-split-group:last-child {
+  margin-bottom: 0;
+}
+.tech-split-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+/* Card variants */
+.tech-logo-card.os-card {
+  border-left: 2px solid var(--c-cia);
+}
+.tech-logo-card.os-card:hover {
+  border-color: var(--c-cia);
+  border-left-width: 2px;
+}
+.tech-logo-card.prop-card {
+  border-left: 2px solid var(--c-warn);
+}
+.tech-logo-card.prop-card:hover {
+  border-color: var(--c-warn);
+  border-left-width: 2px;
+}
+
+@media (max-width: 768px) {
+  .tech-split-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -1784,269 +1892,221 @@ a { color: inherit; text-decoration: none; }
           <div class="section-label-text">Technology Stack</div>
         </div>
       </div>
-      <p class="section-sub">Open source foundations powering cloud infrastructure. All logos inverted to white for dark theme.</p>
+      <p class="section-sub">Infrastructure components powering cloud providers. Split between open source foundations and proprietary systems.</p>
 
-      <!-- Hypervisor & Virtualization -->
-      <div class="tech-category">
-        <div class="tech-category-header">
-          <div class="tech-category-icon">⚙️</div>
-          <h3 class="tech-category-title">Hypervisor & Virtualization</h3>
-          <span class="tech-category-count" id="hypCount">—</span>
-        </div>
-        <div class="tech-logos-grid">
-          <div class="tech-logo-card" data-tech="kvm">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/kvm.svg" alt="KVM" class="real-tech-logo" loading="lazy"/>
+      <div class="tech-split-container">
+        <!-- OPEN SOURCE COLUMN -->
+        <div class="tech-split-col open-source-col">
+          <div class="tech-split-header">
+            <div class="tech-split-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
-            <div class="tech-logo-label">KVM</div>
-            <div class="tech-logo-desc">Kernel-based Virtual Machine</div>
-          </div>
-          <div class="tech-logo-card" data-tech="xen">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/xen.svg" alt="Xen" class="real-tech-logo" loading="lazy"/>
+            <div>
+              <h3 class="tech-split-title">Open Source</h3>
+              <p class="tech-split-subtitle">Community-driven, transparent, auditable</p>
             </div>
-            <div class="tech-logo-label">Xen</div>
-            <div class="tech-logo-desc">Xen Project Hypervisor</div>
+            <div class="tech-split-badge os-badge">OS</div>
           </div>
-          <div class="tech-logo-card" data-tech="proxmox">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/proxmox.svg" alt="Proxmox VE" class="real-tech-logo" loading="lazy"/>
+          
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">⚙️ Hypervisor</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card os-card" data-tech="kvm">
+                <div class="tech-logo-svg"><img src="tech-logos/kvm.svg" alt="KVM" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">KVM</div>
+                <div class="tech-logo-desc">Linux kernel</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="xen">
+                <div class="tech-logo-svg"><img src="tech-logos/xen.svg" alt="Xen" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Xen</div>
+                <div class="tech-logo-desc">Xen Project</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="proxmox">
+                <div class="tech-logo-svg"><img src="tech-logos/proxmox.svg" alt="Proxmox" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Proxmox VE</div>
+                <div class="tech-logo-desc">Open source</div>
+              </div>
             </div>
-            <div class="tech-logo-label">Proxmox VE</div>
-            <div class="tech-logo-desc">Open Source Virtualization</div>
           </div>
-          <div class="tech-logo-card" data-tech="vmware">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/vmware.svg" alt="VMware" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">VMware</div>
-            <div class="tech-logo-desc">vSphere / ESXi</div>
-          </div>
-          <div class="tech-logo-card" data-tech="hyperv">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/hyperv.svg" alt="Hyper-V" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Hyper-V</div>
-            <div class="tech-logo-desc">Microsoft Hypervisor</div>
-          </div>
-          <div class="tech-logo-card" data-tech="aws-nitro">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/aws-nitro.svg" alt="AWS Nitro" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">AWS Nitro</div>
-            <div class="tech-logo-desc">AWS Custom System</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Container & Orchestration -->
-      <div class="tech-category">
-        <div class="tech-category-header">
-          <div class="tech-category-icon">📦</div>
-          <h3 class="tech-category-title">Container & Orchestration</h3>
-          <span class="tech-category-count" id="containerCount">—</span>
-        </div>
-        <div class="tech-logos-grid">
-          <div class="tech-logo-card" data-tech="docker">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/docker.svg" alt="Docker" class="real-tech-logo" loading="lazy"/>
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">📦 Container & Orchestration</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card os-card" data-tech="docker">
+                <div class="tech-logo-svg"><img src="tech-logos/docker.svg" alt="Docker" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Docker</div>
+                <div class="tech-logo-desc">Moby Apache 2.0</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="kubernetes">
+                <div class="tech-logo-svg"><img src="tech-logos/kubernetes.svg" alt="Kubernetes" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Kubernetes</div>
+                <div class="tech-logo-desc">CNCF graduated</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="containerd">
+                <div class="tech-logo-svg"><img src="tech-logos/containerd.svg" alt="containerd" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">containerd</div>
+                <div class="tech-logo-desc">CNCF runtime</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="openshift">
+                <div class="tech-logo-svg"><img src="tech-logos/openshift.svg" alt="OpenShift" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">OpenShift</div>
+                <div class="tech-logo-desc">Red Hat open core</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="rancher">
+                <div class="tech-logo-svg"><img src="tech-logos/rancher.svg" alt="Rancher" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Rancher</div>
+                <div class="tech-logo-desc">SUSE K8s mgmt</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="openstack">
+                <div class="tech-logo-svg"><img src="tech-logos/openstack.svg" alt="OpenStack" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">OpenStack</div>
+                <div class="tech-logo-desc">Cloud platform</div>
+              </div>
             </div>
-            <div class="tech-logo-label">Docker</div>
-            <div class="tech-logo-desc">Container Runtime</div>
           </div>
-          <div class="tech-logo-card" data-tech="kubernetes">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/kubernetes.svg" alt="Kubernetes" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Kubernetes</div>
-            <div class="tech-logo-desc">Container Orchestration</div>
-          </div>
-          <div class="tech-logo-card" data-tech="containerd">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/containerd.svg" alt="containerd" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">containerd</div>
-            <div class="tech-logo-desc">CNCF Runtime</div>
-          </div>
-          <div class="tech-logo-card" data-tech="openshift">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/openshift.svg" alt="OpenShift" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">OpenShift</div>
-            <div class="tech-logo-desc">Enterprise K8s</div>
-          </div>
-          <div class="tech-logo-card" data-tech="rancher">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/rancher.svg" alt="Rancher" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Rancher</div>
-            <div class="tech-logo-desc">K8s Management</div>
-          </div>
-          <div class="tech-logo-card" data-tech="openstack">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/openstack.svg" alt="OpenStack" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">OpenStack</div>
-            <div class="tech-logo-desc">Cloud Platform</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Cloud Platforms -->
-      <div class="tech-category">
-        <div class="tech-category-header">
-          <div class="tech-category-icon">☁️</div>
-          <h3 class="tech-category-title">Cloud Platforms</h3>
-          <span class="tech-category-count" id="cloudCount">—</span>
-        </div>
-        <div class="tech-logos-grid">
-          <div class="tech-logo-card" data-tech="aws">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/aws.svg" alt="AWS" class="real-tech-logo" loading="lazy"/>
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">💾 Storage</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card os-card" data-tech="ceph">
+                <div class="tech-logo-svg"><img src="tech-logos/ceph.svg" alt="Ceph" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Ceph</div>
+                <div class="tech-logo-desc">LGPL distributed</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="minio">
+                <div class="tech-logo-svg"><img src="tech-logos/minio.svg" alt="MinIO" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">MinIO</div>
+                <div class="tech-logo-desc">Apache 2.0 S3</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="swift">
+                <div class="tech-logo-svg"><img src="tech-logos/swift.svg" alt="Swift" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Swift</div>
+                <div class="tech-logo-desc">OpenStack object</div>
+              </div>
+              <div class="tech-logo-card os-card" data-tech="firecracker">
+                <div class="tech-logo-svg"><img src="tech-logos/firecracker.svg" alt="Firecracker" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Firecracker</div>
+                <div class="tech-logo-desc">AWS microVM</div>
+              </div>
             </div>
-            <div class="tech-logo-label">AWS</div>
-            <div class="tech-logo-desc">Amazon Web Services</div>
-          </div>
-          <div class="tech-logo-card" data-tech="azure">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/azure.svg" alt="Azure" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Azure</div>
-            <div class="tech-logo-desc">Microsoft Cloud</div>
-          </div>
-          <div class="tech-logo-card" data-tech="gcp">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/gcp.svg" alt="GCP" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">GCP</div>
-            <div class="tech-logo-desc">Google Cloud Platform</div>
-          </div>
-          <div class="tech-logo-card" data-tech="oracle">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/oracle.svg" alt="Oracle" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Oracle</div>
-            <div class="tech-logo-desc">Oracle Cloud Infrastructure</div>
-          </div>
-          <div class="tech-logo-card" data-tech="alibaba">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/alibaba.svg" alt="Alibaba" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Alibaba</div>
-            <div class="tech-logo-desc">Alibaba Cloud</div>
-          </div>
-          <div class="tech-logo-card" data-tech="huawei">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/huawei.svg" alt="Huawei" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Huawei</div>
-            <div class="tech-logo-desc">Huawei Cloud</div>
           </div>
         </div>
-      </div>
 
-      <!-- Storage -->
-      <div class="tech-category">
-        <div class="tech-category-header">
-          <div class="tech-category-icon">💾</div>
-          <h3 class="tech-category-title">Storage & Databases</h3>
-          <span class="tech-category-count" id="storageCount">—</span>
-        </div>
-        <div class="tech-logos-grid">
-          <div class="tech-logo-card" data-tech="ceph">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/ceph.svg" alt="Ceph" class="real-tech-logo" loading="lazy"/>
+        <!-- PROPRIETARY COLUMN -->
+        <div class="tech-split-col proprietary-col">
+          <div class="tech-split-header">
+            <div class="tech-split-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
-            <div class="tech-logo-label">Ceph</div>
-            <div class="tech-logo-desc">Distributed Storage</div>
-          </div>
-          <div class="tech-logo-card" data-tech="s3">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/s3.svg" alt="S3 API" class="real-tech-logo" loading="lazy"/>
+            <div>
+              <h3 class="tech-split-title">Proprietary</h3>
+              <p class="tech-split-subtitle">Closed-source, vendor-controlled</p>
             </div>
-            <div class="tech-logo-label">S3 API</div>
-            <div class="tech-logo-desc">Object Storage Standard</div>
+            <div class="tech-split-badge prop-badge">PROP</div>
           </div>
-          <div class="tech-logo-card" data-tech="minio">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/minio.svg" alt="MinIO" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">MinIO</div>
-            <div class="tech-logo-desc">S3-compatible Storage</div>
-          </div>
-          <div class="tech-logo-card" data-tech="nvme">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/nvme.svg" alt="NVMe SSD" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">NVMe SSD</div>
-            <div class="tech-logo-desc">High-speed Storage</div>
-          </div>
-          <div class="tech-logo-card" data-tech="swift">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/swift.svg" alt="Swift" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Swift</div>
-            <div class="tech-logo-desc">OpenStack Object Store</div>
-          </div>
-          <div class="tech-logo-card" data-tech="firecracker">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/firecracker.svg" alt="Firecracker" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Firecracker</div>
-            <div class="tech-logo-desc">AWS MicroVM</div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Hardware & Silicon -->
-      <div class="tech-category">
-        <div class="tech-category-header">
-          <div class="tech-category-icon">🔧</div>
-          <h3 class="tech-category-title">Hardware & Custom Silicon</h3>
-          <span class="tech-category-count" id="siliconCount">—</span>
-        </div>
-        <div class="tech-logos-grid">
-          <div class="tech-logo-card" data-tech="intel">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/intel.svg" alt="Intel Xeon" class="real-tech-logo" loading="lazy"/>
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">⚙️ Hypervisor</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card prop-card" data-tech="vmware">
+                <div class="tech-logo-svg"><img src="tech-logos/vmware.svg" alt="VMware" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">VMware</div>
+                <div class="tech-logo-desc">vSphere ESXi</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="hyperv">
+                <div class="tech-logo-svg"><img src="tech-logos/hyperv.svg" alt="Hyper-V" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Hyper-V</div>
+                <div class="tech-logo-desc">Microsoft</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="aws-nitro">
+                <div class="tech-logo-svg"><img src="tech-logos/aws-nitro.svg" alt="AWS Nitro" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">AWS Nitro</div>
+                <div class="tech-logo-desc">Custom system</div>
+              </div>
             </div>
-            <div class="tech-logo-label">Intel Xeon</div>
-            <div class="tech-logo-desc">Intel Gold/Platinum CPUs</div>
           </div>
-          <div class="tech-logo-card" data-tech="amd">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/amd.svg" alt="AMD EPYC" class="real-tech-logo" loading="lazy"/>
+
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">☁️ Cloud Platforms</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card prop-card" data-tech="aws">
+                <div class="tech-logo-svg"><img src="tech-logos/aws.svg" alt="AWS" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">AWS</div>
+                <div class="tech-logo-desc">Hyperscaler</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="azure">
+                <div class="tech-logo-svg"><img src="tech-logos/azure.svg" alt="Azure" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Azure</div>
+                <div class="tech-logo-desc">Microsoft</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="gcp">
+                <div class="tech-logo-svg"><img src="tech-logos/gcp.svg" alt="GCP" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">GCP</div>
+                <div class="tech-logo-desc">Google</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="oracle">
+                <div class="tech-logo-svg"><img src="tech-logos/oracle.svg" alt="Oracle" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Oracle</div>
+                <div class="tech-logo-desc">OCI</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="alibaba">
+                <div class="tech-logo-svg"><img src="tech-logos/alibaba.svg" alt="Alibaba" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Alibaba</div>
+                <div class="tech-logo-desc">Chinese cloud</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="huawei">
+                <div class="tech-logo-svg"><img src="tech-logos/huawei.svg" alt="Huawei" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Huawei</div>
+                <div class="tech-logo-desc">Chinese cloud</div>
+              </div>
             </div>
-            <div class="tech-logo-label">AMD EPYC</div>
-            <div class="tech-logo-desc">AMD Server CPUs</div>
           </div>
-          <div class="tech-logo-card" data-tech="arm">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/arm.svg" alt="ARM Neoverse" class="real-tech-logo" loading="lazy"/>
+
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">💾 Storage</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card prop-card" data-tech="s3">
+                <div class="tech-logo-svg"><img src="tech-logos/s3.svg" alt="S3" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">S3 API</div>
+                <div class="tech-logo-desc">Amazon proprietary</div>
+              </div>
             </div>
-            <div class="tech-logo-label">ARM Neoverse</div>
-            <div class="tech-logo-desc">AWS Graviton, Microsoft Cobalt</div>
           </div>
-          <div class="tech-logo-card" data-tech="nvidia">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/nvidia.svg" alt="NVIDIA GPU" class="real-tech-logo" loading="lazy"/>
+
+          <div class="tech-split-group">
+            <div class="tech-split-group-label">🔧 Hardware & Silicon</div>
+            <div class="tech-logos-grid">
+              <div class="tech-logo-card prop-card" data-tech="intel">
+                <div class="tech-logo-svg"><img src="tech-logos/intel.svg" alt="Intel" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Intel Xeon</div>
+                <div class="tech-logo-desc">x86 CPU</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="amd">
+                <div class="tech-logo-svg"><img src="tech-logos/amd.svg" alt="AMD" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">AMD EPYC</div>
+                <div class="tech-logo-desc">x86 CPU</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="arm">
+                <div class="tech-logo-svg"><img src="tech-logos/arm.svg" alt="ARM" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">ARM</div>
+                <div class="tech-logo-desc">Neoverse</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="nvidia">
+                <div class="tech-logo-svg"><img src="tech-logos/nvidia.svg" alt="NVIDIA" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">NVIDIA</div>
+                <div class="tech-logo-desc">GPU compute</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="tpu">
+                <div class="tech-logo-svg"><img src="tech-logos/tpu.svg" alt="TPU" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Google TPU</div>
+                <div class="tech-logo-desc">Custom chip</div>
+              </div>
+              <div class="tech-logo-card prop-card" data-tech="graviton">
+                <div class="tech-logo-svg"><img src="tech-logos/graviton.svg" alt="Graviton" class="real-tech-logo" loading="lazy"/></div>
+                <div class="tech-logo-label">Graviton</div>
+                <div class="tech-logo-desc">AWS custom Arm</div>
+              </div>
             </div>
-            <div class="tech-logo-label">NVIDIA GPU</div>
-            <div class="tech-logo-desc">GPU Acceleration</div>
-          </div>
-          <div class="tech-logo-card" data-tech="tpu">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/tpu.svg" alt="Google TPU" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Google TPU</div>
-            <div class="tech-logo-desc">Tensor Processing Unit</div>
-          </div>
-          <div class="tech-logo-card" data-tech="aws-graviton">
-            <div class="tech-logo-svg">
-              <img src="tech-logos/aws-graviton.svg" alt="Graviton3/4" class="real-tech-logo" loading="lazy"/>
-            </div>
-            <div class="tech-logo-label">Graviton3/4</div>
-            <div class="tech-logo-desc">AWS Custom Arm</div>
           </div>
         </div>
       </div>
