@@ -1,0 +1,494 @@
+{
+  "Microsoft Azure": {
+    "score": 53.1,
+    "dcs": 60,
+    "countries": 1,
+    "tiers": 8
+  },
+  "OVH": {
+    "score": 48.9,
+    "dcs": 41,
+    "countries": 1,
+    "tiers": 66
+  },
+  "Oracle Cloud": {
+    "score": 46.2,
+    "dcs": 50,
+    "countries": 1,
+    "tiers": 15
+  },
+  "Vultr": {
+    "score": 33.6,
+    "dcs": 32,
+    "countries": 1,
+    "tiers": 27
+  },
+  "AWS Middle East (Bahrain)": {
+    "score": 29.6,
+    "dcs": 32,
+    "countries": 1,
+    "tiers": 7
+  },
+  "Huawei Cloud": {
+    "score": 27.3,
+    "dcs": 30,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Alibaba Cloud": {
+    "score": 26.0,
+    "dcs": 28,
+    "countries": 1,
+    "tiers": 6
+  },
+  "Tencent Cloud": {
+    "score": 23.8,
+    "dcs": 26,
+    "countries": 1,
+    "tiers": 3
+  },
+  "UpCloud": {
+    "score": 23.0,
+    "dcs": 13,
+    "countries": 0,
+    "tiers": 61
+  },
+  "IDCloudHost": {
+    "score": 22.8,
+    "dcs": 9,
+    "countries": 1,
+    "tiers": 69
+  },
+  "DigitalOcean": {
+    "score": 20.1,
+    "dcs": 15,
+    "countries": 2,
+    "tiers": 23
+  },
+  "Contabo": {
+    "score": 19.6,
+    "dcs": 14,
+    "countries": 1,
+    "tiers": 32
+  },
+  "Kamatera": {
+    "score": 19.6,
+    "dcs": 18,
+    "countries": 0,
+    "tiers": 23
+  },
+  "Linode (Akamai)": {
+    "score": 15.8,
+    "dcs": 11,
+    "countries": 2,
+    "tiers": 18
+  },
+  "Herza Cloud": {
+    "score": 13.7,
+    "dcs": 4,
+    "countries": 4,
+    "tiers": 22
+  },
+  "BiznetGio": {
+    "score": 11.4,
+    "dcs": 8,
+    "countries": 1,
+    "tiers": 16
+  },
+  "Hetzner Cloud": {
+    "score": 10.3,
+    "dcs": 6,
+    "countries": 1,
+    "tiers": 19
+  },
+  "Baidu AI Cloud": {
+    "score": 9.0,
+    "dcs": 8,
+    "countries": 1,
+    "tiers": 4
+  },
+  "IDC Frontier": {
+    "score": 8.8,
+    "dcs": 8,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Kingsoft Cloud": {
+    "score": 8.8,
+    "dcs": 8,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Viettel IDC": {
+    "score": 8.5,
+    "dcs": 6,
+    "countries": 1,
+    "tiers": 10
+  },
+  "Hostinger": {
+    "score": 8.5,
+    "dcs": 7,
+    "countries": 1,
+    "tiers": 6
+  },
+  "FPT Smart Cloud": {
+    "score": 7.3,
+    "dcs": 5,
+    "countries": 1,
+    "tiers": 8
+  },
+  "UCloud": {
+    "score": 7.1,
+    "dcs": 6,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Qwords": {
+    "score": 6.4,
+    "dcs": 4,
+    "countries": 1,
+    "tiers": 8
+  },
+  "Locaweb Cloud": {
+    "score": 6.3,
+    "dcs": 5,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Gabia Cloud": {
+    "score": 5.4,
+    "dcs": 4,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Exabytes": {
+    "score": 5.0,
+    "dcs": 3,
+    "countries": 1,
+    "tiers": 5
+  },
+  "DomaiNesia": {
+    "score": 5.0,
+    "dcs": 2,
+    "countries": 1,
+    "tiers": 9
+  },
+  "CloudKilat": {
+    "score": 4.8,
+    "dcs": 3,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Rumahweb": {
+    "score": 4.8,
+    "dcs": 3,
+    "countries": 1,
+    "tiers": 4
+  },
+  "JagoanHosting": {
+    "score": 4.4,
+    "dcs": 2,
+    "countries": 1,
+    "tiers": 6
+  },
+  "Shinjiru VPS": {
+    "score": 4.0,
+    "dcs": 2,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Microsoft Azure UAE": {
+    "score": 3.5,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 6
+  },
+  "VNG Cloud": {
+    "score": 3.3,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 5
+  },
+  "NHN Cloud": {
+    "score": 3.3,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 5
+  },
+  "Microsoft Azure South Africa": {
+    "score": 3.3,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 5
+  },
+  "AWS Africa (Cape Town)": {
+    "score": 3.3,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 5
+  },
+  "VNG Cloud (GreenNode)": {
+    "score": 3.3,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 5
+  },
+  "Sakura Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "GMO Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "NTT Enterprise Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "NAVER Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Kakao Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "China Unicom Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Macquarie Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "HostDime Brazil": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "stc Cloud": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Cerebrium": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Anyscale": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Google Cloud Qatar": {
+    "score": 3.1,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 4
+  },
+  "Cloud4C": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "NxtGen Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Cyfuture Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "NeevCloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "IIJ GIO": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "KDDI Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "SoftBank White Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "KT Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Samsung SDS": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "LG CNS Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "SK C&C Cloud Z": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "JD Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Volcano Engine": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "HiCloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Far EasTone Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "CITIC CPC": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "HKT Enterprise Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "AUCloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Vault Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Catalyst Cloud": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "King.Host": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Bravulink": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Telkom Cloud SA": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Liquid Telecom": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Internet Solutions Africa": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Novita AI": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Fireworks AI": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Google Cloud UAE": {
+    "score": 2.9,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 3
+  },
+  "Douzone Cloud": {
+    "score": 2.7,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 2
+  },
+  "Chief Cloud": {
+    "score": 2.7,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 2
+  },
+  "eCloudvalley": {
+    "score": 2.7,
+    "dcs": 1,
+    "countries": 1,
+    "tiers": 2
+  }
+}

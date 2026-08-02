@@ -1,0 +1,982 @@
+{
+  "AUCloud": {
+    "score": 100,
+    "hypervisor": "kvm (openstack-derived, i",
+    "container": "docker, containerd",
+    "orchestration": "managed kubernetes (opens",
+    "storage": "ceph (openstack cinder ba",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage",
+      "network"
+    ]
+  },
+  "Vault Cloud": {
+    "score": 100,
+    "hypervisor": "kvm (openstack-derived, i",
+    "container": "docker, containerd",
+    "orchestration": "managed kubernetes",
+    "storage": "ceph (openstack cinder)",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage",
+      "network"
+    ]
+  },
+  "Catalyst Cloud": {
+    "score": 100,
+    "hypervisor": "kvm (catalyst cloud uses ",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (catalyst clou",
+    "storage": "ceph (block storage cinde",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage",
+      "network"
+    ]
+  },
+  "Alibaba Cloud": {
+    "score": 90,
+    "hypervisor": "xen (legacy ecs instances",
+    "container": "docker, containerd (for a",
+    "orchestration": "ack (container service fo",
+    "storage": "oss (object storage, s3-c",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Qwords": {
+    "score": 90,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "self-managed vps + kubern",
+    "storage": "san + ssd + object storag",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Tencent Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (tencent cloud virtua",
+    "container": "docker, containerd",
+    "orchestration": "tencent kubernetes engine",
+    "storage": "cbs (cloud block storage,",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "DigitalOcean": {
+    "score": 90,
+    "hypervisor": "kvm (with proprietary enh",
+    "container": "docker containerd, contai",
+    "orchestration": "doks (digitalocean kubern",
+    "storage": "spaces (s3-compatible obj",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "FPT Smart Cloud": {
+    "score": 90,
+    "hypervisor": "vmware vsphere (confirmed",
+    "container": "docker (fpt container reg",
+    "orchestration": "kubernetes (fpt kubernete",
+    "storage": "fpt block storage, fpt ob",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Linode (Akamai)": {
+    "score": 90,
+    "hypervisor": "kvm (primarily amd epyc, ",
+    "container": "docker, containerd for lk",
+    "orchestration": "lke (linode kubernetes en",
+    "storage": "block storage (cbs), s3-c",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "VNG Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (openstack-derived vs",
+    "container": "docker, kubernetes",
+    "orchestration": "managed kubernetes (vng k",
+    "storage": "vstorage (object + block,",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Contabo": {
+    "score": 90,
+    "hypervisor": "kvm (amd epyc for cloud v",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes via self-manag",
+    "storage": "contabo object storage (s",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Vultr": {
+    "score": 90,
+    "hypervisor": "kvm (amd epyc and intel x",
+    "container": "docker, containerd for ku",
+    "orchestration": "vultr kubernetes engine (",
+    "storage": "vultr block storage (cbs)",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "IDCloudHost": {
+    "score": 90,
+    "hypervisor": "kvm (proxmox ve)",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (s3-compatible",
+    "storage": "san + object storage (s3-",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "NeevCloud": {
+    "score": 90,
+    "hypervisor": "kvm (bare-metal focus, gp",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (neevcloud kub",
+    "storage": "zeta (s3-compatible objec",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "NAVER Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (naver cloud platform",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (naver cloud c",
+    "storage": "nas, object storage (s3-c",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "NHN Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (confirmed in nhn clo",
+    "container": "docker (nhn container reg",
+    "orchestration": "kubernetes via nhn kubern",
+    "storage": "block storage (cbs), nas,",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "China Unicom Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (custom wo cloud os)",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (modified chin",
+    "storage": "object storage (s3-compat",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "JD Cloud": {
+    "score": 90,
+    "hypervisor": "kvm (jd cloud virtual mac",
+    "container": "docker, containerd",
+    "orchestration": "jd kubernetes engine (jke",
+    "storage": "cloud disk (block, ssd/nv",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Volcano Engine": {
+    "score": 90,
+    "hypervisor": "kvm (custom bytedance os)",
+    "container": "docker, containerd",
+    "orchestration": "vke (volcano kubernetes e",
+    "storage": "object storage (s3-compat",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "VNG Cloud (GreenNode)": {
+    "score": 90,
+    "hypervisor": "kvm (vng cloud vserver us",
+    "container": "docker, containerd",
+    "orchestration": "vks (vng kubernetes servi",
+    "storage": "vstorage (block, object, ",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "OVH": {
+    "score": 90,
+    "hypervisor": "kvm (openstack-based foun",
+    "container": "docker, containerd; opens",
+    "orchestration": "ovh managed kubernetes (b",
+    "storage": "ovh object storage (s3-co",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "Oracle Cloud": {
+    "score": 90,
+    "hypervisor": "kvm-based for vm instance",
+    "container": "containerd, docker",
+    "orchestration": "oke (oracle kubernetes en",
+    "storage": "object storage (s3-compat",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "eCloudvalley": {
+    "score": 75,
+    "hypervisor": "openstack (implied; eclou",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (managed opens",
+    "storage": "ceph (block, object, file",
+    "matches": [
+      "container",
+      "orchestration",
+      "storage",
+      "network"
+    ]
+  },
+  "BiznetGio": {
+    "score": 70,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "openstack + kubernetes (n",
+    "storage": "ssd nvme + san (neo elast",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Huawei Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (huawei cloud uses kv",
+    "container": "docker, containerd (isula",
+    "orchestration": "cce (cloud container engi",
+    "storage": "evs (elastic volume servi",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Exabytes": {
+    "score": 70,
+    "hypervisor": "kvm (typical for shared h",
+    "container": "docker",
+    "orchestration": "self-managed",
+    "storage": "ssd + object storage (s3-",
+    "matches": [
+      "hypervisor",
+      "container",
+      "storage"
+    ]
+  },
+  "Hetzner Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (intel xeon, amd epyc",
+    "container": "docker, containerd; hetzn",
+    "orchestration": "hetzner kubernetes (via c",
+    "storage": "hetzner storage box (netw",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Hostinger": {
+    "score": 70,
+    "hypervisor": "kvm (litespeed, cpanel)",
+    "container": "docker (managed via panel",
+    "orchestration": "self-managed (no managed ",
+    "storage": "ssd (100% nvme storage fl",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Cloud4C": {
+    "score": 70,
+    "hypervisor": "kvm (managed cloud platfo",
+    "container": "docker, kubernetes",
+    "orchestration": "managed kubernetes (opens",
+    "storage": "block + object storage (h",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Sakura Cloud": {
+    "score": 70,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "managed kubernetes (by sa",
+    "storage": "san-backed block storage,",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "GMO Cloud": {
+    "score": 70,
+    "hypervisor": "vmware vsphere (for gmo c",
+    "container": "docker",
+    "orchestration": "kubernetes available via ",
+    "storage": "block storage, nas",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "IIJ GIO": {
+    "score": 70,
+    "hypervisor": "vmware vsphere for enterp",
+    "container": "docker",
+    "orchestration": "kubernetes (iij gio kuber",
+    "storage": "san-backed block storage,",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "NTT Enterprise Cloud": {
+    "score": 70,
+    "hypervisor": "vmware vsphere (enterpris",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (ntt cloud kub",
+    "storage": "enterprise nas (nfs), blo",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "KDDI Cloud": {
+    "score": 70,
+    "hypervisor": "vmware vsphere (kddi clou",
+    "container": "docker",
+    "orchestration": "kubernetes (kddi cloud ku",
+    "storage": "enterprise-grade block (i",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "KT Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (kt cloud compute use",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (kt cloud kube",
+    "storage": "block storage (iscsi), na",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Kakao Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (implied from vpc/vir",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (via kubeflow ",
+    "storage": "block storage, object sto",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "LG CNS Cloud": {
+    "score": 70,
+    "hypervisor": "vmware vsphere (enterpris",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (lg cns cloud ",
+    "storage": "enterprise storage (dell/",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "SK C&C Cloud Z": {
+    "score": 70,
+    "hypervisor": "vmware vsphere; kvm for c",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (cloud z kuber",
+    "storage": "block, nas, object storag",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Gabia Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (implied; gabia offer",
+    "container": "docker",
+    "orchestration": "kubernetes (via partner/i",
+    "storage": "block storage, nas",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Baidu AI Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (baidu cloud uses kvm",
+    "container": "docker, containerd",
+    "orchestration": "baidu kubernetes engine (",
+    "storage": "block storage (baidu clou",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Kingsoft Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (for standard instanc",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (kce \u2014 kingsof",
+    "storage": "ebs (block), rds (mysql/p",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "UCloud": {
+    "score": 70,
+    "hypervisor": "kvm (ucloud's primary hyp",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (uk8s, ucloud ",
+    "storage": "udisk (block, ssd/nvme), ",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "HiCloud": {
+    "score": 70,
+    "hypervisor": "kvm (hkbn hicloud)",
+    "container": "docker",
+    "orchestration": "managed kubernetes",
+    "storage": "object storage + block st",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Chief Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (chief cloud platform",
+    "container": "docker, kubernetes",
+    "orchestration": "managed kubernetes (chief",
+    "storage": "block storage (chief clou",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "CITIC CPC": {
+    "score": 70,
+    "hypervisor": "kvm + vmware",
+    "container": "docker, containerd",
+    "orchestration": "managed kubernetes (multi",
+    "storage": "object storage + block st",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Locaweb Cloud": {
+    "score": 70,
+    "hypervisor": "kvm (locaweb cloud platfo",
+    "container": "docker (native support)",
+    "orchestration": "self-managed (no managed ",
+    "storage": "ssd + block storage",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "HostDime Brazil": {
+    "score": 70,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "self-managed (hostdime cl",
+    "storage": "block + object storage",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Telkom Cloud SA": {
+    "score": 70,
+    "hypervisor": "kvm (openstack-derived)",
+    "container": "docker, containerd",
+    "orchestration": "managed kubernetes",
+    "storage": "block + object storage",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Internet Solutions Africa": {
+    "score": 70,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "kubernetes (managed)",
+    "storage": "object storage",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Novita AI": {
+    "score": 70,
+    "hypervisor": "kvm (cloud-agnostic)",
+    "container": "docker",
+    "orchestration": "kubernetes",
+    "storage": "object storage",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Cerebrium": {
+    "score": 70,
+    "hypervisor": "kvm (cloud-agnostic)",
+    "container": "containerd / docker",
+    "orchestration": "kubernetes (cerebrium pro",
+    "storage": "object storage (cloud-agn",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "AWS Middle East (Bahrain)": {
+    "score": 70,
+    "hypervisor": "aws nitro system (custom ",
+    "container": "firecracker (lambda), ecs",
+    "orchestration": "eks (managed kubernetes, ",
+    "storage": "s3 (object), ebs (block),",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "AWS Africa (Cape Town)": {
+    "score": 70,
+    "hypervisor": "aws nitro system (custom ",
+    "container": "firecracker + ecs (docker",
+    "orchestration": "eks (managed kubernetes, ",
+    "storage": "s3 + ebs + efs",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "UpCloud": {
+    "score": 70,
+    "hypervisor": "kvm (amd epyc 4th gen 'ge",
+    "container": "docker, containerd for up",
+    "orchestration": "upcloud managed kubernete",
+    "storage": "maxiops (upcloud's propri",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "Kamatera": {
+    "score": 70,
+    "hypervisor": "kvm (fully customizable v",
+    "container": "docker, containerd for ku",
+    "orchestration": "kamatera managed kubernet",
+    "storage": "block storage (distribute",
+    "matches": [
+      "hypervisor",
+      "container",
+      "orchestration"
+    ]
+  },
+  "IDC Frontier": {
+    "score": 65,
+    "hypervisor": "vmware vsphere; also prov",
+    "container": "docker (idcf cloud contai",
+    "orchestration": "kubernetes (idcf cloud co",
+    "storage": "ceph-based block storage ",
+    "matches": [
+      "container",
+      "orchestration",
+      "storage"
+    ]
+  },
+  "JagoanHosting": {
+    "score": 50,
+    "hypervisor": "kvm",
+    "container": "docker (airflow-ready ser",
+    "orchestration": "self-managed vps",
+    "storage": "nvme (80,000 iops) + san ",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "SoftBank White Cloud": {
+    "score": 50,
+    "hypervisor": "kvm (paas)",
+    "container": "docker + kubernetes",
+    "orchestration": "softbank proprietary paas",
+    "storage": "block + object storage",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "King.Host": {
+    "score": 50,
+    "hypervisor": "kvm (vps platform)",
+    "container": "docker",
+    "orchestration": "self-managed",
+    "storage": "ssd",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Bravulink": {
+    "score": 50,
+    "hypervisor": "kvm (implied)",
+    "container": "docker",
+    "orchestration": "self-managed",
+    "storage": "block + object storage",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Fireworks AI": {
+    "score": 50,
+    "hypervisor": "kvm (cloud-agnostic)",
+    "container": "docker + firecracker",
+    "orchestration": "fireworks proprietary inf",
+    "storage": "object storage",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Anyscale": {
+    "score": 50,
+    "hypervisor": "kvm (aws/gcp backend)",
+    "container": "docker (ray framework)",
+    "orchestration": "anyscale compute + ray cl",
+    "storage": "object storage (cloud-agn",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Herza Cloud": {
+    "score": 50,
+    "hypervisor": "kvm (likely, openstack-de",
+    "container": "docker (basic support)",
+    "orchestration": "self-managed",
+    "storage": "ssd + san",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Shinjiru VPS": {
+    "score": 50,
+    "hypervisor": "kvm (kvm-openstack derive",
+    "container": "docker",
+    "orchestration": "self-managed",
+    "storage": "nvme + san",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "DomaiNesia": {
+    "score": 50,
+    "hypervisor": "kvm",
+    "container": "docker",
+    "orchestration": "self-managed vps",
+    "storage": "ssd nvme + san + object s",
+    "matches": [
+      "hypervisor",
+      "container"
+    ]
+  },
+  "Viettel IDC": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (implied; ",
+    "container": "docker (likely via manage",
+    "orchestration": "kubernetes (viettel cloud",
+    "storage": "san storage, nas",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Microsoft Azure": {
+    "score": 45,
+    "hypervisor": "azure hyper-v (windows se",
+    "container": "windows containers, hyper",
+    "orchestration": "aks (managed kubernetes, ",
+    "storage": "azure disk (block), azure",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "NxtGen Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (nxtgen is",
+    "container": "docker, containerd",
+    "orchestration": "kubernetes (nxtgen cloud ",
+    "storage": "enterprise san storage, n",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Cyfuture Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (cyfuture ",
+    "container": "docker",
+    "orchestration": "kubernetes (managed conta",
+    "storage": "enterprise storage (san/n",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Samsung SDS": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (samsung s",
+    "container": "docker",
+    "orchestration": "kubernetes (via enterpris",
+    "storage": "enterprise storage soluti",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Douzone Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (implied f",
+    "container": "docker",
+    "orchestration": "kubernetes (managed servi",
+    "storage": "san/nas storage",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Far EasTone Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (implied f",
+    "container": "docker",
+    "orchestration": "kubernetes (managed)",
+    "storage": "san/nas",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "HKT Enterprise Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (hkt is a ",
+    "container": "docker",
+    "orchestration": "kubernetes (managed)",
+    "storage": "san, nas, object storage",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Macquarie Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (macquarie",
+    "container": "docker",
+    "orchestration": "kubernetes (macquarie clo",
+    "storage": "enterprise storage (dell/",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "stc Cloud": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (implied; ",
+    "container": "docker",
+    "orchestration": "kubernetes (stc cloud kub",
+    "storage": "enterprise san storage, n",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Liquid Telecom": {
+    "score": 45,
+    "hypervisor": "vmware vsphere (liquid te",
+    "container": "docker",
+    "orchestration": "kubernetes (liquid cloud ",
+    "storage": "enterprise storage, nas, ",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Microsoft Azure UAE": {
+    "score": 45,
+    "hypervisor": "azure hyper-v (custom)",
+    "container": "containerd, hyper-v isola",
+    "orchestration": "aks (managed kubernetes, ",
+    "storage": "azure disk + files + blob",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Microsoft Azure South Africa": {
+    "score": 45,
+    "hypervisor": "azure hyper-v (custom)",
+    "container": "containerd, hyper-v isola",
+    "orchestration": "aks (managed kubernetes, ",
+    "storage": "azure disk + files + blob",
+    "matches": [
+      "container",
+      "orchestration"
+    ]
+  },
+  "Google Cloud Qatar": {
+    "score": 45,
+    "hypervisor": "kvm-based (gce)",
+    "container": "gvisor (runsc)",
+    "orchestration": "gke (managed kubernetes, ",
+    "storage": "cloud storage + persisten",
+    "matches": [
+      "hypervisor",
+      "orchestration"
+    ]
+  },
+  "Google Cloud UAE": {
+    "score": 45,
+    "hypervisor": "kvm-based (gce)",
+    "container": "gvisor (runsc)",
+    "orchestration": "gke (managed kubernetes, ",
+    "storage": "cloud storage + persisten",
+    "matches": [
+      "hypervisor",
+      "orchestration"
+    ]
+  },
+  "Rumahweb": {
+    "score": 25,
+    "hypervisor": "unknown (likely kvm or vm",
+    "container": "unknown",
+    "orchestration": "unknown",
+    "storage": "san + cloud storage (alib",
+    "matches": [
+      "hypervisor"
+    ]
+  },
+  "CloudKilat": {
+    "score": 0,
+    "hypervisor": "unknown (enterprise sales",
+    "container": "unknown",
+    "orchestration": "unknown",
+    "storage": "kilat storage (proprietar",
+    "matches": []
+  }
+}

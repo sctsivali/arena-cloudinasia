@@ -1,0 +1,740 @@
+{
+  "OVH": {
+    "score": 58.6,
+    "gpu_tiers": 0,
+    "max_ram": 760,
+    "max_cpu": 160,
+    "has_nvme": true,
+    "top_cpu_score": 80,
+    "max_gpu_mem": 0
+  },
+  "UpCloud": {
+    "score": 37.5,
+    "gpu_tiers": 0,
+    "max_ram": 512,
+    "max_cpu": 80,
+    "has_nvme": false,
+    "top_cpu_score": 80,
+    "max_gpu_mem": 0
+  },
+  "Oracle Cloud": {
+    "score": 37.4,
+    "gpu_tiers": 2,
+    "max_ram": 480,
+    "max_cpu": 30,
+    "has_nvme": false,
+    "top_cpu_score": 80,
+    "max_gpu_mem": 0
+  },
+  "Kamatera": {
+    "score": 33.3,
+    "gpu_tiers": 0,
+    "max_ram": 32,
+    "max_cpu": 16,
+    "has_nvme": true,
+    "top_cpu_score": 80,
+    "max_gpu_mem": 0
+  },
+  "IDCloudHost": {
+    "score": 32.2,
+    "gpu_tiers": 0,
+    "max_ram": 500.0,
+    "max_cpu": 32,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Anyscale": {
+    "score": 31.3,
+    "gpu_tiers": 3,
+    "max_ram": 96.0,
+    "max_cpu": 32,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Cerebrium": {
+    "score": 30.2,
+    "gpu_tiers": 4,
+    "max_ram": 80.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Novita AI": {
+    "score": 27.2,
+    "gpu_tiers": 3,
+    "max_ram": 80.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Linode (Akamai)": {
+    "score": 25.3,
+    "gpu_tiers": 1,
+    "max_ram": 96.0,
+    "max_cpu": 32,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Hetzner Cloud": {
+    "score": 24.8,
+    "gpu_tiers": 0,
+    "max_ram": 96.0,
+    "max_cpu": 48,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Fireworks AI": {
+    "score": 24.2,
+    "gpu_tiers": 2,
+    "max_ram": 80.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Contabo": {
+    "score": 22.5,
+    "gpu_tiers": 0,
+    "max_ram": 192.0,
+    "max_cpu": 18,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "DigitalOcean": {
+    "score": 21.9,
+    "gpu_tiers": 0,
+    "max_ram": 128.0,
+    "max_cpu": 24,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Vultr": {
+    "score": 21.1,
+    "gpu_tiers": 0,
+    "max_ram": 96.0,
+    "max_cpu": 24,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "VNG Cloud": {
+    "score": 19.0,
+    "gpu_tiers": 1,
+    "max_ram": 16.0,
+    "max_cpu": 4,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "VNG Cloud (GreenNode)": {
+    "score": 19.0,
+    "gpu_tiers": 1,
+    "max_ram": 16.0,
+    "max_cpu": 4,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "BiznetGio": {
+    "score": 18.1,
+    "gpu_tiers": 0,
+    "max_ram": 24.0,
+    "max_cpu": 16,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Hostinger": {
+    "score": 17.0,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "JagoanHosting": {
+    "score": 16.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Viettel IDC": {
+    "score": 16.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Exabytes": {
+    "score": 16.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "FPT Smart Cloud": {
+    "score": 16.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Tencent Cloud": {
+    "score": 16.0,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 4,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Huawei Cloud": {
+    "score": 15.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Shinjiru VPS": {
+    "score": 15.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": true,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Microsoft Azure UAE": {
+    "score": 7.1,
+    "gpu_tiers": 1,
+    "max_ram": 64.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Microsoft Azure South Africa": {
+    "score": 7.1,
+    "gpu_tiers": 1,
+    "max_ram": 64.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "AWS Africa (Cape Town)": {
+    "score": 5.7,
+    "gpu_tiers": 1,
+    "max_ram": 61.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Qwords": {
+    "score": 4.1,
+    "gpu_tiers": 0,
+    "max_ram": 64.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Google Cloud Qatar": {
+    "score": 4.1,
+    "gpu_tiers": 0,
+    "max_ram": 64.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Alibaba Cloud": {
+    "score": 4.0,
+    "gpu_tiers": 1,
+    "max_ram": 16.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Rumahweb": {
+    "score": 3.3,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "HostDime Brazil": {
+    "score": 3.3,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "stc Cloud": {
+    "score": 3.3,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Herza Cloud": {
+    "score": 3.3,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 16,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "DomaiNesia": {
+    "score": 2.7,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 12,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Microsoft Azure": {
+    "score": 2.0,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "NTT Enterprise Cloud": {
+    "score": 2.0,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Google Cloud UAE": {
+    "score": 2.0,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Cloud4C": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "NxtGen Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Cyfuture Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "NeevCloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "NHN Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Samsung SDS": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "LG CNS Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "SK C&C Cloud Z": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Macquarie Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Locaweb Cloud": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "King.Host": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Bravulink": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Telkom Cloud SA": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Liquid Telecom": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Internet Solutions Africa": {
+    "score": 1.6,
+    "gpu_tiers": 0,
+    "max_ram": 16.0,
+    "max_cpu": 8,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "AWS Middle East (Bahrain)": {
+    "score": 1.4,
+    "gpu_tiers": 0,
+    "max_ram": 32.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "CloudKilat": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Sakura Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "GMO Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "KDDI Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "SoftBank White Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "NAVER Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "KT Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Kakao Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Douzone Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Baidu AI Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "HiCloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Far EasTone Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Chief Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "CITIC CPC": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "HKT Enterprise Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "AUCloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Vault Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Catalyst Cloud": {
+    "score": 0.8,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 4,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "China Unicom Cloud": {
+    "score": 0.5,
+    "gpu_tiers": 0,
+    "max_ram": 8.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "IIJ GIO": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "IDC Frontier": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Gabia Cloud": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "JD Cloud": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Kingsoft Cloud": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "UCloud": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "Volcano Engine": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  },
+  "eCloudvalley": {
+    "score": 0.4,
+    "gpu_tiers": 0,
+    "max_ram": 4.0,
+    "max_cpu": 2,
+    "has_nvme": false,
+    "top_cpu_score": 0,
+    "max_gpu_mem": 0
+  }
+}
