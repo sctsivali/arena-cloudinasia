@@ -2234,6 +2234,113 @@ body.sidebar-collapsed .sidebar-toggle-float {
   gap: 3px;
 }
 
+
+/* ===== Arena Ranking Luxury Styling ===== */
+.arena-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.rank-cell {
+  width: 56px;
+  padding: 12px 12px !important;
+  text-align: center;
+  vertical-align: middle;
+}
+.rank-num {
+  font-size: 12px;
+  color: var(--c-text-3);
+  font-weight: 700;
+  font-family: 'SF Mono', 'Monaco', monospace;
+  letter-spacing: 0.5px;
+}
+.rank-medal {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 auto;
+  position: relative;
+  font-family: inherit;
+  color: #1a1a2e;
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.3);
+}
+.medal-1 {
+  background: linear-gradient(135deg, #fff4a3 0%, #ffd700 30%, #ffb300 70%, #ff8c00 100%);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 0 2px rgba(255,215,0,0.4), 0 4px 16px rgba(255,215,0,0.5);
+  animation: medal-shimmer 2.5s ease-in-out infinite;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+}
+.medal-2 {
+  background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 30%, #c0c0c0 70%, #a8a8a8 100%);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 0 2px rgba(192,192,192,0.4), 0 3px 12px rgba(192,192,192,0.4);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+}
+.medal-3 {
+  background: linear-gradient(135deg, #f5d4a3 0%, #cd7f32 30%, #b87333 70%, #8b4513 100%);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 0 2px rgba(205,127,50,0.4), 0 3px 12px rgba(205,127,50,0.4);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+}
+@keyframes medal-shimmer {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.08); filter: brightness(1.18); }
+}
+
+/* Top 3 luxury row styling */
+.arena-row.top-rank {
+  position: relative;
+  transition: all 0.2s;
+}
+.arena-row.top-rank.rank-1 {
+  background: linear-gradient(90deg, rgba(255,215,0,0.14) 0%, rgba(255,179,0,0.05) 50%, transparent 100%) !important;
+  border-left: 3px solid #ffd700 !important;
+}
+.arena-row.top-rank.rank-1:hover {
+  background: linear-gradient(90deg, rgba(255,215,0,0.22) 0%, rgba(255,179,0,0.08) 50%, transparent 100%) !important;
+}
+.arena-row.top-rank.rank-2 {
+  background: linear-gradient(90deg, rgba(192,192,192,0.12) 0%, rgba(168,168,168,0.04) 50%, transparent 100%) !important;
+  border-left: 3px solid #c0c0c0 !important;
+}
+.arena-row.top-rank.rank-2:hover {
+  background: linear-gradient(90deg, rgba(192,192,192,0.20) 0%, rgba(168,168,168,0.06) 50%, transparent 100%) !important;
+}
+.arena-row.top-rank.rank-3 {
+  background: linear-gradient(90deg, rgba(205,127,50,0.12) 0%, rgba(160,82,45,0.04) 50%, transparent 100%) !important;
+  border-left: 3px solid #cd7f32 !important;
+}
+.arena-row.top-rank.rank-3:hover {
+  background: linear-gradient(90deg, rgba(205,127,50,0.20) 0%, rgba(160,82,45,0.06) 50%, transparent 100%) !important;
+}
+.arena-row.top-rank .arena-provider-name {
+  font-weight: 800 !important;
+  font-size: 13px !important;
+}
+.arena-row.top-rank.rank-1 .arena-provider-name {
+  color: #ffd700 !important;
+}
+.arena-row.top-rank.rank-2 .arena-provider-name {
+  color: #d0d0d0 !important;
+}
+.arena-row.top-rank.rank-3 .arena-provider-name {
+  color: #cd7f32 !important;
+}
+
+/* Score rounded */
+.arena-score-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-head {
+  width: 56px;
+  font-size: 11px !important;
+  color: var(--c-text-3) !important;
+  text-align: center;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -3300,7 +3407,7 @@ function buildArena() {
       <td class="arena-score-cell">
         <div class="arena-score">
           <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
-          <div class="arena-score-num">${c.score}</div>
+          <div class="arena-score-num">${Math.round(c.score * 10) / 10}</div>
         </div>
       </td>
     </tr>
@@ -3325,7 +3432,7 @@ function buildArena() {
       <td class="arena-score-cell">
         <div class="arena-score">
           <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
-          <div class="arena-score-num">${c.score}</div>
+          <div class="arena-score-num">${Math.round(c.score * 10) / 10}</div>
         </div>
       </td>
     </tr>
@@ -3352,7 +3459,7 @@ function buildArena() {
       <td class="arena-score-cell">
         <div class="arena-score">
           <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
-          <div class="arena-score-num">${c.score}</div>
+          <div class="arena-score-num">${Math.round(c.score * 10) / 10}</div>
         </div>
       </td>
     </tr>
@@ -3380,7 +3487,7 @@ function buildArena() {
       <td class="arena-score-cell">
         <div class="arena-score">
           <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
-          <div class="arena-score-num">${c.score}</div>
+          <div class="arena-score-num">${Math.round(c.score * 10) / 10}</div>
         </div>
       </td>
     </tr>
@@ -3407,7 +3514,7 @@ function buildArena() {
       <td class="arena-score-cell">
         <div class="arena-score">
           <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
-          <div class="arena-score-num">${c.score}</div>
+          <div class="arena-score-num">${Math.round(c.score * 10) / 10}</div>
         </div>
       </td>
     </tr>
