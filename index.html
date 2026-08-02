@@ -1573,7 +1573,7 @@ a { color: inherit; text-decoration: none; }
   padding: 10px 6px 8px 6px;
   text-align: center;
   transition: all 0.15s;
-  cursor: help;
+  cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1585,6 +1585,7 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-1px);
 }
 .tech-logo-card.os-card { border-left: 2px solid var(--c-cia); }
+.provider-name-clickable:hover { color: var(--c-cia) !important; }
 .tech-logo-card.prop-card { border-left: 2px solid var(--c-warn); }
 
 .tech-logo-svg {
@@ -1595,11 +1596,19 @@ a { color: inherit; text-decoration: none; }
 .tech-logo-svg svg, .tech-logo-svg img {
   width: 100%; height: 100%;
 }
-.real-tech-logo {
-  filter: brightness(0) invert(1);
-  transition: filter 0.2s;
+.tech-logo-svg {
+  /* White background card so colored logos are visible */
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 4px;
 }
-.tech-logo-card:hover .real-tech-logo { filter: none; }
+.real-tech-logo {
+  filter: none; /* Show original color */
+  transition: transform 0.2s;
+}
+.tech-logo-card:hover .real-tech-logo {
+  transform: scale(1.1); /* Just scale on hover, no color change */
+}
 
 .tech-logo-label {
   font-size: 11px; font-weight: 700;
@@ -1765,6 +1774,280 @@ a { color: inherit; text-decoration: none; }
 
 .tech-logo-card.filtered-out {
   display: none;
+}
+
+
+/* Sticky sidebar with scroll-spy */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+.nav-item {
+  position: relative;
+  padding-left: 14px;
+  transition: all 0.15s;
+}
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--c-cia);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.2s;
+}
+.nav-item.active::before {
+  height: 60%;
+}
+.nav-item.active {
+  background: rgba(96, 189, 145, 0.12);
+  color: var(--c-cia);
+}
+
+
+/* Page-based navigation system */
+.page {
+  display: none;
+  animation: page-fade 0.3s ease-out;
+}
+.page.active {
+  display: block;
+}
+@keyframes page-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Page transition buttons */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 16px;
+  padding: 14px 20px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+}
+.page-nav-info {
+  font-size: 13px;
+  color: var(--c-text-2);
+}
+.page-nav-info b {
+  color: var(--c-cia);
+  font-weight: 700;
+}
+.page-nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+.page-nav-btn {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  color: var(--c-text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.page-nav-btn:hover {
+  border-color: var(--c-cia);
+  background: rgba(96,189,145,0.10);
+}
+.page-nav-btn.primary {
+  background: var(--c-cia);
+  color: #06061a;
+  border-color: var(--c-cia);
+}
+.page-nav-btn.primary:hover {
+  background: var(--c-yellow);
+  border-color: var(--c-yellow);
+}
+
+/* When page is active, the section is shown */
+.section.active-section {
+  display: block;
+}
+
+
+/* Provider Modal */
+#providerModalOverlay,
+#techModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#providerModalOverlay.show,
+#techModalOverlay.show {
+  display: flex;
+}
+#providerModalContent,
+#techModalContent {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 18px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+}
+.provider-modal-close {
+  position: absolute;
+  top: 12px; right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--c-text-3);
+  font-size: 28px;
+  cursor: pointer;
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+.provider-modal-close:hover { color: var(--c-text); }
+.provider-modal-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  color: var(--c-text);
+}
+.provider-modal-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.provider-stat-card {
+  background: var(--c-bg);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+.provider-stat-label {
+  font-size: 9px;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.provider-stat-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--c-cia);
+}
+.provider-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-text-2);
+  margin: 20px 0 10px;
+}
+.provider-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.provider-tag {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  color: var(--c-text);
+}
+.provider-tiers {
+  max-height: 280px;
+  overflow-y: auto;
+}
+.provider-tier {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--c-bg);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+.provider-tier-name { color: var(--c-text); font-weight: 600; }
+.provider-tier-spec { color: var(--c-text-3); font-size: 11px; }
+.provider-tier-price { color: var(--c-cia); font-weight: 700; text-align: right; }
+.provider-tier-more {
+  text-align: center;
+  padding: 8px;
+  color: var(--c-text-3);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Tech Modal */
+.tech-modal-logo {
+  width: 80px; height: 80px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.tech-modal-logo img { width: 100%; height: 100%; }
+.tech-modal-info {
+  font-size: 14px;
+  color: var(--c-text-2);
+  margin: 8px 0 12px;
+  line-height: 1.5;
+}
+.tech-modal-license {
+  font-size: 12px;
+  color: var(--c-text-3);
+  background: var(--c-bg);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--c-cia);
+}
+.tech-modal-license b { color: var(--c-cia); }
+.tech-modal-usage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 16px 0;
+}
+.tech-modal-providers {
+  font-size: 12px;
+  color: var(--c-text-2);
+  line-height: 1.6;
+  background: var(--c-bg);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 768px) {
+  .provider-modal-stats { grid-template-columns: repeat(2, 1fr); }
+  .tech-modal-usage { grid-template-columns: 1fr 1fr; }
+  #providerModalContent, #techModalContent { padding: 20px; }
 }
 
 /* RESPONSIVE */
@@ -2815,7 +3098,7 @@ function setArenaTab(arenaName) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { markProviderNames();
   document.querySelectorAll('.arena-tab').forEach(tab => {
     tab.addEventListener('click', () => setArenaTab(tab.dataset.arena));
   });
@@ -3378,6 +3661,81 @@ function addTechTooltips() {
 
 
 
+
+// Scroll-spy for sidebar nav items
+function updateActiveNav() {
+  const sections = document.querySelectorAll('section.section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const scrollPos = window.scrollY + 200;
+  
+  let activeSection = null;
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (scrollPos >= top && scrollPos < bottom) {
+      activeSection = section.id;
+    }
+  });
+  
+  navItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const targetId = href.substring(1);
+      if (targetId === activeSection) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+});
+
+
+// Make all provider names clickable (delegated)
+document.addEventListener('click', (e) => {
+  // Find provider name in clicked element or parent
+  const target = e.target.closest('[data-provider], .provider-name-clickable, .arena-provider-name, .tech-name');
+  if (target) {
+    const providerName = target.dataset.provider || target.textContent.trim();
+    if (providerName && providerName.length < 60) {
+      // Check if it's a real provider
+      const exists = DATA.rows.some(r => r.provider === providerName);
+      if (exists) {
+        showProviderModal(providerName);
+        e.preventDefault();
+        return;
+      }
+    }
+  }
+  
+  // Find tech card click
+  const techCard = e.target.closest('.tech-logo-card[data-tech]');
+  if (techCard) {
+    showTechModal(techCard.dataset.tech);
+    e.preventDefault();
+  }
+});
+
+// Add data-provider to all provider name elements
+function markProviderNames() {
+  document.querySelectorAll('.arena-provider-name, .provider-name, td.provider-cell, .tech-name, .directory-provider').forEach(el => {
+    const name = el.textContent.trim().split('\n')[0].trim();
+    if (name && name.length < 60) {
+      const exists = DATA.rows.some(r => r.provider === name);
+      if (exists) {
+        el.style.cursor = 'pointer';
+        el.classList.add('provider-name-clickable');
+        el.dataset.provider = name;
+      }
+    }
+  });
+}
+
 const menuToggle = document.getElementById('menuToggle');
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
@@ -3506,6 +3864,226 @@ function filterTechCards(filter) {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.tech-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => filterTechCards(btn.dataset.techFilter));
+  });
+});
+
+
+const TECH_INFO = {"kvm": {"info": "Linux kernel-based hypervisor", "license": "GPL v2"}, "xen": {"info": "Xen Project bare-metal hypervisor", "license": "GPL v2"}, "proxmox": {"info": "Open source virtualization management", "license": "AGPL v3"}, "docker": {"info": "Container runtime (Moby project)", "license": "Apache 2.0"}, "kubernetes": {"info": "Container orchestration system", "license": "Apache 2.0"}, "containerd": {"info": "Industry-standard container runtime", "license": "Apache 2.0"}, "openshift": {"info": "Enterprise Kubernetes platform", "license": "Apache 2.0 (open core)"}, "rancher": {"info": "Multi-cluster Kubernetes management", "license": "Apache 2.0"}, "openstack": {"info": "Open source cloud computing platform", "license": "Apache 2.0"}, "ceph": {"info": "Distributed object/block/file storage", "license": "LGPL 2.1"}, "minio": {"info": "High-performance S3-compatible object storage", "license": "Apache 2.0"}, "swift": {"info": "OpenStack distributed object storage", "license": "Apache 2.0"}, "firecracker": {"info": "Secure microVM for serverless", "license": "Apache 2.0"}, "vmware": {"info": "Enterprise closed-source hypervisor", "license": "Proprietary"}, "hyperv": {"info": "Microsoft Windows hypervisor", "license": "Proprietary"}, "aws-nitro": {"info": "AWS custom hardware security system", "license": "Proprietary"}, "aws": {"info": "Amazon Web Services cloud platform", "license": "Proprietary"}, "azure": {"info": "Microsoft cloud platform", "license": "Proprietary"}, "gcp": {"info": "Google Cloud Platform", "license": "Proprietary"}, "oracle": {"info": "Oracle Cloud Infrastructure (OCI)", "license": "Proprietary"}, "alibaba": {"info": "Alibaba Cloud (Aliyun)", "license": "Proprietary"}, "huawei": {"info": "Huawei Cloud", "license": "Proprietary"}, "s3": {"info": "Amazon S3 object storage API", "license": "Proprietary API"}, "intel": {"info": "Intel Xeon server CPUs", "license": "Proprietary"}, "amd": {"info": "AMD EPYC server CPUs", "license": "Proprietary"}, "arm": {"info": "ARM Neoverse server architecture", "license": "Proprietary license"}, "nvidia": {"info": "NVIDIA GPU accelerators (Tesla, A100, H100)", "license": "Proprietary"}, "tpu": {"info": "Google Tensor Processing Unit", "license": "Proprietary"}, "graviton": {"info": "AWS custom Arm-based CPU", "license": "Proprietary"}};
+
+function showProviderModal(providerName) {
+  const providerData = DATA.rows.filter(r => r.provider === providerName);
+  if (providerData.length === 0) return;
+  
+  const cheapest = providerData.reduce((min, r) => r.price_usd_per_month < min.price_usd_per_month ? r : min);
+  const totalTiers = providerData.length;
+  const countries = [...new Set(providerData.map(r => r.country).filter(c => c))];
+  const openSourceCount = providerData.filter(r => r.tech_open_source).length;
+  const gpuCount = providerData.filter(r => r.gpu && r.gpu !== 'none').length;
+  
+  const modal = document.getElementById('providerModalOverlay');
+  const content = document.getElementById('providerModalContent');
+  
+  content.innerHTML = `
+    <button class="provider-modal-close" onclick="closeProviderModal()">×</button>
+    <h2 class="provider-modal-title">${providerName}</h2>
+    <div class="provider-modal-stats">
+      <div class="provider-stat-card">
+        <div class="provider-stat-label">Tiers</div>
+        <div class="provider-stat-value">${totalTiers}</div>
+      </div>
+      <div class="provider-stat-card">
+        <div class="provider-stat-label">Countries</div>
+        <div class="provider-stat-value">${countries.length}</div>
+      </div>
+      <div class="provider-stat-card">
+        <div class="provider-stat-label">From</div>
+        <div class="provider-stat-value">$${cheapest.price_usd_per_month.toFixed(2)}</div>
+      </div>
+      <div class="provider-stat-card">
+        <div class="provider-stat-label">OS-Based</div>
+        <div class="provider-stat-value">${openSourceCount}</div>
+      </div>
+      <div class="provider-stat-card">
+        <div class="provider-stat-label">GPU Tiers</div>
+        <div class="provider-stat-value">${gpuCount}</div>
+      </div>
+    </div>
+    
+    <h3 class="provider-section-title">🌍 Countries</h3>
+    <div class="provider-tags">${countries.map(c => `<span class="provider-tag">${c}</span>`).join('')}</div>
+    
+    <h3 class="provider-section-title">📋 All Tiers</h3>
+    <div class="provider-tiers">
+      ${providerData.slice(0, 20).map(t => `
+        <div class="provider-tier">
+          <div class="provider-tier-name">${t.tier_name}</div>
+          <div class="provider-tier-spec">${t.vCPU} vCPU · ${t.ram_gb}GB RAM · ${t.storage_gb}GB ${t.storage_type}</div>
+          <div class="provider-tier-price">$${t.price_usd_per_month.toFixed(2)}/mo</div>
+        </div>
+      `).join('')}
+      ${providerData.length > 20 ? `<div class="provider-tier-more">+ ${providerData.length - 20} more tiers</div>` : ''}
+    </div>
+  `;
+  
+  modal.classList.add('show');
+}
+
+function closeProviderModal() {
+  document.getElementById('providerModalOverlay').classList.remove('show');
+}
+
+function showTechModal(techKey) {
+  const info = TECH_INFO[techKey] || { info: 'No info available', license: 'Unknown' };
+  const usage = TECH_USAGE_DATA[techKey] || { provider_count: 0, tier_count: 0, providers: [] };
+  
+  const modal = document.getElementById('techModalOverlay');
+  const content = document.getElementById('techModalContent');
+  
+  const providerList = usage.providers.slice(0, 12).join(', ') + (usage.providers.length > 12 ? ` +${usage.providers.length - 12} more` : '');
+  
+  content.innerHTML = `
+    <button class="provider-modal-close" onclick="closeTechModal()">×</button>
+    <div style="display:flex; gap:24px; align-items:flex-start;">
+      <div class="tech-modal-logo">
+        <img src="tech-logos/${techKey}.svg" alt="${techKey}" />
+      </div>
+      <div style="flex:1;">
+        <h2 class="provider-modal-title">${techKey.toUpperCase()}</h2>
+        <p class="tech-modal-info">${info.info}</p>
+        <div class="tech-modal-license">📜 License: <b>${info.license}</b></div>
+        <div class="tech-modal-usage">
+          <div class="provider-stat-card">
+            <div class="provider-stat-label">Providers</div>
+            <div class="provider-stat-value">${usage.provider_count || 0}</div>
+          </div>
+          <div class="provider-stat-card">
+            <div class="provider-stat-label">Tiers</div>
+            <div class="provider-stat-value">${usage.tier_count || 0}</div>
+          </div>
+        </div>
+        ${usage.providers && usage.providers.length > 0 ? `
+          <h3 class="provider-section-title">Used by</h3>
+          <p class="tech-modal-providers">${providerList}</p>
+        ` : ''}
+      </div>
+    </div>
+  `;
+  
+  modal.classList.add('show');
+}
+
+function closeTechModal() {
+  document.getElementById('techModalOverlay').classList.remove('show');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeProviderModal();
+    closeTechModal();
+  }
+});
+
+// ============== PAGE-BASED NAVIGATION ==============
+const PAGES = [
+  { id: 'hero', title: 'Overview', icon: '🏠' },
+  { id: 'map', title: 'World Map', icon: '🗺️' },
+  { id: 'os-leaderboard', title: 'Open Source Leaderboard', icon: '🛡️' },
+  { id: 'tech-stack', title: 'Technology Stack', icon: '⚙️' },
+  { id: 'providers', title: 'Provider Profiles', icon: '🏢' },
+  { id: 'by-country', title: 'By Country', icon: '🌍' },
+  { id: 'by-tech', title: 'By Technology', icon: '🔧' },
+  { id: 'oss-vs-prop', title: 'OSS vs Proprietary', icon: '⚖️' },
+  { id: 'directory', title: 'Full Directory', icon: '📋' },
+  { id: 'arena', title: 'Arena Compare', icon: '🏆' },
+];
+
+let currentPageIdx = 0;
+
+function showPage(pageIdx) {
+  // Hide all sections
+  document.querySelectorAll('section.section').forEach(s => s.style.display = 'none');
+  
+  // Show target section
+  const page = PAGES[pageIdx];
+  const target = document.getElementById(page.id);
+  if (target) target.style.display = 'block';
+  
+  // Add page navigation buttons
+  injectPageNav(pageIdx);
+  
+  // Update sidebar
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const href = item.getAttribute('href');
+    if (href === '#' + page.id) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+  
+  currentPageIdx = pageIdx;
+  
+  // Update URL
+  history.pushState(null, '', '#' + page.id);
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function injectPageNav(pageIdx) {
+  // Remove old nav
+  const oldNav = document.getElementById('pageNav');
+  if (oldNav) oldNav.remove();
+  
+  const page = PAGES[pageIdx];
+  const prev = pageIdx > 0 ? PAGES[pageIdx - 1] : null;
+  const next = pageIdx < PAGES.length - 1 ? PAGES[pageIdx + 1] : null;
+  
+  const target = document.getElementById(page.id);
+  if (!target) return;
+  
+  const navHtml = `
+    <div class="page-nav" id="pageNav">
+      <div class="page-nav-info">
+        <b>${page.icon} ${page.title}</b> · Page ${pageIdx + 1} of ${PAGES.length}
+      </div>
+      <div class="page-nav-buttons">
+        ${prev ? `<button class="page-nav-btn" onclick="showPage(${pageIdx - 1})">← ${prev.icon} ${prev.title}</button>` : ''}
+        ${next ? `<button class="page-nav-btn primary" onclick="showPage(${pageIdx + 1})">${next.icon} ${next.title} →</button>` : ''}
+        ${!next ? `<span style="color:var(--c-cia); font-weight:700; font-size:13px">🏁 Last page</span>` : ''}
+      </div>
+    </div>
+  `;
+  
+  // Insert at end of target section
+  target.insertAdjacentHTML('beforeend', navHtml);
+}
+
+// Initialize page navigation on load
+document.addEventListener('DOMContentLoaded', () => {
+  // Determine initial page from URL hash
+  const hash = window.location.hash.replace('#', '') || 'hero';
+  const pageIdx = PAGES.findIndex(p => p.id === hash);
+  const initialIdx = pageIdx >= 0 ? pageIdx : 0;
+  showPage(initialIdx);
+  
+  // Handle nav clicks
+  document.querySelectorAll('.nav-item').forEach((item, i) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = item.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const targetId = href.substring(1);
+        const targetIdx = PAGES.findIndex(p => p.id === targetId);
+        if (targetIdx >= 0) {
+          showPage(targetIdx);
+        }
+      }
+      // Close mobile menu
+      if (window.innerWidth <= 768) {
+        setTimeout(() => document.querySelector('.sidebar').classList.remove('expanded'), 100);
+      }
+    });
   });
 });
 
@@ -3663,5 +4241,16 @@ buildLeafletMap();
 
 
 </script>
+
+<!-- Provider Modal -->
+<div id="providerModalOverlay" onclick="if(event.target===this) closeProviderModal()">
+  <div id="providerModalContent"></div>
+</div>
+
+<!-- Tech Modal -->
+<div id="techModalOverlay" onclick="if(event.target===this) closeTechModal()">
+  <div id="techModalContent"></div>
+</div>
+
 </body>
 </html>
