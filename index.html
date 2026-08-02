@@ -1300,6 +1300,111 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+
+/* Arena Compare Tabs */
+.arena-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  padding: 6px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+}
+.arena-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--c-text-2);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.arena-tab:hover {
+  background: rgba(96,189,145,0.08);
+  color: var(--c-text);
+}
+.arena-tab.active {
+  background: linear-gradient(90deg, var(--c-cia), var(--c-yellow));
+  color: #06061a;
+  font-weight: 700;
+}
+
+.arena-panel {
+  display: none;
+  animation: arena-fade-in 0.3s ease-out;
+}
+.arena-panel.active {
+  display: block;
+}
+@keyframes arena-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.arena-panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--c-line);
+}
+.arena-panel-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+.arena-panel-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+  color: var(--c-text);
+}
+.arena-panel-desc {
+  font-size: 13px;
+  color: var(--c-text-2);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Arena table score column */
+.arena-table td.arena-score-cell {
+  text-align: right;
+}
+.arena-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.arena-score-num {
+  font-weight: 800;
+  color: var(--c-cia);
+  font-size: 14px;
+  min-width: 32px;
+  text-align: right;
+}
+.arena-score-bar {
+  width: 60px;
+  height: 4px;
+  background: var(--c-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.arena-score-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-cia), var(--c-yellow));
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .arena-tabs { flex-direction: column; }
+  .arena-tab { width: 100%; }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -1755,23 +1860,136 @@ a { color: inherit; text-decoration: none; }
           <div class="section-label-text">Arena Compare</div>
         </div>
       </div>
-      <p class="section-sub">Direct comparison of the top 10 providers across 5 dimensions. Score 0–100 (higher = better).</p>
+      <p class="section-sub">Top providers across 5 specialized categories. Click each tab to see category-specific rankings.</p>
 
-      <div class="arena-section">
-        <table class="arena-table">
-          <thead>
-            <tr>
-              <th>Provider</th>
-              <th>Price</th>
-              <th>Coverage</th>
-              <th>OSS</th>
-              <th>Variety</th>
-              <th>Sovereignty</th>
-              <th>Overall</th>
-            </tr>
-          </thead>
-          <tbody id="arenaBody"></tbody>
-        </table>
+      <div class="arena-tabs" id="arenaTabs">
+        <button class="arena-tab active" data-arena="cost">💰 Cost Champion</button>
+        <button class="arena-tab" data-arena="coverage">🌍 Coverage Leader</button>
+        <button class="arena-tab" data-arena="performance">⚡ Performance Champion</button>
+        <button class="arena-tab" data-arena="sovereignty">🏛️ Digital Sovereignty</button>
+        <button class="arena-tab" data-arena="opensource">🔓 Open Source Cloud Native</button>
+      </div>
+
+      <div class="arena-content" id="arenaContent">
+        <!-- Cost Champion -->
+        <div class="arena-panel active" data-arena-panel="cost">
+          <div class="arena-panel-header">
+            <div class="arena-panel-icon">💰</div>
+            <div>
+              <h3 class="arena-panel-title">Cost Champion</h3>
+              <p class="arena-panel-desc">Best price-to-performance ratio. Cheapest entry price, lowest $/GB storage, lowest $/GB RAM.</p>
+            </div>
+          </div>
+          <table class="arena-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>From</th>
+                <th>$/GB Storage</th>
+                <th>$/GB RAM</th>
+                <th>Total Tiers</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="arenaCostBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Coverage Leader -->
+        <div class="arena-panel" data-arena-panel="coverage">
+          <div class="arena-panel-header">
+            <div class="arena-panel-icon">🌍</div>
+            <div>
+              <h3 class="arena-panel-title">Coverage Leader</h3>
+              <p class="arena-panel-desc">Widest global reach. Most data centers, most countries, broadest regional presence.</p>
+            </div>
+          </div>
+          <table class="arena-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>Data Centers</th>
+                <th>Countries</th>
+                <th>Regions</th>
+                <th>Tiers</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="arenaCoverageBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Performance Champion -->
+        <div class="arena-panel" data-arena-panel="performance">
+          <div class="arena-panel-header">
+            <div class="arena-panel-icon">⚡</div>
+            <div>
+              <h3 class="arena-panel-title">Performance Champion</h3>
+              <p class="arena-panel-desc">GPU instances, NVMe SSD storage, high RAM tiers (32GB+), latest generation CPUs.</p>
+            </div>
+          </div>
+          <table class="arena-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>GPU Tiers</th>
+                <th>Max RAM</th>
+                <th>NVMe Tiers</th>
+                <th>Top CPU</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="arenaPerformanceBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Digital Sovereignty -->
+        <div class="arena-panel" data-arena-panel="sovereignty">
+          <div class="arena-panel-header">
+            <div class="arena-panel-icon">🏛️</div>
+            <div>
+              <h3 class="arena-panel-title">Digital Sovereignty</h3>
+              <p class="arena-panel-desc">Local data residency. Sovereign infrastructure. HQ and DCs in same region as customers. Local support teams.</p>
+            </div>
+          </div>
+          <table class="arena-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>HQ Country</th>
+                <th>DC Region</th>
+                <th>Local DCs</th>
+                <th>HQ Match</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="arenaSovereigntyBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Open Source Cloud Native -->
+        <div class="arena-panel" data-arena-panel="opensource">
+          <div class="arena-panel-header">
+            <div class="arena-panel-icon">🔓</div>
+            <div>
+              <h3 class="arena-panel-title">Open Source Cloud Native</h3>
+              <p class="arena-panel-desc">Open source hypervisor (KVM/Xen), open source orchestration (K8s/OpenStack/Magnum), open source container runtime.</p>
+            </div>
+          </div>
+          <table class="arena-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>Hypervisor</th>
+                <th>Container</th>
+                <th>Orchestration</th>
+                <th>Storage</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="arenaOpensourceBody"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -1939,122 +2157,242 @@ function buildOSSPanel() {
     propVendors.map(v => `<span class="vendor-tag">${v}</span>`).join('');
 }
 
+function setArenaTab(arenaName) {
+  document.querySelectorAll('.arena-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.arena === arenaName);
+  });
+  document.querySelectorAll('.arena-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.arenaPanel === arenaName);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.arena-tab').forEach(tab => {
+    tab.addEventListener('click', () => setArenaTab(tab.dataset.arena));
+  });
+});
+
 function buildArena() {
-  const counts = {};
+  // Aggregate per-provider stats from DATA
+  const stats = {};
   DATA.rows.forEach(r => {
-    if (!counts[r.provider]) counts[r.provider] = { 
-      tiers: 0, min: Infinity, max_ram: 0, max_storage: 0, oss: 0, 
-      countries: new Set(), types: new Set(), sovereign: 0, dcs: 0,
-      dc_locations: new Set(), gpu: 0, open_source_score: r.open_source_score || 0
+    if (!stats[r.provider]) stats[r.provider] = { 
+      tiers: 0, min: Infinity, totalStorage: 0, totalRAM: 0, countStorage: 0, countRAM: 0,
+      gpu: 0, maxRAM: 0, nvme: 0, topCPU: '', hq: '', dcCount: 0, dcCountries: new Set(),
+      countries: new Set(), sovereign: 0, hypervisor: '', container: '', orchestration: '',
+      storage: '', openSourceScore: 0, localSupport: false
     };
-    const c = counts[r.provider];
-    c.tiers++;
-    if (r.price_usd_per_month < c.min) c.min = r.price_usd_per_month;
-    if (r.ram_gb > c.max_ram) c.max_ram = r.ram_gb;
-    if (r.storage_gb > c.max_storage) c.max_storage = r.storage_gb;
-    if (r.tech_open_source) c.oss++;
-    c.countries.add(r.country);
-    c.types.add(r.provider_type);
-    if (r.data_residency === 'local') c.sovereign++;
-    if (r.dc_location) c.dc_locations.add(r.dc_location);
-    if (r.gpu && r.gpu !== 'none') c.gpu++;
-    // Use computed variety_score from data
-    if (r.variety_score > c.open_source_score) {} // skip
+    const s = stats[r.provider];
+    s.tiers++;
+    if (r.price_usd_per_month < s.min) s.min = r.price_usd_per_month;
+    if (r.storage_gb > 0) { s.totalStorage += r.storage_gb; s.countStorage++; }
+    if (r.ram_gb > 0) { s.totalRAM += r.ram_gb; s.countRAM++; }
+    if (r.gpu && r.gpu !== 'none') s.gpu++;
+    if (r.ram_gb > s.maxRAM) s.maxRAM = r.ram_gb;
+    if ((r.storage_type || '').toLowerCase().includes('nvme')) s.nvme++;
+    if (r.cpu_family && r.cpu_family.length > s.topCPU.length) s.topCPU = r.cpu_family;
+    if (r.provider_country) s.hq = r.provider_country;
+    if (r.dc_count > s.dcCount) s.dcCount = r.dc_count;
+    if (r.dc_location) s.dcCountries.add(r.dc_location.split(',')[0].trim());
+    if (r.country) s.countries.add(r.country);
+    if (r.data_residency === 'local') s.sovereign++;
+    
+    // Open source / tech
+    const ts = r.tech_stack || {};
+    if (!s.hypervisor && ts.hypervisor) s.hypervisor = ts.hypervisor;
+    if (!s.container && ts.container_runtime) s.container = ts.container_runtime;
+    if (!s.orchestration && ts.orchestration) s.orchestration = ts.orchestration;
+    if (!s.storage && ts.storage) s.storage = ts.storage;
+    if (r.open_source_score) s.openSourceScore = r.open_source_score;
   });
+
+  const entries = Object.entries(stats);
+
+  // ========== COST CHAMPION ==========
+  const costScores = entries.map(([p, s]) => {
+    const min = s.min || 0;
+    const avgStorage = s.countStorage > 0 ? s.totalStorage / s.countStorage : 0;
+    const avgRAM = s.countRAM > 0 ? s.totalRAM / s.countRAM : 0;
+    const storageRate = avgStorage > 0 && min > 0 ? min / avgStorage : 0;
+    const ramRate = avgRAM > 0 && min > 0 ? min / avgRAM : 0;
+    return { provider: p, min, storageRate, ramRate, tiers: s.tiers, _data: { p, s, storageRate, ramRate, min } };
+  });
+  // Lower storage/ram rate = better. Normalize
+  const maxStorageRate = Math.max(...costScores.map(c => c.storageRate));
+  const maxRamRate = Math.max(...costScores.map(c => c.ramRate));
+  const maxMin = Math.max(...costScores.map(c => c.min));
   
-  // Aggregate DC count from data
-  DATA.rows.forEach(r => {
-    if (counts[r.provider]) {
-      counts[r.provider].dcs = Math.max(counts[r.provider].dcs, r.dc_count || 0);
-    }
+  costScores.forEach(c => {
+    // Score components: cheap entry, low $/GB storage, low $/GB RAM
+    const priceComp = 100 - (c.min / maxMin) * 60; // lower price = higher
+    const storageComp = c.storageRate > 0 ? (1 - c.storageRate / maxStorageRate) * 100 : 0;
+    const ramComp = c.ramRate > 0 ? (1 - c.ramRate / maxRamRate) * 100 : 0;
+    c.score = Math.round(priceComp * 0.4 + storageComp * 0.3 + ramComp * 0.3);
   });
-
-  // Sort by tier count (more tiers = more comprehensive)
-  const top = Object.entries(counts)
-    .sort((a,b) => b[1].tiers - a[1].tiers)
-    .slice(0, 10);
-
-  const allMin = Math.min(...top.map(([k,v]) => v.min));
-  const allMax = Math.max(...top.map(([k,v]) => v.tiers));
-
-  const arena = top.map(([provider, info]) => {
-    // Price score (cheaper = better, normalize against cheapest)
-    const priceScore = Math.max(0, Math.min(100, 100 - ((info.min - allMin) / allMin) * 50));
-    
-    // Coverage score (tier count normalized)
-    const coverageScore = Math.min(100, (info.tiers / allMax) * 100);
-    
-    // OSS score (% of OS-based tiers)
-    const ossScore = info.tiers > 0 ? (info.oss / info.tiers) * 100 : 0;
-    
-    // Variety score (provider type + DC count + GPU)
-    const typeScore = Math.min(60, info.types.size * 20);
-    const dcScore = Math.min(30, info.dcs * 1.5);
-    const gpuScore = info.gpu > 0 ? Math.min(20, info.gpu * 4) : 0;
-    const varietyScore = Math.min(100, typeScore + dcScore + gpuScore);
-    
-    // Sovereign score (local data residency)
-    const sovereignScore = Math.min(100, (info.sovereign / info.tiers) * 100);
-    
-    // Weighted overall
-    const overall = (
-      priceScore * 0.20 + 
-      coverageScore * 0.18 + 
-      ossScore * 0.18 + 
-      varietyScore * 0.22 + 
-      sovereignScore * 0.22
-    );
-
-    return { provider, priceScore, coverageScore, ossScore, varietyScore, sovereignScore, overall, info };
-  });
-
-  const body = document.getElementById('arenaBody');
-  body.innerHTML = arena.map(a => `
+  costScores.sort((a,b) => b.score - a.score);
+  
+  document.getElementById('arenaCostBody').innerHTML = costScores.slice(0, 10).map(c => `
     <tr>
-      <td class="provider-cell">
-        <div class="arena-provider-name">${a.provider}</div>
-        <div class="arena-provider-meta">${a.info.dcs} DCs · ${a.info.countries.size} countries</div>
-      </td>
-      <td>
-        <div class="arena-cell-label">From</div>
-        <div class="score">$${a.info.min.toFixed(2)}</div>
-        <div class="arena-bar-container">
-          <div class="arena-bar-fill" style="width:${a.priceScore.toFixed(0)}%"></div>
+      <td class="provider-cell"><div class="arena-provider-name">${c.provider}</div></td>
+      <td><div class="score">$${c.min.toFixed(2)}</div></td>
+      <td><div class="score">$${c.storageRate.toFixed(3)}</div></td>
+      <td><div class="score">$${c.ramRate.toFixed(3)}</div></td>
+      <td><div class="score">${c.tiers}</div></td>
+      <td class="arena-score-cell">
+        <div class="arena-score">
+          <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
+          <div class="arena-score-num">${c.score}</div>
         </div>
       </td>
-      <td>
-        <div class="arena-cell-label">Tiers</div>
-        <div class="score">${a.info.tiers}</div>
-        <div class="arena-bar-container">
-          <div class="arena-bar-fill" style="width:${a.coverageScore.toFixed(0)}%"></div>
+    </tr>
+  `).join('');
+
+  // ========== COVERAGE LEADER ==========
+  const coverageScores = entries.map(([p, s]) => {
+    const dcScore = Math.min(100, s.dcCount * 5);
+    const countryScore = Math.min(100, s.countries.size * 8);
+    const regionScore = Math.min(100, s.dcCountries.size * 4);
+    const tierScore = Math.min(100, s.tiers * 1.5);
+    return {
+      provider: p,
+      dcs: s.dcCount,
+      countries: s.countries.size,
+      regions: s.dcCountries.size,
+      tiers: s.tiers,
+      score: Math.round((dcScore * 0.4 + countryScore * 0.3 + regionScore * 0.2 + tierScore * 0.1))
+    };
+  });
+  coverageScores.sort((a,b) => b.score - a.score);
+  
+  document.getElementById('arenaCoverageBody').innerHTML = coverageScores.slice(0, 10).map(c => `
+    <tr>
+      <td class="provider-cell"><div class="arena-provider-name">${c.provider}</div></td>
+      <td><div class="score">${c.dcs}</div></td>
+      <td><div class="score">${c.countries}</div></td>
+      <td><div class="score">${c.regions}</div></td>
+      <td><div class="score">${c.tiers}</div></td>
+      <td class="arena-score-cell">
+        <div class="arena-score">
+          <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
+          <div class="arena-score-num">${c.score}</div>
         </div>
       </td>
-      <td>
-        <div class="arena-cell-label">OSS %</div>
-        <div class="score">${Math.round(a.ossScore)}<span class="arena-pct">%</span></div>
-        <div class="arena-bar-container">
-          <div class="arena-bar-fill oss-bar" style="width:${a.ossScore.toFixed(0)}%"></div>
+    </tr>
+  `).join('');
+
+  // ========== PERFORMANCE CHAMPION ==========
+  const perfScores = entries.map(([p, s]) => {
+    const gpuScore = Math.min(100, s.gpu * 10);
+    const ramScore = Math.min(100, s.maxRAM / 2);
+    const nvmeScore = s.tiers > 0 ? (s.nvme / s.tiers) * 100 : 0;
+    const cpuScore = s.topCPU.length > 0 ? 50 : 0;
+    return {
+      provider: p,
+      gpu: s.gpu,
+      maxRAM: s.maxRAM,
+      nvme: s.nvme,
+      cpu: s.topCPU || '-',
+      score: Math.round(gpuScore * 0.35 + ramScore * 0.30 + nvmeScore * 0.25 + cpuScore * 0.10)
+    };
+  });
+  perfScores.sort((a,b) => b.score - a.score);
+  
+  document.getElementById('arenaPerformanceBody').innerHTML = perfScores.slice(0, 10).map(c => `
+    <tr>
+      <td class="provider-cell"><div class="arena-provider-name">${c.provider}</div></td>
+      <td><div class="score">${c.gpu}</div></td>
+      <td><div class="score">${c.maxRAM} GB</div></td>
+      <td><div class="score">${c.nvme}</div></td>
+      <td><div class="score" style="font-size:11px">${c.cpu.slice(0, 25)}</div></td>
+      <td class="arena-score-cell">
+        <div class="arena-score">
+          <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
+          <div class="arena-score-num">${c.score}</div>
         </div>
       </td>
-      <td>
-        <div class="arena-cell-label">DCs</div>
-        <div class="score">${a.info.dcs}</div>
-        <div class="arena-bar-container">
-          <div class="arena-bar-fill variety-bar" style="width:${Math.min(100, a.info.dcs * 2).toFixed(0)}%"></div>
+    </tr>
+  `).join('');
+
+  // ========== DIGITAL SOVEREIGNTY ==========
+  const sovScores = entries.map(([p, s]) => {
+    const hqScore = s.sovereign > 0 ? (s.sovereign / s.tiers) * 100 : 0;
+    const dcCount = s.dcCountries.size;
+    const localDcScore = Math.min(100, dcCount * 5);
+    
+    // HQ match: if HQ country = dc locations match → high score
+    let hqMatch = false;
+    let hqMatchScore = 0;
+    if (s.hq && s.dcCountries.size > 0) {
+      // Simplified: if HQ is in APAC and most DCs are in same region
+      const apacCountries = ['Indonesia', 'Singapore', 'Malaysia', 'Thailand', 'Vietnam', 'Philippines', 'Japan', 'South Korea', 'China', 'Hong Kong', 'Taiwan', 'Australia', 'New Zealand', 'India'];
+      if (apacCountries.includes(s.hq)) {
+        const localDcCount = Array.from(s.dcCountries).filter(c => apacCountries.some(ac => c.toLowerCase().includes(ac.toLowerCase()))).length;
+        hqMatchScore = (localDcCount / dcCount) * 100;
+        hqMatch = localDcCount >= dcCount * 0.5;
+      }
+    }
+    
+    return {
+      provider: p,
+      hq: s.hq || 'Unknown',
+      dcRegion: Array.from(s.dcCountries).slice(0, 3).join(', ') || '-',
+      localDCs: dcCount,
+      hqMatch: hqMatch ? '✓ Match' : '✗',
+      score: Math.round(hqScore * 0.4 + localDcScore * 0.3 + hqMatchScore * 0.3)
+    };
+  });
+  sovScores.sort((a,b) => b.score - a.score);
+  
+  document.getElementById('arenaSovereigntyBody').innerHTML = sovScores.slice(0, 10).map(c => `
+    <tr>
+      <td class="provider-cell"><div class="arena-provider-name">${c.provider}</div></td>
+      <td><div class="score" style="font-size:12px">${c.hq}</div></td>
+      <td><div class="score" style="font-size:11px">${c.dcRegion.slice(0, 30)}</div></td>
+      <td><div class="score">${c.localDCs}</div></td>
+      <td><div class="score" style="color:${c.hqMatch === '✓ Match' ? 'var(--c-cia)' : 'var(--c-text-3)'}">${c.hqMatch}</div></td>
+      <td class="arena-score-cell">
+        <div class="arena-score">
+          <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
+          <div class="arena-score-num">${c.score}</div>
         </div>
       </td>
-      <td>
-        <div class="arena-cell-label">Local %</div>
-        <div class="score">${Math.round(a.sovereignScore)}<span class="arena-pct">%</span></div>
-        <div class="arena-bar-container">
-          <div class="arena-bar-fill sovereign-bar" style="width:${a.sovereignScore.toFixed(0)}%"></div>
-        </div>
-      </td>
-      <td>
-        <div class="arena-cell-label">Overall</div>
-        <div class="score overall-score">${Math.round(a.overall)}</div>
-        <div class="arena-overall-bar">
-          <div class="arena-overall-fill" style="width:${a.overall.toFixed(0)}%"></div>
+    </tr>
+  `).join('');
+
+  // ========== OPEN SOURCE CLOUD NATIVE ==========
+  const osScores = entries.map(([p, s]) => {
+    const hypervisor = s.hypervisor || 'unknown';
+    const container = s.container || 'unknown';
+    const orchestration = s.orchestration || 'unknown';
+    const storage = s.storage || 'unknown';
+    
+    const isOsHyp = /kvm|xen|proxmox|qemu|openstack/i.test(hypervisor);
+    const isOsContainer = /docker|containerd|cri-o|podman|runc/i.test(container);
+    const isOsOrch = /kubernetes|k8s|magnum|rancher|nomad/i.test(orchestration);
+    const isOsStorage = /ceph|swift|minio|rados|s3/i.test(storage);
+    
+    return {
+      provider: p,
+      hypervisor: hypervisor.replace('unknown', '-').slice(0, 25),
+      container: container.replace('unknown', '-').slice(0, 25),
+      orchestration: orchestration.replace('unknown', '-').slice(0, 25),
+      storage: storage.replace('unknown', '-').slice(0, 25),
+      score: s.openSourceScore || Math.round(((isOsHyp + isOsContainer + isOsOrch + isOsStorage) / 4) * 100)
+    };
+  });
+  osScores.sort((a,b) => b.score - a.score);
+  
+  document.getElementById('arenaOpensourceBody').innerHTML = osScores.slice(0, 10).map(c => `
+    <tr>
+      <td class="provider-cell"><div class="arena-provider-name">${c.provider}</div></td>
+      <td><div class="score" style="font-size:11px">${c.hypervisor}</div></td>
+      <td><div class="score" style="font-size:11px">${c.container}</div></td>
+      <td><div class="score" style="font-size:11px">${c.orchestration}</div></td>
+      <td><div class="score" style="font-size:11px">${c.storage}</div></td>
+      <td class="arena-score-cell">
+        <div class="arena-score">
+          <div class="arena-score-bar"><div class="arena-score-bar-fill" style="width:${c.score}%"></div></div>
+          <div class="arena-score-num">${c.score}</div>
         </div>
       </td>
     </tr>
