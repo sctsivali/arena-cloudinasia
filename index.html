@@ -1244,11 +1244,11 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 0;
   top: 0;
-  width: 30px;
-  height: 30px;
-  border: 2px solid var(--c-cia);
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--c-cia);
   border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0.3);
+  transform: translate(-50%, -50%) scale(0.5);
   opacity: 0;
   pointer-events: none;
   animation: radar-pulse 2.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
@@ -1262,13 +1262,13 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 0;
   top: 0;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: var(--c-cia);
-  border: 2px solid #0a0a1a;
+  border: 1.5px solid #0a0a1a;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 2px var(--c-cia);
+  box-shadow: 0 0 0 1.5px var(--c-cia);
   z-index: 2;
   pointer-events: auto;
 }
@@ -1279,9 +1279,9 @@ a { color: inherit; text-decoration: none; }
 }
 .cloud-radar-marker.hub .radar-dot {
   background: var(--c-yellow);
-  box-shadow: 0 0 0 2px var(--c-yellow);
-  width: 10px;
-  height: 10px;
+  box-shadow: 0 0 0 1.5px var(--c-yellow);
+  width: 7px;
+  height: 7px;
 }
 
 @keyframes radar-pulse {
@@ -1294,7 +1294,7 @@ a { color: inherit; text-decoration: none; }
     opacity: 0.1;
   }
   100% {
-    transform: translate(-50%, -50%) scale(8);
+    transform: translate(-50%, -50%) scale(3.5);
     opacity: 0;
     border-width: 1px;
   }
