@@ -1609,6 +1609,99 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+
+/* Tech Card Badge */
+.tech-card-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.tech-card-badge.open-badge {
+  background: rgba(96, 189, 145, 0.10);
+  border: 1px solid rgba(96, 189, 145, 0.25);
+  color: var(--c-cia);
+}
+.tech-card-badge.proprietary-badge {
+  background: rgba(245, 158, 11, 0.10);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: var(--c-warn);
+}
+.tech-card-badge .badge-type {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.open-badge .badge-type {
+  background: var(--c-cia);
+  color: #06061a;
+}
+.proprietary-badge .badge-type {
+  background: var(--c-warn);
+  color: #06061a;
+}
+.tech-card-badge .badge-stat {
+  font-size: 10px;
+  color: var(--c-text-2);
+  font-weight: 600;
+}
+.tech-card-badge .badge-stat b {
+  color: var(--c-text);
+  font-weight: 800;
+  font-size: 11px;
+}
+
+/* Tech Filter Bar */
+.tech-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.tech-filter-label {
+  font-size: 12px;
+  color: var(--c-text-3);
+  font-weight: 600;
+  margin-right: 4px;
+}
+.tech-filter-btn {
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--c-line);
+  background: var(--c-bg-2);
+  color: var(--c-text-2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.tech-filter-btn:hover {
+  border-color: var(--c-cia);
+  color: var(--c-text);
+}
+.tech-filter-btn.active {
+  background: var(--c-cia);
+  color: #06061a;
+  border-color: var(--c-cia);
+}
+.tech-filter-btn.active.prop {
+  background: var(--c-warn);
+  border-color: var(--c-warn);
+}
+
+.tech-logo-card.filtered-out {
+  display: none;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -1894,6 +1987,15 @@ a { color: inherit; text-decoration: none; }
       </div>
       <p class="section-sub">Infrastructure components powering cloud providers. Split between open source foundations and proprietary systems.</p>
 
+      <div class="tech-filter-bar">
+        <span class="tech-filter-label">Filter:</span>
+        <button class="tech-filter-btn active" data-tech-filter="all">All</button>
+        <button class="tech-filter-btn" data-tech-filter="open">🛡️ Open Source</button>
+        <button class="tech-filter-btn prop" data-tech-filter="proprietary">🔒 Proprietary</button>
+        <button class="tech-filter-btn" data-tech-filter="popular">⭐ Most Used</button>
+        <button class="tech-filter-btn" data-tech-filter="rare">🌱 Rare</button>
+      </div>
+
       <div class="tech-split-container">
         <!-- OPEN SOURCE COLUMN -->
         <div class="tech-split-col open-source-col">
@@ -1913,17 +2015,32 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card os-card" data-tech="kvm">
                 <div class="tech-logo-svg"><img src="tech-logos/kvm.svg" alt="KVM" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">KVM</div>
+                <div class="tech-logo-label">KVM
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>66</b> prov</span>
+              <span class="badge-stat"><b>605</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Linux kernel</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="xen">
                 <div class="tech-logo-svg"><img src="tech-logos/xen.svg" alt="Xen" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Xen</div>
+                <div class="tech-logo-label">Xen
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>3</b> prov</span>
+              <span class="badge-stat"><b>13</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Xen Project</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="proxmox">
                 <div class="tech-logo-svg"><img src="tech-logos/proxmox.svg" alt="Proxmox" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Proxmox VE</div>
+                <div class="tech-logo-label">Proxmox VE
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>2</b> prov</span>
+              <span class="badge-stat"><b>135</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Open source</div>
               </div>
             </div>
@@ -1934,32 +2051,62 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card os-card" data-tech="docker">
                 <div class="tech-logo-svg"><img src="tech-logos/docker.svg" alt="Docker" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Docker</div>
+                <div class="tech-logo-label">Docker
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>76</b> prov</span>
+              <span class="badge-stat"><b>645</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Moby Apache 2.0</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="kubernetes">
                 <div class="tech-logo-svg"><img src="tech-logos/kubernetes.svg" alt="Kubernetes" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Kubernetes</div>
+                <div class="tech-logo-label">Kubernetes
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>71</b> prov</span>
+              <span class="badge-stat"><b>604</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">CNCF graduated</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="containerd">
                 <div class="tech-logo-svg"><img src="tech-logos/containerd.svg" alt="containerd" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">containerd</div>
+                <div class="tech-logo-label">containerd
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>42</b> prov</span>
+              <span class="badge-stat"><b>483</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">CNCF runtime</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="openshift">
                 <div class="tech-logo-svg"><img src="tech-logos/openshift.svg" alt="OpenShift" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">OpenShift</div>
+                <div class="tech-logo-label">OpenShift
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>1</b> prov</span>
+              <span class="badge-stat"><b>3</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Red Hat open core</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="rancher">
                 <div class="tech-logo-svg"><img src="tech-logos/rancher.svg" alt="Rancher" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Rancher</div>
+                <div class="tech-logo-label">Rancher
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>0</b> prov</span>
+              <span class="badge-stat"><b>0</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">SUSE K8s mgmt</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="openstack">
                 <div class="tech-logo-svg"><img src="tech-logos/openstack.svg" alt="OpenStack" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">OpenStack</div>
+                <div class="tech-logo-label">OpenStack
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>14</b> prov</span>
+              <span class="badge-stat"><b>140</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Cloud platform</div>
               </div>
             </div>
@@ -1970,22 +2117,42 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card os-card" data-tech="ceph">
                 <div class="tech-logo-svg"><img src="tech-logos/ceph.svg" alt="Ceph" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Ceph</div>
+                <div class="tech-logo-label">Ceph
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>6</b> prov</span>
+              <span class="badge-stat"><b>80</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">LGPL distributed</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="minio">
                 <div class="tech-logo-svg"><img src="tech-logos/minio.svg" alt="MinIO" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">MinIO</div>
+                <div class="tech-logo-label">MinIO
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>0</b> prov</span>
+              <span class="badge-stat"><b>0</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Apache 2.0 S3</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="swift">
                 <div class="tech-logo-svg"><img src="tech-logos/swift.svg" alt="Swift" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Swift</div>
+                <div class="tech-logo-label">Swift
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>1</b> prov</span>
+              <span class="badge-stat"><b>3</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">OpenStack object</div>
               </div>
               <div class="tech-logo-card os-card" data-tech="firecracker">
                 <div class="tech-logo-svg"><img src="tech-logos/firecracker.svg" alt="Firecracker" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Firecracker</div>
+                <div class="tech-logo-label">Firecracker
+            <div class="tech-card-badge open-badge">
+              <span class="badge-type">OPEN</span>
+              <span class="badge-stat"><b>3</b> prov</span>
+              <span class="badge-stat"><b>15</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">AWS microVM</div>
               </div>
             </div>
@@ -2010,17 +2177,32 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card prop-card" data-tech="vmware">
                 <div class="tech-logo-svg"><img src="tech-logos/vmware.svg" alt="VMware" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">VMware</div>
+                <div class="tech-logo-label">VMware
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>21</b> prov</span>
+              <span class="badge-stat"><b>142</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">vSphere ESXi</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="hyperv">
                 <div class="tech-logo-svg"><img src="tech-logos/hyperv.svg" alt="Hyper-V" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Hyper-V</div>
+                <div class="tech-logo-label">Hyper-V
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>4</b> prov</span>
+              <span class="badge-stat"><b>85</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Microsoft</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="aws-nitro">
                 <div class="tech-logo-svg"><img src="tech-logos/aws-nitro.svg" alt="AWS Nitro" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">AWS Nitro</div>
+                <div class="tech-logo-label">AWS Nitro
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>2</b> prov</span>
+              <span class="badge-stat"><b>12</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Custom system</div>
               </div>
             </div>
@@ -2031,32 +2213,62 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card prop-card" data-tech="aws">
                 <div class="tech-logo-svg"><img src="tech-logos/aws.svg" alt="AWS" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">AWS</div>
+                <div class="tech-logo-label">AWS
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>3</b> prov</span>
+              <span class="badge-stat"><b>16</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Hyperscaler</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="azure">
                 <div class="tech-logo-svg"><img src="tech-logos/azure.svg" alt="Azure" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Azure</div>
+                <div class="tech-logo-label">Azure
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>3</b> prov</span>
+              <span class="badge-stat"><b>19</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Microsoft</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="gcp">
                 <div class="tech-logo-svg"><img src="tech-logos/gcp.svg" alt="GCP" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">GCP</div>
+                <div class="tech-logo-label">GCP
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>3</b> prov</span>
+              <span class="badge-stat"><b>11</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Google</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="oracle">
                 <div class="tech-logo-svg"><img src="tech-logos/oracle.svg" alt="Oracle" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Oracle</div>
+                <div class="tech-logo-label">Oracle
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>1</b> prov</span>
+              <span class="badge-stat"><b>15</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">OCI</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="alibaba">
                 <div class="tech-logo-svg"><img src="tech-logos/alibaba.svg" alt="Alibaba" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Alibaba</div>
+                <div class="tech-logo-label">Alibaba
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>1</b> prov</span>
+              <span class="badge-stat"><b>6</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Chinese cloud</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="huawei">
                 <div class="tech-logo-svg"><img src="tech-logos/huawei.svg" alt="Huawei" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Huawei</div>
+                <div class="tech-logo-label">Huawei
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>1</b> prov</span>
+              <span class="badge-stat"><b>4</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Chinese cloud</div>
               </div>
             </div>
@@ -2067,7 +2279,12 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card prop-card" data-tech="s3">
                 <div class="tech-logo-svg"><img src="tech-logos/s3.svg" alt="S3" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">S3 API</div>
+                <div class="tech-logo-label">S3 API
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>0</b> prov</span>
+              <span class="badge-stat"><b>0</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Amazon proprietary</div>
               </div>
             </div>
@@ -2078,32 +2295,62 @@ a { color: inherit; text-decoration: none; }
             <div class="tech-logos-grid">
               <div class="tech-logo-card prop-card" data-tech="intel">
                 <div class="tech-logo-svg"><img src="tech-logos/intel.svg" alt="Intel" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Intel Xeon</div>
+                <div class="tech-logo-label">Intel Xeon
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>69</b> prov</span>
+              <span class="badge-stat"><b>530</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">x86 CPU</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="amd">
                 <div class="tech-logo-svg"><img src="tech-logos/amd.svg" alt="AMD" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">AMD EPYC</div>
+                <div class="tech-logo-label">AMD EPYC
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>32</b> prov</span>
+              <span class="badge-stat"><b>475</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">x86 CPU</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="arm">
                 <div class="tech-logo-svg"><img src="tech-logos/arm.svg" alt="ARM" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">ARM</div>
+                <div class="tech-logo-label">ARM
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>6</b> prov</span>
+              <span class="badge-stat"><b>62</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Neoverse</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="nvidia">
                 <div class="tech-logo-svg"><img src="tech-logos/nvidia.svg" alt="NVIDIA" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">NVIDIA</div>
+                <div class="tech-logo-label">NVIDIA
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>5</b> prov</span>
+              <span class="badge-stat"><b>15</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">GPU compute</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="tpu">
                 <div class="tech-logo-svg"><img src="tech-logos/tpu.svg" alt="TPU" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Google TPU</div>
+                <div class="tech-logo-label">Google TPU
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>0</b> prov</span>
+              <span class="badge-stat"><b>0</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">Custom chip</div>
               </div>
               <div class="tech-logo-card prop-card" data-tech="graviton">
                 <div class="tech-logo-svg"><img src="tech-logos/graviton.svg" alt="Graviton" class="real-tech-logo" loading="lazy"/></div>
-                <div class="tech-logo-label">Graviton</div>
+                <div class="tech-logo-label">Graviton
+            <div class="tech-card-badge proprietary-badge">
+              <span class="badge-type">PROPRIETARY</span>
+              <span class="badge-stat"><b>0</b> prov</span>
+              <span class="badge-stat"><b>0</b> tiers</span>
+            </div></div>
                 <div class="tech-logo-desc">AWS custom Arm</div>
               </div>
             </div>
@@ -3182,6 +3429,8 @@ buildArena();
 const COUNTRY_PROVIDER_DATA = {"China": {"providers": ["Alibaba Cloud", "Baidu AI Cloud", "CITIC CPC", "China Unicom Cloud", "Huawei Cloud", "JD Cloud", "Kingsoft Cloud", "Tencent Cloud", "UCloud", "Volcano Engine"], "count": 10}, "Indonesia": {"providers": ["BiznetGio", "CloudKilat", "DomaiNesia", "Herza Cloud", "IDCloudHost", "JagoanHosting", "Qwords", "Rumahweb"], "count": 8}, "Vietnam": {"providers": ["FPT Smart Cloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Viettel IDC"], "count": 4}, "USA": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Anyscale", "DigitalOcean", "Fireworks AI", "Google Cloud Qatar", "Google Cloud UAE", "Linode (Akamai)", "Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "Novita AI", "Vultr"], "count": 13}, "Malaysia": {"providers": ["Exabytes", "Shinjiru VPS"], "count": 2}, "Germany": {"providers": ["Contabo", "Hetzner Cloud"], "count": 2}, "Lithuania": {"providers": ["Hostinger"], "count": 1}, "India": {"providers": ["Cloud4C", "Cyfuture Cloud", "NeevCloud", "NxtGen Cloud"], "count": 4}, "Japan": {"providers": ["GMO Cloud", "IDC Frontier", "IIJ GIO", "KDDI Cloud", "NTT Enterprise Cloud", "Sakura Cloud", "SoftBank White Cloud"], "count": 7}, "South Korea": {"providers": ["Douzone Cloud", "Gabia Cloud", "KT Cloud", "Kakao Cloud", "LG CNS Cloud", "NAVER Cloud", "NHN Cloud", "SK C&C Cloud Z", "Samsung SDS"], "count": 9}, "Taiwan": {"providers": ["Chief Cloud", "Far EasTone Cloud", "HiCloud", "eCloudvalley"], "count": 4}, "Hong Kong": {"providers": ["HKT Enterprise Cloud"], "count": 1}, "Australia": {"providers": ["AUCloud", "Macquarie Cloud", "Vault Cloud"], "count": 3}, "New Zealand": {"providers": ["Catalyst Cloud"], "count": 1}, "Brazil": {"providers": ["Bravulink", "HostDime Brazil", "King.Host", "Locaweb Cloud"], "count": 4}, "Saudi Arabia": {"providers": ["stc Cloud"], "count": 1}, "South Africa": {"providers": ["Internet Solutions Africa", "Liquid Telecom", "Telkom Cloud SA"], "count": 3}, "Netherlands": {"providers": ["Cerebrium"], "count": 1}, "France": {"providers": ["OVH"], "count": 1}, "Finland": {"providers": ["UpCloud"], "count": 1}, "IL": {"providers": ["Kamatera"], "count": 1}};
 const CITY_DATA = [{"city": "Singapore", "lat": 1.35, "lng": 103.82, "count": 21, "providers": ["Huawei Cloud", "Tencent Cloud", "DigitalOcean", "Linode (Akamai)", "Hostinger", "Cloud4C", "Hetzner Cloud", "Herza Cloud"]}, {"city": "Tokyo", "lat": 35.68, "lng": 139.65, "count": 20, "providers": ["GMO Cloud", "IIJ GIO", "NTT Enterprise Cloud", "KDDI Cloud", "SoftBank White Cloud", "IDC Frontier", "Google Cloud (GCP)", "Vultr"]}, {"city": "Jakarta", "lat": -6.21, "lng": 106.85, "count": 18, "providers": ["Alibaba Cloud", "BiznetGio", "CloudKilat", "JagoanHosting", "Qwords", "IDCloudHost", "Herza Cloud", "DomaiNesia"]}, {"city": "Seoul", "lat": 37.57, "lng": 126.98, "count": 17, "providers": ["NAVER Cloud", "KT Cloud", "NHN Cloud", "Kakao Cloud", "Samsung SDS", "LG CNS Cloud", "SK C&C Cloud Z", "Gabia Cloud"]}, {"city": "Frankfurt", "lat": 50.11, "lng": 8.68, "count": 15, "providers": ["Hetzner Cloud", "Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera"]}, {"city": "Mumbai", "lat": 19.08, "lng": 72.88, "count": 15, "providers": ["NeevCloud", "Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "OVH", "Alibaba Cloud", "Tencent Cloud", "UCloud"]}, {"city": "Hong Kong", "lat": 22.32, "lng": 114.17, "count": 14, "providers": ["Microsoft Azure", "JD Cloud", "UCloud", "CITIC CPC", "HKT Enterprise Cloud", "Google Cloud (GCP)", "Kamatera", "Alibaba Cloud"]}, {"city": "Sydney", "lat": -33.87, "lng": 151.21, "count": 14, "providers": ["Macquarie Cloud", "Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "OVH", "UpCloud"]}, {"city": "London", "lat": 51.51, "lng": -0.13, "count": 14, "providers": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera", "Alibaba Cloud"]}, {"city": "São Paulo", "lat": -23.55, "lng": -46.63, "count": 13, "providers": ["Contabo", "Locaweb Cloud", "HostDime Brazil", "Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Hostinger ID", "Contabo Brazil"]}, {"city": "Osaka", "lat": 34.69, "lng": 135.5, "count": 8, "providers": ["Sakura Cloud", "Google Cloud (GCP)", "SAKURA Internet", "NTT Enterprise Cloud", "KDDI Cloud", "IIJ GIO", "GMO Cloud", "Oracle Cloud"]}, {"city": "Amsterdam", "lat": 52.37, "lng": 4.9, "count": 8, "providers": ["DigitalOcean", "Vultr", "Linode (Akamai)", "UpCloud", "Kamatera", "Hostinger ID", "Oracle Cloud", "Hostinger"]}, {"city": "Toronto", "lat": 43.65, "lng": -79.38, "count": 7, "providers": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Kamatera", "Oracle Cloud", "Cloud4C"]}, {"city": "Beijing", "lat": 39.9, "lng": 116.41, "count": 6, "providers": ["Baidu AI Cloud", "China Unicom Cloud", "Kingsoft Cloud", "Volcano Engine", "JD Cloud", "UCloud"]}, {"city": "Busan", "lat": 35.18, "lng": 129.08, "count": 6, "providers": ["KT Cloud", "NHN Cloud", "Kakao Cloud", "NAVER Cloud", "LG CNS Cloud", "Douzone Cloud"]}, {"city": "Shanghai", "lat": 31.23, "lng": 121.47, "count": 6, "providers": ["JD Cloud", "UCloud", "Kingsoft Cloud", "Volcano Engine", "CITIC CPC", "China Unicom Cloud"]}, {"city": "Hanoi", "lat": 21.03, "lng": 105.85, "count": 5, "providers": ["Viettel IDC", "FPT Smart Cloud", "HiCloud", "VNG Cloud (GreenNode)", "VNG Cloud"]}, {"city": "Ho Chi Minh City", "lat": 10.82, "lng": 106.63, "count": 5, "providers": ["VNG Cloud", "VNG Cloud (GreenNode)", "Viettel IDC", "FPT Smart Cloud", "HiCloud"]}, {"city": "New York", "lat": 40.71, "lng": -74.01, "count": 5, "providers": ["DigitalOcean", "Vultr", "Kamatera", "UpCloud", "Cloud4C"]}, {"city": "Cape Town", "lat": -33.92, "lng": 18.42, "count": 5, "providers": ["Microsoft Azure South Africa", "AWS Africa (Cape Town)", "Liquid Telecom", "Internet Solutions Africa", "Telkom Cloud SA"]}, {"city": "Dallas", "lat": 32.78, "lng": -96.8, "count": 5, "providers": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Kamatera", "Cloud4C"]}, {"city": "Madrid", "lat": 40.42, "lng": -3.7, "count": 5, "providers": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Oracle Cloud", "Cloud4C"]}, {"city": "Yogyakarta", "lat": -7.8, "lng": 110.37, "count": 4, "providers": ["Rumahweb", "DomaiNesia", "IDCloudHost", "JagoanHosting"]}, {"city": "Bangalore", "lat": 12.97, "lng": 77.59, "count": 4, "providers": ["NxtGen Cloud", "DigitalOcean", "E2E Networks", "NeevCloud"]}, {"city": "Johannesburg", "lat": -26.2, "lng": 28.05, "count": 4, "providers": ["Internet Solutions Africa", "Huawei Cloud", "Liquid Telecom", "Cloud4C"]}, {"city": "Dubai", "lat": 25.2, "lng": 55.27, "count": 4, "providers": ["Microsoft Azure UAE", "Google Cloud UAE", "Alibaba Cloud", "Oracle Cloud"]}, {"city": "Kuala Lumpur", "lat": 3.14, "lng": 101.69, "count": 4, "providers": ["Shinjiru VPS", "Alibaba Cloud", "Herza Cloud", "Cloud4C"]}, {"city": "Surabaya", "lat": -7.26, "lng": 112.75, "count": 4, "providers": ["IDCloudHost", "BiznetGio", "Qwords", "Eranyacloud"]}, {"city": "Melbourne", "lat": -37.81, "lng": 144.96, "count": 4, "providers": ["Google Cloud (GCP)", "Macquarie Cloud", "Oracle Cloud", "AUCloud"]}, {"city": "Stockholm", "lat": 59.33, "lng": 18.07, "count": 4, "providers": ["Vultr", "Linode (Akamai)", "UpCloud", "Oracle Cloud"]}, {"city": "Ashburn", "lat": 39.04, "lng": -77.49, "count": 4, "providers": ["Hetzner Cloud", "Contabo", "Oracle Cloud", "Equinix Metal"]}, {"city": "Bangkok", "lat": 13.76, "lng": 100.5, "count": 4, "providers": ["Tencent Cloud", "Huawei Cloud", "Cloud4C", "Volcano Engine"]}, {"city": "Shenzhen", "lat": 22.54, "lng": 114.06, "count": 4, "providers": ["JD Cloud", "UCloud", "Volcano Engine", "CITIC CPC"]}, {"city": "Guangzhou", "lat": 23.13, "lng": 113.26, "count": 4, "providers": ["JD Cloud", "UCloud", "Volcano Engine", "China Unicom Cloud"]}, {"city": "Taipei", "lat": 25.03, "lng": 121.57, "count": 3, "providers": ["Far EasTone Cloud", "Chief Cloud", "eCloudvalley"]}, {"city": "Canberra", "lat": -35.28, "lng": 149.13, "count": 3, "providers": ["AUCloud", "Vault Cloud", "Macquarie Cloud"]}, {"city": "Santiago", "lat": -33.45, "lng": -70.66, "count": 3, "providers": ["Google Cloud (GCP)", "Huawei Cloud", "Oracle Cloud"]}, {"city": "Paris", "lat": 48.86, "lng": 2.35, "count": 3, "providers": ["Google Cloud (GCP)", "Vultr", "Oracle Cloud"]}, {"city": "Tel Aviv", "lat": 32.09, "lng": 34.78, "count": 3, "providers": ["Google Cloud (GCP)", "Kamatera", "Oracle Cloud"]}, {"city": "Delhi", "lat": 28.7, "lng": 77.1, "count": 3, "providers": ["Google Cloud (GCP)", "NxtGen Cloud", "NeevCloud"]}];
 
+const TECH_USAGE_DATA = {"kvm": {"providers": ["AUCloud", "AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Alibaba Cloud", "Anyscale", "Baidu AI Cloud", "BiznetGio", "Bravulink", "CITIC CPC", "Catalyst Cloud", "Cerebrium", "Chief Cloud", "China Unicom Cloud", "Cloud4C", "Contabo", "DigitalOcean", "DomaiNesia", "Exabytes", "FPT Smart Cloud", "Fireworks AI", "GMO Cloud", "Gabia Cloud", "Google Cloud Qatar", "Google Cloud UAE", "Herza Cloud", "Hetzner Cloud", "HiCloud", "HostDime Brazil", "Hostinger", "Huawei Cloud", "IDCloudHost", "IIJ GIO", "Internet Solutions Africa", "JD Cloud", "JagoanHosting", "KDDI Cloud", "KT Cloud", "Kakao Cloud", "Kamatera", "King.Host", "Kingsoft Cloud", "LG CNS Cloud", "Linode (Akamai)", "Locaweb Cloud", "NAVER Cloud", "NHN Cloud", "NTT Enterprise Cloud", "NeevCloud", "Novita AI", "OVH", "Oracle Cloud", "Qwords", "Rumahweb", "SK C&C Cloud Z", "Sakura Cloud", "Shinjiru VPS", "SoftBank White Cloud", "Telkom Cloud SA", "Tencent Cloud", "UCloud", "UpCloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Vault Cloud", "Volcano Engine", "Vultr"], "provider_count": 66, "tier_count": 605}, "xen": {"providers": ["Alibaba Cloud", "Huawei Cloud", "Kingsoft Cloud"], "provider_count": 3, "tier_count": 13}, "proxmox": {"providers": ["IDCloudHost", "OVH"], "provider_count": 2, "tier_count": 135}, "vmware": {"providers": ["CITIC CPC", "Cyfuture Cloud", "Douzone Cloud", "FPT Smart Cloud", "Far EasTone Cloud", "GMO Cloud", "HKT Enterprise Cloud", "IDC Frontier", "IIJ GIO", "KDDI Cloud", "LG CNS Cloud", "Liquid Telecom", "Macquarie Cloud", "NTT Enterprise Cloud", "NxtGen Cloud", "OVH", "Rumahweb", "SK C&C Cloud Z", "Samsung SDS", "Viettel IDC", "stc Cloud"], "provider_count": 21, "tier_count": 142}, "hyperv": {"providers": ["Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "OVH"], "provider_count": 4, "tier_count": 85}, "aws-nitro": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)"], "provider_count": 2, "tier_count": 12}, "docker": {"providers": ["AUCloud", "AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Alibaba Cloud", "Anyscale", "Baidu AI Cloud", "BiznetGio", "Bravulink", "CITIC CPC", "Catalyst Cloud", "Cerebrium", "Chief Cloud", "China Unicom Cloud", "Cloud4C", "Contabo", "Cyfuture Cloud", "DigitalOcean", "DomaiNesia", "Douzone Cloud", "Exabytes", "FPT Smart Cloud", "Far EasTone Cloud", "Fireworks AI", "GMO Cloud", "Gabia Cloud", "HKT Enterprise Cloud", "Herza Cloud", "Hetzner Cloud", "HiCloud", "HostDime Brazil", "Hostinger", "Huawei Cloud", "IDC Frontier", "IDCloudHost", "IIJ GIO", "Internet Solutions Africa", "JD Cloud", "JagoanHosting", "KDDI Cloud", "KT Cloud", "Kakao Cloud", "Kamatera", "King.Host", "Kingsoft Cloud", "LG CNS Cloud", "Linode (Akamai)", "Liquid Telecom", "Locaweb Cloud", "Macquarie Cloud", "Microsoft Azure", "NAVER Cloud", "NHN Cloud", "NTT Enterprise Cloud", "NeevCloud", "Novita AI", "NxtGen Cloud", "OVH", "Oracle Cloud", "Qwords", "SK C&C Cloud Z", "Sakura Cloud", "Samsung SDS", "Shinjiru VPS", "SoftBank White Cloud", "Telkom Cloud SA", "Tencent Cloud", "UCloud", "UpCloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Vault Cloud", "Viettel IDC", "Volcano Engine", "Vultr", "eCloudvalley", "stc Cloud"], "provider_count": 76, "tier_count": 645}, "kubernetes": {"providers": ["AUCloud", "AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Alibaba Cloud", "Baidu AI Cloud", "BiznetGio", "CITIC CPC", "Catalyst Cloud", "Cerebrium", "Chief Cloud", "China Unicom Cloud", "Cloud4C", "Contabo", "Cyfuture Cloud", "DigitalOcean", "Douzone Cloud", "FPT Smart Cloud", "Far EasTone Cloud", "GMO Cloud", "Gabia Cloud", "Google Cloud Qatar", "Google Cloud UAE", "HKT Enterprise Cloud", "Hetzner Cloud", "HiCloud", "HostDime Brazil", "Hostinger", "Huawei Cloud", "IDC Frontier", "IDCloudHost", "IIJ GIO", "Internet Solutions Africa", "JD Cloud", "KDDI Cloud", "KT Cloud", "Kakao Cloud", "Kamatera", "Kingsoft Cloud", "LG CNS Cloud", "Linode (Akamai)", "Liquid Telecom", "Locaweb Cloud", "Macquarie Cloud", "Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "NAVER Cloud", "NHN Cloud", "NTT Enterprise Cloud", "NeevCloud", "Novita AI", "NxtGen Cloud", "OVH", "Oracle Cloud", "Qwords", "SK C&C Cloud Z", "Sakura Cloud", "Samsung SDS", "SoftBank White Cloud", "Telkom Cloud SA", "Tencent Cloud", "UCloud", "UpCloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Vault Cloud", "Viettel IDC", "Volcano Engine", "Vultr", "eCloudvalley", "stc Cloud"], "provider_count": 71, "tier_count": 604}, "containerd": {"providers": ["AUCloud", "AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Alibaba Cloud", "Baidu AI Cloud", "CITIC CPC", "Catalyst Cloud", "Cerebrium", "China Unicom Cloud", "Contabo", "DigitalOcean", "FPT Smart Cloud", "Hetzner Cloud", "Huawei Cloud", "IDCloudHost", "JD Cloud", "KT Cloud", "Kakao Cloud", "Kamatera", "Kingsoft Cloud", "LG CNS Cloud", "Linode (Akamai)", "Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "NAVER Cloud", "NHN Cloud", "NTT Enterprise Cloud", "NeevCloud", "NxtGen Cloud", "OVH", "Oracle Cloud", "SK C&C Cloud Z", "Telkom Cloud SA", "Tencent Cloud", "UCloud", "UpCloud", "VNG Cloud (GreenNode)", "Vault Cloud", "Volcano Engine", "Vultr", "eCloudvalley"], "provider_count": 42, "tier_count": 483}, "openshift": {"providers": ["Cloud4C"], "provider_count": 1, "tier_count": 3}, "rancher": {"providers": [], "provider_count": 0, "tier_count": 0}, "openstack": {"providers": ["AUCloud", "BiznetGio", "Catalyst Cloud", "Herza Cloud", "IDC Frontier", "KDDI Cloud", "LG CNS Cloud", "NTT Enterprise Cloud", "OVH", "Shinjiru VPS", "Telkom Cloud SA", "VNG Cloud", "Vault Cloud", "eCloudvalley"], "provider_count": 14, "tier_count": 140}, "aws": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Anyscale"], "provider_count": 3, "tier_count": 16}, "azure": {"providers": ["Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE"], "provider_count": 3, "tier_count": 19}, "gcp": {"providers": ["Anyscale", "Google Cloud Qatar", "Google Cloud UAE"], "provider_count": 3, "tier_count": 11}, "oracle": {"providers": ["Oracle Cloud"], "provider_count": 1, "tier_count": 15}, "alibaba": {"providers": ["Alibaba Cloud"], "provider_count": 1, "tier_count": 6}, "huawei": {"providers": ["Huawei Cloud"], "provider_count": 1, "tier_count": 4}, "ceph": {"providers": ["AUCloud", "Catalyst Cloud", "IDC Frontier", "OVH", "Vault Cloud", "eCloudvalley"], "provider_count": 6, "tier_count": 80}, "s3": {"providers": [], "provider_count": 0, "tier_count": 0}, "minio": {"providers": [], "provider_count": 0, "tier_count": 0}, "swift": {"providers": ["Catalyst Cloud"], "provider_count": 1, "tier_count": 3}, "firecracker": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Fireworks AI"], "provider_count": 3, "tier_count": 15}, "intel": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Alibaba Cloud", "Baidu AI Cloud", "Bravulink", "CITIC CPC", "Catalyst Cloud", "Chief Cloud", "China Unicom Cloud", "Cloud4C", "CloudKilat", "Contabo", "Cyfuture Cloud", "DigitalOcean", "DomaiNesia", "Douzone Cloud", "Exabytes", "FPT Smart Cloud", "Far EasTone Cloud", "GMO Cloud", "Gabia Cloud", "Google Cloud Qatar", "Google Cloud UAE", "HKT Enterprise Cloud", "Herza Cloud", "Hetzner Cloud", "HiCloud", "HostDime Brazil", "Huawei Cloud", "IDC Frontier", "IIJ GIO", "Internet Solutions Africa", "JD Cloud", "JagoanHosting", "KDDI Cloud", "KT Cloud", "Kakao Cloud", "Kamatera", "King.Host", "Kingsoft Cloud", "LG CNS Cloud", "Linode (Akamai)", "Liquid Telecom", "Locaweb Cloud", "Microsoft Azure", "Microsoft Azure South Africa", "Microsoft Azure UAE", "NAVER Cloud", "NHN Cloud", "NTT Enterprise Cloud", "NeevCloud", "OVH", "Oracle Cloud", "Qwords", "Rumahweb", "SK C&C Cloud Z", "Samsung SDS", "Shinjiru VPS", "SoftBank White Cloud", "Telkom Cloud SA", "Tencent Cloud", "UCloud", "UpCloud", "Vault Cloud", "Viettel IDC", "Volcano Engine", "Vultr", "eCloudvalley", "stc Cloud"], "provider_count": 69, "tier_count": 530}, "amd": {"providers": ["AUCloud", "Alibaba Cloud", "BiznetGio", "CloudKilat", "Contabo", "DigitalOcean", "Google Cloud Qatar", "Google Cloud UAE", "Herza Cloud", "Hetzner Cloud", "HostDime Brazil", "Hostinger", "IDCloudHost", "Kamatera", "Kingsoft Cloud", "Linode (Akamai)", "Locaweb Cloud", "Macquarie Cloud", "Microsoft Azure", "NHN Cloud", "NeevCloud", "NxtGen Cloud", "OVH", "Oracle Cloud", "Sakura Cloud", "Tencent Cloud", "UCloud", "UpCloud", "VNG Cloud", "VNG Cloud (GreenNode)", "Viettel IDC", "Vultr"], "provider_count": 32, "tier_count": 475}, "arm": {"providers": ["AWS Africa (Cape Town)", "AWS Middle East (Bahrain)", "Hetzner Cloud", "Huawei Cloud", "Kamatera", "Oracle Cloud"], "provider_count": 6, "tier_count": 62}, "nvidia": {"providers": ["Anyscale", "Baidu AI Cloud", "Kakao Cloud", "NeevCloud", "Volcano Engine"], "provider_count": 5, "tier_count": 15}, "tpu": {"providers": [], "provider_count": 0, "tier_count": 0}, "graviton": {"providers": [], "provider_count": 0, "tier_count": 0}};
+
 const CITY_PROVIDER_DATA = {"Jakarta": ["IDCloudHost", "BiznetGio", "JagoanHosting", "Qwords", "CloudKilat", "DomaiNesia", "Rumahweb", "Dewaweb", "IndonesianCloud", "Eranyacloud", "Google Cloud (GCP)", "Alibaba Cloud", "Tencent Cloud", "Herza Cloud", "Hostinger ID", "Oracle Cloud", "Cloud4C", "Hostinger"], "Surabaya": ["IDCloudHost", "BiznetGio", "Qwords", "Eranyacloud"], "Medan": ["IDCloudHost"], "Makassar": ["IDCloudHost"], "Denpasar": ["IDCloudHost", "BiznetGio"], "Balikpapan": ["IDCloudHost"], "Manado": ["IDCloudHost"], "Bandung": ["IDCloudHost", "Qwords"], "Yogyakarta": ["IDCloudHost", "JagoanHosting", "DomaiNesia", "Rumahweb"], "Cibitung": ["BiznetGio"], "Bekasi": ["BiznetGio"], "Singapore": ["CloudKilat", "Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "OVH", "UpCloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Herza Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger", "Volcano Engine"], "US East": ["AWS"], "US West": ["AWS"], "Asia Pacific": ["AWS"], "EU": ["AWS"], "Canada": ["AWS"], "South America": ["AWS"], "Mexico": ["AWS"], "Middle East": ["AWS"], "Africa": ["AWS"], "East US": ["Microsoft Azure"], "West US": ["Microsoft Azure"], "Central US": ["Microsoft Azure"], "Canada Central": ["Microsoft Azure"], "Brazil South": ["Microsoft Azure"], "North Europe": ["Microsoft Azure"], "West Europe": ["Microsoft Azure"], "UK South": ["Microsoft Azure"], "France Central": ["Microsoft Azure"], "Germany West Central": ["Microsoft Azure"], "Sweden Central": ["Microsoft Azure"], "Switzerland North": ["Microsoft Azure"], "Norway East": ["Microsoft Azure"], "Italy North": ["Microsoft Azure"], "Spain Central": ["Microsoft Azure"], "Poland Central": ["Microsoft Azure"], "East Asia": ["Microsoft Azure"], "Southeast Asia": ["Microsoft Azure"], "Japan East": ["Microsoft Azure"], "Japan West": ["Microsoft Azure"], "Korea Central": ["Microsoft Azure"], "Korea South": ["Microsoft Azure"], "Australia East": ["Microsoft Azure"], "Australia Southeast": ["Microsoft Azure"], "Central India": ["Microsoft Azure"], "South India": ["Microsoft Azure"], "West India": ["Microsoft Azure"], "UAE North": ["Microsoft Azure"], "Qatar Central": ["Microsoft Azure"], "Israel Central": ["Microsoft Azure"], "South Africa North": ["Microsoft Azure"], "Iowa": ["Google Cloud (GCP)"], "Oregon": ["Google Cloud (GCP)"], "Virginia": ["Google Cloud (GCP)"], "South Carolina": ["Google Cloud (GCP)"], "Las Vegas": ["Google Cloud (GCP)"], "Dallas": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Kamatera", "Cloud4C"], "Montreal": ["Google Cloud (GCP)", "Oracle Cloud"], "Toronto": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Kamatera", "Oracle Cloud", "Cloud4C"], "São Paulo": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Contabo", "Hostinger ID", "Contabo Brazil", "Locaweb Cloud", "Oracle Cloud", "Bravulink", "Cloud4C", "HostDime Brazil", "Hostinger", "King.Host"], "Santiago": ["Google Cloud (GCP)", "Huawei Cloud", "Oracle Cloud"], "Belgium": ["Google Cloud (GCP)"], "Netherlands": ["Google Cloud (GCP)"], "London": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger"], "Frankfurt": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "UpCloud", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Hostinger ID", "Oracle Cloud", "Equinix Metal", "Cloud4C", "Hostinger"], "Finland": ["Google Cloud (GCP)"], "Denmark": ["Google Cloud (GCP)"], "Zurich": ["Google Cloud (GCP)", "Oracle Cloud"], "Milan": ["Google Cloud (GCP)", "Oracle Cloud"], "Paris": ["Google Cloud (GCP)", "Vultr", "Oracle Cloud"], "Madrid": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Oracle Cloud", "Cloud4C"], "Tel Aviv": ["Google Cloud (GCP)", "Kamatera", "Oracle Cloud"], "Doha": ["Google Cloud (GCP)"], "Saudi Arabia": ["Google Cloud (GCP)"], "Mumbai": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "OVH", "Alibaba Cloud", "Tencent Cloud", "UCloud", "E2E Networks", "NxtGen Cloud", "Cyfuture Cloud", "NeevCloud", "Hostinger ID", "Oracle Cloud", "Cloud4C", "Hostinger"], "Delhi": ["Google Cloud (GCP)", "NxtGen Cloud", "NeevCloud"], "Hong Kong": ["Google Cloud (GCP)", "Kamatera", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Kingsoft Cloud", "HKT Enterprise Cloud", "Cloud4C", "Volcano Engine", "CITIC CPC", "China Unicom Cloud"], "Taiwan": ["Google Cloud (GCP)"], "Tokyo": ["Google Cloud (GCP)", "Vultr", "Linode (Akamai)", "Contabo", "SAKURA Internet", "IDC Frontier", "NTT Enterprise Cloud", "KDDI Cloud", "IIJ GIO", "GMO Cloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "UCloud", "Oracle Cloud", "Equinix Metal", "Cloud4C", "SoftBank White Cloud", "Volcano Engine"], "Osaka": ["Google Cloud (GCP)", "SAKURA Internet", "NTT Enterprise Cloud", "KDDI Cloud", "IIJ GIO", "GMO Cloud", "Oracle Cloud"], "Seoul": ["Google Cloud (GCP)", "Vultr", "KT Cloud", "NHN Cloud", "Kakao Cloud", "NAVER Cloud", "LG CNS Cloud", "SK C&C Cloud Z", "Samsung SDS", "Douzone Cloud", "Gabia Cloud", "Alibaba Cloud", "Tencent Cloud", "Huawei Cloud", "JD Cloud", "Oracle Cloud", "Volcano Engine"], "Sydney": ["Google Cloud (GCP)", "DigitalOcean", "Vultr", "Linode (Akamai)", "Contabo", "OVH", "UpCloud", "Alibaba Cloud", "Macquarie Cloud", "Oracle Cloud", "Equinix Metal", "AUCloud", "Cloud4C", "Vault Cloud"], "Melbourne": ["Google Cloud (GCP)", "Macquarie Cloud", "Oracle Cloud", "AUCloud"], "New York": ["DigitalOcean", "Vultr", "UpCloud", "Kamatera", "Cloud4C"], "San Francisco": ["DigitalOcean"], "Amsterdam": ["DigitalOcean", "Vultr", "Linode (Akamai)", "UpCloud", "Kamatera", "Hostinger ID", "Oracle Cloud", "Hostinger"], "Bangalore": ["DigitalOcean", "E2E Networks", "NxtGen Cloud", "NeevCloud"], "Chicago": ["Vultr", "UpCloud", "Cloud4C"], "Los Angeles": ["Vultr", "Linode (Akamai)", "Kamatera"], "Miami": ["Vultr"], "Seattle": ["Vultr", "Linode (Akamai)", "Contabo"], "Silicon Valley": ["Vultr", "Equinix Metal"], "Atlanta": ["Vultr", "Linode (Akamai)"], "Stockholm": ["Vultr", "Linode (Akamai)", "UpCloud", "Oracle Cloud"], "Warsaw": ["Vultr", "Contabo"], "Mexico City": ["Vultr", "Huawei Cloud", "Cloud4C"], "Newark": ["Linode (Akamai)"], "Fremont": ["Linode (Akamai)"], "Falkenstein": ["Hetzner Cloud"], "Nuremberg": ["Hetzner Cloud", "Contabo"], "Helsinki": ["Hetzner Cloud", "UpCloud"], "Ashburn": ["Hetzner Cloud", "Contabo", "Oracle Cloud", "Equinix Metal"], "Hillsboro": ["Hetzner Cloud", "OVH"], "Düsseldorf": ["Contabo"], "St. Louis": ["Contabo"], "Jaipur": ["Contabo"], "Roubaix": ["OVH"], "Strasbourg": ["OVH"], "Gravelines": ["OVH"], "Beauharnois": ["OVH"], "Vint Hill": ["OVH"], "San Jose": ["UpCloud", "Oracle Cloud"], "Ishikawa": ["SAKURA Internet"], "Busan": ["KT Cloud", "NHN Cloud", "Kakao Cloud", "NAVER Cloud", "LG CNS Cloud", "Douzone Cloud"], "Pangyo": ["NHN Cloud"], "Seongnam": ["Kakao Cloud"], "Kuala Lumpur": ["Alibaba Cloud", "Herza Cloud", "Cloud4C", "Shinjiru VPS"], "Dubai": ["Alibaba Cloud", "Oracle Cloud"], "Bangkok": ["Tencent Cloud", "Huawei Cloud", "Cloud4C", "Volcano Engine"], "Johannesburg": ["Huawei Cloud", "Liquid Telecom", "Internet Solutions Africa", "Cloud4C"], "Lima": ["Huawei Cloud"], "Sao Paulo": ["Huawei Cloud"], "Buenos Aires": ["Huawei Cloud"], "Beijing": ["JD Cloud", "UCloud", "Kingsoft Cloud", "Volcano Engine", "China Unicom Cloud"], "Shanghai": ["JD Cloud", "UCloud", "Kingsoft Cloud", "Volcano Engine", "CITIC CPC", "China Unicom Cloud"], "Shenzhen": ["JD Cloud", "UCloud", "Volcano Engine", "CITIC CPC"], "Guangzhou": ["JD Cloud", "UCloud", "Volcano Engine", "China Unicom Cloud"], "Hanoi": ["Viettel IDC", "FPT Smart Cloud", "VNG Cloud (GreenNode)", "HiCloud", "VNG Cloud"], "Ho Chi Minh City": ["Viettel IDC", "FPT Smart Cloud", "VNG Cloud (GreenNode)", "HiCloud", "VNG Cloud"], "Da Nang": ["Viettel IDC"], "Taipei": ["Far EasTone Cloud", "eCloudvalley", "Chief Cloud"], "Noida": ["E2E Networks", "Cyfuture Cloud"], "Chennai": ["E2E Networks", "Oracle Cloud"], "Canberra": ["Macquarie Cloud", "AUCloud", "Vault Cloud"], "Wellington": ["Catalyst Cloud"], "Auckland": ["Catalyst Cloud", "Cloud4C"], "Hamilton": ["Catalyst Cloud"], "Kapuni": ["Catalyst Cloud"], "Christchurch": ["Catalyst Cloud"], "Riyadh": ["stc Cloud"], "Jeddah": ["stc Cloud", "Oracle Cloud"], "Dammam": ["stc Cloud"], "Bahrain": ["stc Cloud"], "Nairobi": ["Liquid Telecom", "Internet Solutions Africa"], "Cape Town": ["Liquid Telecom", "Internet Solutions Africa", "Telkom Cloud SA"], "Lagos": ["Liquid Telecom"], "Cairo": ["Liquid Telecom", "Cloud4C"], "Manila": ["Herza Cloud", "Cloud4C"], "Rio de Janeiro": ["Locaweb Cloud", "HostDime Brazil"], "Phoenix": ["Oracle Cloud"], "Queretaro": ["Oracle Cloud"], "Vinhedo": ["Oracle Cloud"], "Marseille": ["Oracle Cloud"], "Hyderabad": ["Oracle Cloud"], "US": ["RunPod", "Lambda Labs"], "Europe": ["RunPod"], "Las Vegas)": ["Lambda Labs"], "Asia-Pacific": ["Lambda Labs"], "Global": ["Vast.ai", "Modal Labs", "Cerebrium", "Novita AI", "Anyscale", "Fireworks AI"], "Adelaide": ["AUCloud"], "Perth": ["AUCloud"], "Penang": ["Exabytes"], "Cyberjaya": ["Exabytes"], "Fortaleza": ["HostDime Brazil"], "Curitiba": ["King.Host"], "Centurion": ["Telkom Cloud SA"], "Taichung": ["Chief Cloud"]};
 const CITY_COORDS = {"Jakarta": [-6.21, 106.85], "Cibitung": [-6.27, 107.08], "Surabaya": [-7.26, 112.75], "Medan": [3.6, 98.67], "Yogyakarta": [-7.8, 110.37], "Bekasi": [-6.24, 106.98], "Bandung": [-6.92, 107.62], "Makassar": [-5.15, 119.43], "Denpasar": [-8.67, 115.21], "Manado": [1.47, 124.84], "Balikpapan": [-1.24, 116.85], "Singapore": [1.35, 103.82], "Kuala Lumpur": [3.14, 101.69], "Penang": [5.42, 100.33], "Cyberjaya": [2.92, 101.66], "Johor Bahru": [1.49, 103.74], "Cyberjaya, Malaysia": [2.92, 101.66], "Hanoi": [21.03, 105.85], "Ho Chi Minh City": [10.82, 106.63], "Da Nang": [16.05, 108.2], "Bangkok": [13.76, 100.5], "Manila": [14.6, 120.98], "Quezon City": [14.68, 121.05], "Cebu": [10.32, 123.89], "Hong Kong": [22.32, 114.17], "Shanghai": [31.23, 121.47], "Beijing": [39.9, 116.41], "Shenzhen": [22.54, 114.06], "Guangzhou": [23.13, 113.26], "Taipei": [25.03, 121.57], "Taichung": [24.15, 120.67], "Tokyo": [35.68, 139.65], "Osaka": [34.69, 135.5], "Ishikawa": [36.56, 136.66], "Fukuoka": [33.59, 130.4], "Seoul": [37.57, 126.98], "Busan": [35.18, 129.08], "Seongnam": [37.44, 127.14], "Pangyo": [37.39, 127.11], "Gasan": [37.47, 127.12], "Gangnam": [37.5, 127.05], "Incheon": [37.46, 126.71], "Mumbai": [19.08, 72.88], "Bangalore": [12.97, 77.59], "Delhi": [28.7, 77.1], "Chennai": [13.08, 80.27], "Noida": [28.54, 77.39], "Hyderabad": [17.39, 78.49], "Pune": [18.52, 73.86], "Kolkata": [22.57, 88.36], "Sydney": [-33.87, 151.21], "Melbourne": [-37.81, 144.96], "Canberra": [-35.28, 149.13], "Perth": [-31.95, 115.86], "Adelaide": [-34.93, 138.6], "Brisbane": [-27.47, 153.03], "Wellington": [-41.29, 174.78], "Auckland": [-36.85, 174.76], "Christchurch": [-43.53, 172.64], "Hamilton": [-37.79, 175.28], "Dubai": [25.2, 55.27], "Riyadh": [24.71, 46.68], "Jeddah": [21.49, 39.19], "Dammam": [26.42, 50.09], "Doha": [25.29, 51.53], "Tel Aviv": [32.09, 34.78], "Manama": [26.07, 50.55], "Cape Town": [-33.92, 18.42], "Johannesburg": [-26.2, 28.05], "Nairobi": [-1.29, 36.82], "Lagos": [6.52, 3.38], "Cairo": [30.04, 31.24], "Centurion": [-25.86, 28.19], "Casablanca": [33.57, -7.59], "Accra": [5.55, -0.2], "São Paulo": [-23.55, -46.63], "Rio de Janeiro": [-22.91, -43.17], "Fortaleza": [-3.72, -38.54], "Belo Horizonte": [-19.92, -43.93], "Curitiba": [-25.43, -49.27], "Brasília": [-15.83, -47.92], "Buenos Aires": [-34.61, -58.38], "Santiago": [-33.45, -70.66], "Lima": [-12.05, -77.04], "Bogotá": [4.71, -74.07], "Mexico City": [19.43, -99.13], "Querétaro": [20.59, -100.39], "Ashburn": [39.04, -77.49], "Hillsboro": [45.52, -122.99], "Phoenix": [33.45, -112.07], "Newark": [40.74, -74.17], "Atlanta": [33.75, -84.39], "Dallas": [32.78, -96.8], "Fremont": [37.55, -121.99], "Los Angeles": [34.05, -118.24], "Seattle": [47.61, -122.33], "San Jose": [37.34, -121.89], "Miami": [25.76, -80.19], "Silicon Valley": [37.44, -122.14], "Chicago": [41.88, -87.63], "New York": [40.71, -74.01], "St. Louis": [38.63, -90.2], "Vint Hill": [38.73, -77.65], "San Francisco": [37.77, -122.42], "Las Vegas": [36.17, -115.14], "Boston": [42.36, -71.06], "Washington DC": [38.91, -77.04], "Toronto": [43.65, -79.38], "Montreal": [45.5, -73.57], "Beauharnois": [45.32, -73.87], "Vancouver": [49.28, -123.12], "Calgary": [51.05, -114.07], "London": [51.51, -0.13], "Amsterdam": [52.37, 4.9], "Frankfurt": [50.11, 8.68], "Paris": [48.86, 2.35], "Madrid": [40.42, -3.7], "Stockholm": [59.33, 18.07], "Warsaw": [52.23, 21.01], "Roubaix": [50.69, 3.17], "Strasbourg": [48.57, 7.75], "Gravelines": [50.99, 2.13], "Falkenstein": [50.48, 12.37], "Nuremberg": [49.45, 11.08], "Düsseldorf": [51.23, 6.77], "Munich": [48.14, 11.58], "Helsinki": [60.17, 24.94], "Zurich": [47.38, 8.54], "Marseille": [43.3, 5.37], "Milan": [45.46, 9.19], "Hamburg": [53.55, 9.99], "Berlin": [52.52, 13.4], "Vienna": [48.21, 16.37], "Copenhagen": [55.68, 12.57], "Oslo": [59.91, 10.75], "Lisbon": [38.72, -9.14], "Brussels": [50.85, 4.35], "Dublin": [53.35, -6.26], "Edinburgh": [55.95, -3.19], "Manchester": [53.48, -2.24], "Jaipur": [26.91, 75.79], "N. Virginia": [38.95, -77.45], "Ohio": [40.0, -82.6], "N California": [37.42, -122.08], "Oregon": [45.52, -122.99], "Canada Central": [43.65, -79.38], "Tokyo Region": [35.68, 139.65], "Seoul Region": [37.57, 126.98], "Mumbai Region": [19.08, 72.88], "Singapore Region": [1.35, 103.82], "Sydney Region": [-33.87, 151.21], "Hong Kong SAR": [22.32, 114.17], "Jakarta Region": [-6.21, 106.85], "Middle East": [25.27, 55.3], "Bahrain Region": [26.07, 50.55], "Cape Town Region": [-33.92, 18.42], "Milan Region": [45.46, 9.19], "Paris Region": [48.86, 2.35], "Spain Region": [40.42, -3.7], "Stockholm Region": [59.33, 18.07], "Zurich Region": [47.38, 8.54], "Frankfurt Region": [50.11, 8.68], "Ireland Region": [53.35, -6.26], "London Region": [51.51, -0.13], "US East": [38.95, -77.45], "US West": [37.42, -122.08], "East US": [38.95, -77.45], "West US": [37.42, -122.08], "Central US": [41.5, -90.5], "East Asia": [22.32, 114.17], "Southeast Asia": [1.35, 103.82], "Japan East": [35.68, 139.65], "Japan West": [34.69, 135.5], "Korea Central": [37.57, 126.98], "Korea South": [35.18, 129.08], "Australia East": [-33.87, 151.21], "Australia Southeast": [-37.81, 144.96], "Central India": [19.08, 72.88], "South India": [13.08, 80.27], "West India": [18.52, 73.86], "UAE North": [25.2, 55.27], "Qatar Central": [25.29, 51.53], "Israel Central": [32.09, 34.78], "South Africa North": [-26.2, 28.05], "North Europe": [53.35, -6.26], "West Europe": [52.37, 4.9], "UK South": [51.51, -0.13], "France Central": [48.86, 2.35], "Germany West Central": [50.11, 8.68], "Sweden Central": [59.33, 18.07], "Switzerland North": [47.38, 8.54], "Norway East": [59.91, 10.75], "Italy North": [45.46, 9.19], "Poland Central": [52.23, 21.01], "Brazil South": [-23.55, -46.63], "Mexico Central": [19.43, -99.13], "us-central1": [41.5, -93.5], "us-east1": [33.2, -80.0], "us-east4": [38.95, -77.45], "us-west1": [45.52, -122.99], "us-west2": [34.05, -118.24], "us-south1": [32.78, -96.8], "us-west3": [36.17, -115.14], "us-west4": [36.17, -115.14], "northamerica-northeast1": [43.65, -79.38], "northamerica-northeast2": [43.65, -79.38], "southamerica-east1": [-23.55, -46.63], "europe-west1": [50.85, 4.35], "europe-west2": [51.51, -0.13], "europe-west3": [50.11, 8.68], "europe-west4": [52.37, 4.9], "europe-west6": [47.38, 8.54], "europe-west8": [45.46, 9.19], "europe-west9": [48.86, 2.35], "europe-north1": [60.17, 24.94], "europe-southwest1": [38.72, -9.14], "me-west1": [32.09, 34.78], "me-central1": [25.29, 51.53], "me-central2": [24.71, 46.68], "asia-south1": [19.08, 72.88], "asia-south2": [28.7, 77.1], "asia-southeast1": [1.35, 103.82], "asia-southeast2": [-6.21, 106.85], "asia-east2": [22.32, 114.17], "asia-east1": [25.03, 121.57], "asia-northeast1": [35.68, 139.65], "asia-northeast2": [34.69, 135.5], "asia-northeast3": [37.57, 126.98], "australia-southeast1": [-33.87, 151.21], "australia-southeast2": [-37.81, 144.96], "africa-south1": [-33.92, 18.42], "Manila, Philippines": [14.6, 120.98], "Singapore (ap-southeast-1)": [1.35, 103.82], "Cyberjaya (ap-southeast-3)": [2.92, 101.66], "Hong Kong (ap-east-1)": [22.32, 114.17], "Tokyo (ap-northeast-1)": [35.68, 139.65], "Seoul (ap-northeast-2)": [37.57, 126.98], "Osaka (ap-northeast-3)": [34.69, 135.5], "Mumbai (ap-south-1)": [19.08, 72.88], "Sydney (ap-southeast-2)": [-33.87, 151.21], "Jakarta (ap-southeast-3)": [-6.21, 106.85], "Ireland (eu-west-1)": [53.35, -6.26], "London (eu-west-2)": [51.51, -0.13], "Paris (eu-west-3)": [48.86, 2.35], "Amsterdam (eu-west-4)": [52.37, 4.9], "Milan (eu-south-1)": [45.46, 9.19], "Spain (eu-south-2)": [40.42, -3.7], "Stockholm (eu-north-1)": [59.33, 18.07], "Frankfurt (eu-central-1)": [50.11, 8.68], "Zurich (eu-central-2)": [47.38, 8.54], "Bahrain (me-south-1)": [26.07, 50.55], "UAE (me-central-1)": [25.2, 55.27], "Doha (me-central-1)": [25.29, 51.53], "Israel (il-central-1)": [32.09, 34.78], "Cape Town (af-south-1)": [-33.92, 18.42], "São Paulo (sa-east-1)": [-23.55, -46.63], "Canada (ca-central-1)": [43.65, -79.38], "US East (us-east-1)": [38.95, -77.45], "US East (us-east-2)": [39.96, -83.0], "US West (us-west-1)": [45.52, -122.99], "US West (us-west-2)": [45.52, -122.99], "Vinhedo": [-23.03, -46.98]}
 const COUNTRY_COORDS = {"US": [38.91, -77.04], "USA": [38.91, -77.04], "United States": [38.91, -77.04], "CA": [45.42, -75.69], "Canada": [45.42, -75.69], "MX": [19.43, -99.13], "Mexico": [19.43, -99.13], "BR": [-15.83, -47.92], "Brazil": [-15.83, -47.92], "AR": [-34.61, -58.38], "Argentina": [-34.61, -58.38], "CL": [-33.45, -70.66], "Chile": [-33.45, -70.66], "CO": [4.71, -74.07], "Colombia": [4.71, -74.07], "PE": [-12.05, -77.04], "Peru": [-12.05, -77.04], "Latin America": [-15.83, -47.92], "UK": [51.51, -0.13], "GB": [51.51, -0.13], "United Kingdom": [51.51, -0.13], "DE": [52.52, 13.4], "Germany": [52.52, 13.4], "FR": [48.86, 2.35], "France": [48.86, 2.35], "NL": [52.37, 4.9], "Netherlands": [52.37, 4.9], "ES": [40.42, -3.7], "Spain": [40.42, -3.7], "IT": [41.9, 12.5], "Italy": [41.9, 12.5], "PL": [52.23, 21.01], "Poland": [52.23, 21.01], "SE": [59.33, 18.07], "Sweden": [59.33, 18.07], "NO": [59.91, 10.75], "Norway": [59.91, 10.75], "FI": [60.17, 24.94], "Finland": [60.17, 24.94], "DK": [55.68, 12.57], "Denmark": [55.68, 12.57], "BE": [50.85, 4.35], "Belgium": [50.85, 4.35], "CH": [46.95, 7.45], "Switzerland": [46.95, 7.45], "AT": [48.21, 16.37], "Austria": [48.21, 16.37], "IE": [53.35, -6.26], "Ireland": [53.35, -6.26], "PT": [38.72, -9.14], "Portugal": [38.72, -9.14], "GR": [37.98, 23.73], "Greece": [37.98, 23.73], "EU": [50.85, 4.35], "Europe": [50.85, 4.35], "RU": [55.75, 37.62], "Russia": [55.75, 37.62], "ZA": [-25.86, 28.19], "South Africa": [-25.86, 28.19], "EG": [30.04, 31.24], "Egypt": [30.04, 31.24], "NG": [9.08, 8.68], "Nigeria": [9.08, 8.68], "KE": [-1.29, 36.82], "Kenya": [-1.29, 36.82], "MA": [33.57, -7.59], "Morocco": [33.57, -7.59], "GH": [5.55, -0.2], "Ghana": [5.55, -0.2], "Africa": [-8.84, 13.23], "AE": [25.2, 55.27], "UAE": [25.2, 55.27], "United Arab Emirates": [25.2, 55.27], "SA": [24.71, 46.68], "Saudi Arabia": [24.71, 46.68], "QA": [25.29, 51.53], "Qatar": [25.29, 51.53], "BH": [26.07, 50.55], "Bahrain": [26.07, 50.55], "IL": [41.88, -87.63], "Israel": [32.09, 34.78], "TR": [39.93, 32.86], "Turkey": [39.93, 32.86], "Middle East": [25.27, 55.3], "IN": [19.08, 72.88], "India": [19.08, 72.88], "PK": [30.38, 69.35], "Bangladesh": [23.81, 90.41], "ID": [-6.21, 106.85], "Indonesia": [-6.21, 106.85], "SG": [1.35, 103.82], "Singapore": [1.35, 103.82], "MY": [3.14, 101.69], "Malaysia": [3.14, 101.69], "TH": [13.76, 100.5], "Thailand": [13.76, 100.5], "PH": [14.6, 120.98], "Philippines": [14.6, 120.98], "VN": [10.82, 106.63], "Vietnam": [10.82, 106.63], "HK": [22.32, 114.17], "Hong Kong": [22.32, 114.17], "TW": [25.03, 121.57], "Taiwan": [25.03, 121.57], "CN": [39.9, 116.41], "China": [39.9, 116.41], "JP": [35.68, 139.65], "Japan": [35.68, 139.65], "KR": [37.57, 126.98], "South Korea": [37.57, 126.98], "AU": [-33.87, 151.21], "Australia": [-33.87, 151.21], "NZ": [-41.29, 174.78], "New Zealand": [-41.29, 174.78], "Asia Pacific": [13.75, 100.5], "APAC": [13.75, 100.5], "Asia": [22.32, 114.17], "Central": [39.91, -98.35], "South America": [-23.55, -46.63], "North America": [39.91, -98.35], "NY": [40.71, -74.01], "New York State": [40.71, -74.01], "California": [34.05, -118.24], "California, US": [34.05, -118.24], "TX": [29.76, -95.37], "Texas": [29.76, -95.37], "NJ": [40.06, -74.41], "New Jersey": [40.06, -74.41], "FL": [25.76, -80.19], "Florida": [25.76, -80.19], "GA": [33.75, -84.39], "Georgia": [33.75, -84.39], "Illinois": [41.88, -87.63], "WA": [47.61, -122.33], "Washington": [47.61, -122.33], "Iowa": [41.87, -93.1], "Virginia": [37.43, -78.66], "South Carolina": [33.84, -81.03], "Iowa (us-central1)": [41.87, -93.1], "europe-north2": [55.68, 12.57], "southamerica-west1": [-33.45, -70.66], "NYC1-3": [40.71, -74.01], "SFO1-3": [37.77, -122.42], "AMS2-3": [52.37, 4.9], "SGP1": [1.35, 103.82], "TOR1": [43.65, -79.38], "FRA1": [50.11, 8.68], "SYD1": [-33.87, 151.21], "LON1": [51.51, -0.13], "BLR1": [12.97, 77.59], "Queretaro": [20.59, -100.39], "Querétaro": [20.59, -100.39]};;
@@ -3242,6 +3491,43 @@ function lookupCoords(name) {
   }
   return null;
 }
+
+
+function filterTechCards(filter) {
+  const cards = document.querySelectorAll('.tech-logo-card');
+  const buttons = document.querySelectorAll('.tech-filter-btn');
+  
+  // Update button states
+  buttons.forEach(b => {
+    b.classList.toggle('active', b.dataset.techFilter === filter);
+  });
+  
+  // Get usage data
+  const usage = TECH_USAGE_DATA || {};
+  
+  // Filter cards
+  cards.forEach(card => {
+    const tech = card.dataset.tech;
+    const isOpen = card.classList.contains('os-card');
+    const isProp = card.classList.contains('prop-card');
+    const tierCount = usage[tech] ? usage[tech].tier_count : 0;
+    
+    let show = false;
+    if (filter === 'all') show = true;
+    else if (filter === 'open') show = isOpen;
+    else if (filter === 'proprietary') show = isProp;
+    else if (filter === 'popular') show = tierCount >= 100;
+    else if (filter === 'rare') show = tierCount > 0 && tierCount < 20;
+    
+    card.classList.toggle('filtered-out', !show);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.tech-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => filterTechCards(btn.dataset.techFilter));
+  });
+});
 
 function buildLeafletMap() {
   // Initialize map - world view
