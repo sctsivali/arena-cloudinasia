@@ -2174,6 +2174,45 @@ body.sidebar-collapsed .sidebar-toggle-float {
   display: grid;
 }
 
+
+/* Uniform Provider Cards */
+.provider-tech-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.provider-tech-card {
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.provider-tech-card:hover {
+  border-color: var(--c-cia);
+  background: rgba(96,189,145,0.05);
+  transform: translateY(-2px);
+}
+.provider-tech-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 8px;
+}
+.provider-tech-card-stats {
+  font-size: 10px;
+  color: var(--c-text-3);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -2436,8 +2475,8 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div class="tech-filter-bar">
 <span class="tech-filter-label">Filter:</span>
 <button class="tech-filter-btn active" data-tech-filter="all">All</button>
-<button class="tech-filter-btn" data-tech-filter="open">🛡️ Open Source</button>
-<button class="tech-filter-btn prop" data-tech-filter="proprietary">🔒 Proprietary</button>
+<button class="tech-filter-btn" data-tech-filter="open">Open Source</button>
+<button class="tech-filter-btn prop" data-tech-filter="proprietary">Proprietary</button>
 <button class="tech-filter-btn" data-tech-filter="popular">⭐ Most Used</button>
 <button class="tech-filter-btn" data-tech-filter="rare">🌱 Rare</button>
 </div>
@@ -2455,7 +2494,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div class="tech-split-badge os-badge">OS</div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">⚙️ Hypervisor</div>
+<div class="tech-split-group-label">Hypervisor</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card os-card" data-tech="kvm">
 <div class="tech-logo-svg"><img alt="KVM" class="real-tech-logo" loading="lazy" src="tech-logos/kvm.svg"/></div>
@@ -2487,7 +2526,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">📦 Container &amp; Orchestration</div>
+<div class="tech-split-group-label">Container &amp; Orchestration</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card os-card" data-tech="docker">
 <div class="tech-logo-svg"><img alt="Docker" class="real-tech-logo" loading="lazy" src="tech-logos/docker.svg"/></div>
@@ -2546,7 +2585,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">💾 Storage</div>
+<div class="tech-split-group-label">Storage</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card os-card" data-tech="ceph">
 <div class="tech-logo-svg"><img alt="Ceph" class="real-tech-logo" loading="lazy" src="tech-logos/ceph.svg"/></div>
@@ -2600,7 +2639,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div class="tech-split-badge prop-badge">PROP</div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">⚙️ Hypervisor</div>
+<div class="tech-split-group-label">Hypervisor</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card prop-card" data-tech="vmware">
 <div class="tech-logo-svg"><img alt="VMware" class="real-tech-logo" loading="lazy" src="tech-logos/vmware.svg"/></div>
@@ -2632,7 +2671,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">☁️ Cloud Platforms</div>
+<div class="tech-split-group-label">Cloud Platforms</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card prop-card" data-tech="aws">
 <div class="tech-logo-svg"><img alt="AWS" class="real-tech-logo" loading="lazy" src="tech-logos/aws.svg"/></div>
@@ -2691,7 +2730,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">💾 Storage</div>
+<div class="tech-split-group-label">Storage</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card prop-card" data-tech="s3">
 <div class="tech-logo-svg"><img alt="S3" class="real-tech-logo" loading="lazy" src="tech-logos/s3.svg"/></div>
@@ -2705,7 +2744,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 <div class="tech-split-group">
-<div class="tech-split-group-label">🔧 Hardware &amp; Silicon</div>
+<div class="tech-split-group-label">Hardware &amp; Silicon</div>
 <div class="tech-logos-grid">
 <div class="tech-logo-card prop-card" data-tech="intel">
 <div class="tech-logo-svg"><img alt="Intel" class="real-tech-logo" loading="lazy" src="tech-logos/intel.svg"/></div>
@@ -2923,17 +2962,17 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 <p class="section-sub">Top providers across 5 specialized categories. Click each tab to see category-specific rankings.</p>
 <div class="arena-tabs" id="arenaTabs">
-<button class="arena-tab active" data-arena="cost">💰 Cost Champion</button>
-<button class="arena-tab" data-arena="coverage">🌍 Coverage Leader</button>
-<button class="arena-tab" data-arena="performance">⚡ Performance Champion</button>
-<button class="arena-tab" data-arena="sovereignty">🏛️ Digital Sovereignty</button>
-<button class="arena-tab" data-arena="opensource">🔓 Open Source Cloud Native</button>
+<button class="arena-tab active" data-arena="cost">Cost Champion</button>
+<button class="arena-tab" data-arena="coverage">Coverage Leader</button>
+<button class="arena-tab" data-arena="performance">Performance Champion</button>
+<button class="arena-tab" data-arena="sovereignty">Digital Sovereignty</button>
+<button class="arena-tab" data-arena="opensource">Open Source Cloud Native</button>
 </div>
 <div class="arena-content" id="arenaContent">
 <!-- Cost Champion -->
 <div class="arena-panel active" data-arena-panel="cost">
 <div class="arena-panel-header">
-<div class="arena-panel-icon">💰</div>
+<div class="arena-panel-icon"></div>
 <div>
 <h3 class="arena-panel-title">Cost Champion</h3>
 <p class="arena-panel-desc">Best price-to-performance ratio. Cheapest entry price, lowest $/GB storage, lowest $/GB RAM.</p>
@@ -2956,7 +2995,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <!-- Coverage Leader -->
 <div class="arena-panel" data-arena-panel="coverage">
 <div class="arena-panel-header">
-<div class="arena-panel-icon">🌍</div>
+<div class="arena-panel-icon"></div>
 <div>
 <h3 class="arena-panel-title">Coverage Leader</h3>
 <p class="arena-panel-desc">Widest global reach. Most data centers, most countries, broadest regional presence.</p>
@@ -2979,7 +3018,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <!-- Performance Champion -->
 <div class="arena-panel" data-arena-panel="performance">
 <div class="arena-panel-header">
-<div class="arena-panel-icon">⚡</div>
+<div class="arena-panel-icon"></div>
 <div>
 <h3 class="arena-panel-title">Performance Champion</h3>
 <p class="arena-panel-desc">GPU instances, NVMe SSD storage, high RAM tiers (32GB+), latest generation CPUs.</p>
@@ -3002,7 +3041,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <!-- Digital Sovereignty -->
 <div class="arena-panel" data-arena-panel="sovereignty">
 <div class="arena-panel-header">
-<div class="arena-panel-icon">🏛️</div>
+<div class="arena-panel-icon"></div>
 <div>
 <h3 class="arena-panel-title">Digital Sovereignty</h3>
 <p class="arena-panel-desc">Local data residency. Sovereign infrastructure. HQ and DCs in same region as customers. Local support teams.</p>
@@ -3025,7 +3064,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <!-- Open Source Cloud Native -->
 <div class="arena-panel" data-arena-panel="opensource">
 <div class="arena-panel-header">
-<div class="arena-panel-icon">🔓</div>
+<div class="arena-panel-icon"></div>
 <div>
 <h3 class="arena-panel-title">Open Source Cloud Native</h3>
 <p class="arena-panel-desc">Open source hypervisor (KVM/Xen), open source orchestration (K8s/OpenStack/Magnum), open source container runtime.</p>
@@ -3611,7 +3650,7 @@ function buildProviderTechCards() {
   }).join('');
 }
 
-function openProviderModal(providerName) {
+window.openProviderModal = function(providerName) {
   const byProvider = {};
   DATA.rows.forEach(r => {
     if (!byProvider[r.provider]) {
@@ -3844,14 +3883,36 @@ document.addEventListener('click', (e) => {
 
 // Add data-provider to all provider name elements
 function markProviderNames() {
-  document.querySelectorAll('.arena-provider-name, .provider-name, td.provider-cell, .tech-name, .directory-provider').forEach(el => {
+  // Get list of all unique provider names
+  const providerNames = [...new Set(DATA.rows.map(r => r.provider))].filter(n => n && n.length < 60);
+  const providerSet = new Set(providerNames);
+  
+  // 1. Mark by specific class selectors (high confidence)
+  document.querySelectorAll('.arena-provider-name, .provider-name, td.provider-cell, .directory-provider').forEach(el => {
     const name = el.textContent.trim().split('\n')[0].trim();
-    if (name && name.length < 60) {
-      const exists = DATA.rows.some(r => r.provider === name);
-      if (exists) {
+    if (providerSet.has(name)) {
+      el.style.cursor = 'pointer';
+      el.classList.add('provider-name-clickable');
+      el.dataset.provider = name;
+    }
+  });
+  
+  // 2. Aggressive search: find all elements whose text contains a provider name
+  const allLeafElements = document.querySelectorAll('section.section *');
+  allLeafElements.forEach(el => {
+    if (el.classList && el.classList.contains('provider-name-clickable')) return;
+    if (el.children.length > 3) return;
+    
+    const text = el.textContent.trim();
+    if (!text || text.length > 80) return;
+    
+    // Check each provider name
+    for (const name of providerNames) {
+      if (text === name || (text.startsWith(name) && text.length <= name.length + 3)) {
         el.style.cursor = 'pointer';
         el.classList.add('provider-name-clickable');
         el.dataset.provider = name;
+        break;
       }
     }
   });
@@ -4018,17 +4079,23 @@ document.addEventListener('DOMContentLoaded', () => {
 const TECH_INFO = {"kvm": {"info": "Linux kernel-based hypervisor", "license": "GPL v2"}, "xen": {"info": "Xen Project bare-metal hypervisor", "license": "GPL v2"}, "proxmox": {"info": "Open source virtualization management", "license": "AGPL v3"}, "docker": {"info": "Container runtime (Moby project)", "license": "Apache 2.0"}, "kubernetes": {"info": "Container orchestration system", "license": "Apache 2.0"}, "containerd": {"info": "Industry-standard container runtime", "license": "Apache 2.0"}, "openshift": {"info": "Enterprise Kubernetes platform", "license": "Apache 2.0 (open core)"}, "rancher": {"info": "Multi-cluster Kubernetes management", "license": "Apache 2.0"}, "openstack": {"info": "Open source cloud computing platform", "license": "Apache 2.0"}, "ceph": {"info": "Distributed object/block/file storage", "license": "LGPL 2.1"}, "minio": {"info": "High-performance S3-compatible object storage", "license": "Apache 2.0"}, "swift": {"info": "OpenStack distributed object storage", "license": "Apache 2.0"}, "firecracker": {"info": "Secure microVM for serverless", "license": "Apache 2.0"}, "vmware": {"info": "Enterprise closed-source hypervisor", "license": "Proprietary"}, "hyperv": {"info": "Microsoft Windows hypervisor", "license": "Proprietary"}, "aws-nitro": {"info": "AWS custom hardware security system", "license": "Proprietary"}, "aws": {"info": "Amazon Web Services cloud platform", "license": "Proprietary"}, "azure": {"info": "Microsoft cloud platform", "license": "Proprietary"}, "gcp": {"info": "Google Cloud Platform", "license": "Proprietary"}, "oracle": {"info": "Oracle Cloud Infrastructure (OCI)", "license": "Proprietary"}, "alibaba": {"info": "Alibaba Cloud (Aliyun)", "license": "Proprietary"}, "huawei": {"info": "Huawei Cloud", "license": "Proprietary"}, "s3": {"info": "Amazon S3 object storage API", "license": "Proprietary API"}, "intel": {"info": "Intel Xeon server CPUs", "license": "Proprietary"}, "amd": {"info": "AMD EPYC server CPUs", "license": "Proprietary"}, "arm": {"info": "ARM Neoverse server architecture", "license": "Proprietary license"}, "nvidia": {"info": "NVIDIA GPU accelerators (Tesla, A100, H100)", "license": "Proprietary"}, "tpu": {"info": "Google Tensor Processing Unit", "license": "Proprietary"}, "graviton": {"info": "AWS custom Arm-based CPU", "license": "Proprietary"}};
 
 function showProviderModal(providerName) {
+  // Use the rich openProviderModal (defined in providers page logic)
+  if (typeof openProviderModal === 'function') {
+    openProviderModal(providerName);
+    return;
+  }
+  // Fallback: simple modal
   const providerData = DATA.rows.filter(r => r.provider === providerName);
   if (providerData.length === 0) return;
+  
+  const modal = document.getElementById('providerModalOverlay');
+  const content = document.getElementById('providerModalContent');
   
   const cheapest = providerData.reduce((min, r) => r.price_usd_per_month < min.price_usd_per_month ? r : min);
   const totalTiers = providerData.length;
   const countries = [...new Set(providerData.map(r => r.country).filter(c => c))];
   const openSourceCount = providerData.filter(r => r.tech_open_source).length;
   const gpuCount = providerData.filter(r => r.gpu && r.gpu !== 'none').length;
-  
-  const modal = document.getElementById('providerModalOverlay');
-  const content = document.getElementById('providerModalContent');
   
   content.innerHTML = `
     <button class="provider-modal-close" onclick="closeProviderModal()">×</button>
@@ -4058,11 +4125,9 @@ function showProviderModal(providerName) {
         <div class="provider-stat-value">${gpuCount}</div>
       </div>
     </div>
-    
-    <h3 class="provider-section-title">🌍 Countries</h3>
+    <h3 class="provider-section-title">Countries</h3>
     <div class="provider-tags">${countries.map(c => `<span class="provider-tag">${c}</span>`).join('')}</div>
-    
-    <h3 class="provider-section-title">📋 All Tiers</h3>
+    <h3 class="provider-section-title">All Tiers</h3>
     <div class="provider-tiers">
       ${providerData.slice(0, 20).map(t => `
         <div class="provider-tier">
@@ -4071,13 +4136,10 @@ function showProviderModal(providerName) {
           <div class="provider-tier-price">$${t.price_usd_per_month.toFixed(2)}/mo</div>
         </div>
       `).join('')}
-      ${providerData.length > 20 ? `<div class="provider-tier-more">+ ${providerData.length - 20} more tiers</div>` : ''}
     </div>
   `;
-  
   modal.classList.add('show');
 }
-
 function closeProviderModal() {
   document.getElementById('providerModalOverlay').classList.remove('show');
 }
@@ -4220,6 +4282,9 @@ function showPage(pageIdx) {
   const page = PAGES[pageIdx];
   const target = document.getElementById(page.id);
   if (target) target.style.display = 'block';
+  
+  // Re-mark provider names on page change
+  setTimeout(markProviderNames, 100);
   
   // If map is on this page, invalidate size
   if (page.id === 'hero') {
