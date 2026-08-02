@@ -2137,7 +2137,6 @@ a { color: inherit; text-decoration: none; }
 }
 .sidebar.collapsed .nav-section-label,
 .sidebar.collapsed .nav-item span,
-.sidebar.collapsed .nav-item,
 .sidebar.collapsed .sidebar-footer,
 .sidebar.collapsed .brand .cia-logo {
   display: none !important;
@@ -2148,6 +2147,16 @@ a { color: inherit; text-decoration: none; }
 }
 .sidebar.collapsed .nav-item svg {
   margin: 0 !important;
+}
+.sidebar.collapsed .nav-item svg {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+}
+.sidebar.collapsed .nav-item {
+  display: flex !important;
+  width: 100%;
+  min-height: 36px;
 }
 .sidebar.collapsed .nav-section {
   align-items: center;
@@ -4079,9 +4088,9 @@ document.addEventListener('DOMContentLoaded', () => {
 const TECH_INFO = {"kvm": {"info": "Linux kernel-based hypervisor", "license": "GPL v2"}, "xen": {"info": "Xen Project bare-metal hypervisor", "license": "GPL v2"}, "proxmox": {"info": "Open source virtualization management", "license": "AGPL v3"}, "docker": {"info": "Container runtime (Moby project)", "license": "Apache 2.0"}, "kubernetes": {"info": "Container orchestration system", "license": "Apache 2.0"}, "containerd": {"info": "Industry-standard container runtime", "license": "Apache 2.0"}, "openshift": {"info": "Enterprise Kubernetes platform", "license": "Apache 2.0 (open core)"}, "rancher": {"info": "Multi-cluster Kubernetes management", "license": "Apache 2.0"}, "openstack": {"info": "Open source cloud computing platform", "license": "Apache 2.0"}, "ceph": {"info": "Distributed object/block/file storage", "license": "LGPL 2.1"}, "minio": {"info": "High-performance S3-compatible object storage", "license": "Apache 2.0"}, "swift": {"info": "OpenStack distributed object storage", "license": "Apache 2.0"}, "firecracker": {"info": "Secure microVM for serverless", "license": "Apache 2.0"}, "vmware": {"info": "Enterprise closed-source hypervisor", "license": "Proprietary"}, "hyperv": {"info": "Microsoft Windows hypervisor", "license": "Proprietary"}, "aws-nitro": {"info": "AWS custom hardware security system", "license": "Proprietary"}, "aws": {"info": "Amazon Web Services cloud platform", "license": "Proprietary"}, "azure": {"info": "Microsoft cloud platform", "license": "Proprietary"}, "gcp": {"info": "Google Cloud Platform", "license": "Proprietary"}, "oracle": {"info": "Oracle Cloud Infrastructure (OCI)", "license": "Proprietary"}, "alibaba": {"info": "Alibaba Cloud (Aliyun)", "license": "Proprietary"}, "huawei": {"info": "Huawei Cloud", "license": "Proprietary"}, "s3": {"info": "Amazon S3 object storage API", "license": "Proprietary API"}, "intel": {"info": "Intel Xeon server CPUs", "license": "Proprietary"}, "amd": {"info": "AMD EPYC server CPUs", "license": "Proprietary"}, "arm": {"info": "ARM Neoverse server architecture", "license": "Proprietary license"}, "nvidia": {"info": "NVIDIA GPU accelerators (Tesla, A100, H100)", "license": "Proprietary"}, "tpu": {"info": "Google Tensor Processing Unit", "license": "Proprietary"}, "graviton": {"info": "AWS custom Arm-based CPU", "license": "Proprietary"}};
 
 function showProviderModal(providerName) {
-  // Use the rich openProviderModal (defined in providers page logic)
-  if (typeof openProviderModal === 'function') {
-    openProviderModal(providerName);
+  // Use the rich openProviderModal (exposed as window.openProviderModal)
+  if (typeof window.openProviderModal === 'function') {
+    window.openProviderModal(providerName);
     return;
   }
   // Fallback: simple modal
