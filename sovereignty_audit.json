@@ -1,0 +1,386 @@
+{
+  "updated_at": "2026-08-03T05:53:14.155684",
+  "note": "Sovereignty data based on public company info as of Aug 2026",
+  "data": {
+    "IDCloudHost": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta",
+        "Cibitung"
+      ],
+      "dc_country_match": true,
+      "notes": "Founded 2012, Indonesian-Indonesian company, local support 24/7 Bahasa"
+    },
+    "BiznetGio": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta",
+        "Cibitung",
+        "Banten"
+      ],
+      "dc_country_match": true,
+      "notes": "Subsidiary of Biznet Networks, NEO Lite series popular, local payment"
+    },
+    "Indonesian Cloud": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Local Indonesian cloud provider"
+    },
+    "Lintasarta Cloudeka": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta",
+        "Cibitung"
+      ],
+      "dc_country_match": true,
+      "notes": "Telkom subsidiary, sovereign Indonesian cloud"
+    },
+    "Telkomsigma Cloud": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta",
+        "Surabaya"
+      ],
+      "dc_country_match": true,
+      "notes": "Telkom subsidiary, enterprise focus"
+    },
+    "Datacomm Cloud Business - DCloud": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Local Indonesian provider, Datacomm group"
+    },
+    "CloudKilat": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia only",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian provider, Kilat Storage, Kilat VM"
+    },
+    "Dewaweb": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian web hosting, ex-Dewaweb"
+    },
+    "Rumahweb": {
+      "hq_country": "Indonesia",
+      "hq_city": "Yogyakarta",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian hosting, focus on WP hosting"
+    },
+    "Qwords": {
+      "hq_country": "Indonesia",
+      "hq_city": "Bandung",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta",
+        "Bandung"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian provider, Bandung-based"
+    },
+    "Herza Cloud": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta",
+        "Surabaya",
+        "Bali",
+        "Batam"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian provider, multi-DC"
+    },
+    "JagoanHosting": {
+      "hq_country": "Indonesia",
+      "hq_city": "Malang",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian hosting, Malang-based"
+    },
+    "DomaiNesia": {
+      "hq_country": "Indonesia",
+      "hq_city": "Jakarta",
+      "local_support": true,
+      "data_residency": "Indonesia",
+      "dc_locations": [
+        "Jakarta"
+      ],
+      "dc_country_match": true,
+      "notes": "Indonesian domain + hosting"
+    },
+    "Exabytes": {
+      "hq_country": "Malaysia",
+      "hq_city": "Kuala Lumpur",
+      "local_support": true,
+      "data_residency": "Malaysia + SEA",
+      "dc_locations": [
+        "Kuala Lumpur",
+        "Singapore",
+        "Hong Kong"
+      ],
+      "dc_country_match": true,
+      "notes": "Malaysian provider, SEA coverage"
+    },
+    "Shinjiru": {
+      "hq_country": "Malaysia",
+      "hq_city": "Kuala Lumpur",
+      "local_support": true,
+      "data_residency": "Malaysia + SEA",
+      "dc_locations": [
+        "Kuala Lumpur"
+      ],
+      "dc_country_match": true,
+      "notes": "Malaysian provider, hosting focus"
+    },
+    "IP ServerOne": {
+      "hq_country": "Malaysia",
+      "hq_city": "Petaling Jaya",
+      "local_support": true,
+      "data_residency": "Malaysia",
+      "dc_locations": [
+        "Kuala Lumpur",
+        "Cyberjaya"
+      ],
+      "dc_country_match": true,
+      "notes": "Malaysian provider, enterprise"
+    },
+    "Server Connect": {
+      "hq_country": "Malaysia",
+      "hq_city": "Kuala Lumpur",
+      "local_support": true,
+      "data_residency": "Malaysia",
+      "dc_locations": [
+        "Kuala Lumpur"
+      ],
+      "dc_country_match": true,
+      "notes": "Malaysian provider"
+    },
+    "Viettel IDC": {
+      "hq_country": "Vietnam",
+      "hq_city": "Hanoi",
+      "local_support": true,
+      "data_residency": "Vietnam",
+      "dc_locations": [
+        "Hanoi",
+        "Ho Chi Minh"
+      ],
+      "dc_country_match": true,
+      "notes": "Vietnam state-backed, sovereign cloud"
+    },
+    "FPT Smart Cloud": {
+      "hq_country": "Vietnam",
+      "hq_city": "Hanoi",
+      "local_support": true,
+      "data_residency": "Vietnam",
+      "dc_locations": [
+        "Hanoi",
+        "Ho Chi Minh"
+      ],
+      "dc_country_match": true,
+      "notes": "FPT Corporation subsidiary"
+    },
+    "OVH": {
+      "hq_country": "France",
+      "hq_city": "Roubaix",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Sydney"
+      ],
+      "dc_country_match": false,
+      "notes": "French HQ, APAC presence in SG/Sydney, no local APAC support"
+    },
+    "Vultr": {
+      "hq_country": "USA",
+      "hq_city": "New Jersey",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Tokyo",
+        "Sydney"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, 32+ global locations, English-only support"
+    },
+    "DigitalOcean": {
+      "hq_country": "USA",
+      "hq_city": "New York",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, 14 global regions, English-only"
+    },
+    "UpCloud": {
+      "hq_country": "Finland",
+      "hq_city": "Helsinki",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore"
+      ],
+      "dc_country_match": false,
+      "notes": "Finnish HQ, English support"
+    },
+    "Contabo": {
+      "hq_country": "Germany",
+      "hq_city": "Munich",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore"
+      ],
+      "dc_country_match": false,
+      "notes": "German HQ, English support, cheap"
+    },
+    "Kamatera": {
+      "hq_country": "Israel",
+      "hq_city": "Rosh HaAyin",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Hong Kong",
+        "Singapore"
+      ],
+      "dc_country_match": false,
+      "notes": "Israeli HQ, global coverage"
+    },
+    "Hetzner Cloud": {
+      "hq_country": "Germany",
+      "hq_city": "Gunzenhausen",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore"
+      ],
+      "dc_country_match": false,
+      "notes": "German HQ, English support"
+    },
+    "Linode (Akamai)": {
+      "hq_country": "USA",
+      "hq_city": "Philadelphia",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Tokyo"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, now Akamai"
+    },
+    "Oracle Cloud": {
+      "hq_country": "USA",
+      "hq_city": "Austin",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Tokyo",
+        "Seoul"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, Always Free tier"
+    },
+    "AWS Middle East (Bahrain)": {
+      "hq_country": "USA",
+      "hq_city": "Seattle",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Bahrain",
+        "Singapore",
+        "Tokyo"
+      ],
+      "dc_country_match": false,
+      "notes": "AWS Middle East region, English support"
+    },
+    "Alibaba Cloud": {
+      "hq_country": "China",
+      "hq_city": "Hangzhou",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Jakarta",
+        "Tokyo"
+      ],
+      "dc_country_match": false,
+      "notes": "Chinese HQ, APAC strong"
+    },
+    "Microsoft Azure": {
+      "hq_country": "USA",
+      "hq_city": "Redmond",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Jakarta"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, Azure APAC"
+    },
+    "Google Cloud": {
+      "hq_country": "USA",
+      "hq_city": "Mountain View",
+      "local_support": false,
+      "data_residency": "Global",
+      "dc_locations": [
+        "Singapore",
+        "Jakarta",
+        "Tokyo"
+      ],
+      "dc_country_match": false,
+      "notes": "USA HQ, GCP APAC"
+    }
+  }
+}
