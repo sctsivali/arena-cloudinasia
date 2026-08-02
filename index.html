@@ -2056,6 +2056,32 @@ a { color: inherit; text-decoration: none; }
   border-radius: 8px;
   margin: 8px 0 0;
 }
+.tech-modal-providers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+.provider-tag-clickable {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  color: var(--c-text);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.provider-tag-clickable:hover {
+  border-color: var(--c-cia);
+  background: rgba(96,189,145,0.10);
+  color: var(--c-cia);
+}
+.provider-tag-more {
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--c-text-3);
+}
 
 @media (max-width: 768px) {
   .provider-modal-stats { grid-template-columns: repeat(2, 1fr); }
@@ -3955,7 +3981,8 @@ function showTechModal(techKey) {
   const modal = document.getElementById('techModalOverlay');
   const content = document.getElementById('techModalContent');
   
-  const providerList = usage.providers.slice(0, 12).join(', ') + (usage.providers.length > 12 ? ` +${usage.providers.length - 12} more` : '');
+  const providerList = usage.providers.slice(0, 8).join(', ') + (usage.providers.length > 8 ? ` +${usage.providers.length - 8} more` : '');
+  const hasProviders = usage.providers && usage.providers.length > 0;
   
   content.innerHTML = `
     <button class="provider-modal-close" onclick="closeTechModal()">×</button>
@@ -3966,7 +3993,7 @@ function showTechModal(techKey) {
       <div style="flex:1;">
         <h2 class="provider-modal-title">${techKey.toUpperCase()}</h2>
         <p class="tech-modal-info">${info.info}</p>
-        <div class="tech-modal-license">📜 License: <b>${info.license}</b></div>
+        <div class="tech-modal-license">License: <b>${info.license}</b></div>
         <div class="tech-modal-usage">
           <div class="provider-stat-card">
             <div class="provider-stat-label">Providers</div>
@@ -3977,9 +4004,15 @@ function showTechModal(techKey) {
             <div class="provider-stat-value">${usage.tier_count || 0}</div>
           </div>
         </div>
-        ${usage.providers && usage.providers.length > 0 ? `
-          <h3 class="provider-section-title">Used by</h3>
-          <p class="tech-modal-providers">${providerList}</p>
+        ${hasProviders ? `
+          <h3 class="provider-section-title">Used by ${usage.provider_count} cloud providers</h3>
+          <div class="tech-modal-providers-grid">
+            ${usage.providers.slice(0, 12).map(p => `<span class="provider-tag-clickable" onclick="showProviderModal('${p.replace(/'/g, "\'")}')">${p}</span>`).join('')}
+            ${usage.providers.length > 12 ? `<span class="provider-tag-more">+${usage.providers.length - 12} more</span>` : ''}
+          </div>
+          <div style="margin-top:16px;">
+            <button class="provider-check-btn" onclick="closeTechModal(); filterByTech('${techKey}');">View in Directory</button>
+          </div>
         ` : ''}
       </div>
     </div>
@@ -4007,6 +4040,29 @@ function checkProviderProducts(providerName) {
     const search = document.getElementById('dirSearch');
     if (search) {
       search.value = providerName;
+      applyDirectoryFilter();
+    }
+  }, 200);
+}
+
+function filterByTech(techKey) {
+  // Find directory page
+  const dirIdx = PAGES.findIndex(p => p.id === 'directory');
+  if (dirIdx >= 0) showPage(dirIdx);
+  setTimeout(() => {
+    const search = document.getElementById('dirSearch');
+    if (search) {
+      // Use tech name as search term to find providers using this tech
+      const techSearch = techKey.toLowerCase();
+      const matchingProviders = [...new Set(DATA.rows.filter(r => {
+        const ts = r.tech_stack || {};
+        return Object.values(ts).some(v => String(v).toLowerCase().includes(techSearch));
+      }).map(r => r.provider))];
+      if (matchingProviders.length > 0) {
+        search.value = matchingProviders[0];
+      } else {
+        search.value = techKey;
+      }
       applyDirectoryFilter();
     }
   }, 200);
@@ -4237,9 +4293,10 @@ function buildLeafletMap() {
         className: 'cloud-radar-marker' + (isHub ? ' hub' : ''),
         html: '<div class="radar-pulse"></div>' +
               '<div class="radar-dot"></div>',
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
       });
+      L.marker([city.lat, city.lng], { icon: radarIcon, zIndexOffset: 1000 }).addTo(map);
       const radar = L.marker([city.lat, city.lng], { 
         icon: radarIcon, 
         zIndexOffset: 1000,
