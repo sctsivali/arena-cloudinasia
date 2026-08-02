@@ -1502,38 +1502,33 @@ a { color: inherit; text-decoration: none; }
 }
 
 
-/* Tech Stack - Split Open Source vs Proprietary */
+
+/* Tech Stack - Compact cards */
 .tech-split-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 .tech-split-col {
   background: var(--c-bg-2);
   border: 1px solid var(--c-line);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 16px;
 }
-.open-source-col {
-  border-top: 3px solid var(--c-cia);
-}
-.proprietary-col {
-  border-top: 3px solid var(--c-warn);
-}
+.open-source-col { border-top: 2px solid var(--c-cia); }
+.proprietary-col { border-top: 2px solid var(--c-warn); }
 .tech-split-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
   border-bottom: 1px solid var(--c-line);
 }
 .tech-split-icon {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 6px;
 }
 .open-source-col .tech-split-icon {
   background: rgba(96, 189, 145, 0.12);
@@ -1544,65 +1539,175 @@ a { color: inherit; text-decoration: none; }
   color: var(--c-warn);
 }
 .tech-split-title {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--c-text);
-  margin: 0 0 2px 0;
+  font-size: 15px; font-weight: 800;
+  color: var(--c-text); margin: 0;
 }
 .tech-split-subtitle {
-  font-size: 11px;
-  color: var(--c-text-3);
+  font-size: 10px; color: var(--c-text-3);
   margin: 0;
 }
 .tech-split-badge {
   margin-left: auto;
-  padding: 4px 12px;
-  border-radius: 99px;
-  font-size: 11px;
-  font-weight: 800;
+  padding: 3px 9px; border-radius: 99px;
+  font-size: 10px; font-weight: 800;
   letter-spacing: 0.05em;
 }
-.os-badge {
-  background: rgba(96, 189, 145, 0.15);
-  color: var(--c-cia);
-}
-.prop-badge {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--c-warn);
-}
+.os-badge { background: rgba(96,189,145,0.15); color: var(--c-cia); }
+.prop-badge { background: rgba(245,158,11,0.15); color: var(--c-warn); }
 
-.tech-split-group {
-  margin-bottom: 20px;
-}
-.tech-split-group:last-child {
-  margin-bottom: 0;
-}
+.tech-split-group { margin-bottom: 14px; }
+.tech-split-group:last-child { margin-bottom: 0; }
 .tech-split-group-label {
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px; font-weight: 700;
   color: var(--c-text-3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 10px;
-  padding-left: 4px;
+  margin-bottom: 8px;
 }
 
-/* Card variants */
-.tech-logo-card.os-card {
-  border-left: 2px solid var(--c-cia);
+/* COMPACT TECH CARDS */
+.tech-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 8px;
 }
-.tech-logo-card.os-card:hover {
+.tech-logo-card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  transition: all 0.15s;
+  cursor: help;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tech-logo-card:hover {
   border-color: var(--c-cia);
-  border-left-width: 2px;
+  transform: translateY(-1px);
 }
-.tech-logo-card.prop-card {
-  border-left: 2px solid var(--c-warn);
+.tech-logo-card.os-card { border-left: 2px solid var(--c-cia); }
+.tech-logo-card.prop-card { border-left: 2px solid var(--c-warn); }
+
+.tech-logo-svg {
+  width: 30px; height: 30px;
+  margin-bottom: 6px;
+  display: grid; place-items: center;
 }
-.tech-logo-card.prop-card:hover {
-  border-color: var(--c-warn);
-  border-left-width: 2px;
+.tech-logo-svg svg, .tech-logo-svg img {
+  width: 100%; height: 100%;
+}
+.real-tech-logo {
+  filter: brightness(0) invert(1);
+  transition: filter 0.2s;
+}
+.tech-logo-card:hover .real-tech-logo { filter: none; }
+
+.tech-logo-label {
+  font-size: 11px; font-weight: 700;
+  color: var(--c-text); margin-bottom: 4px;
+  line-height: 1.2;
+}
+.tech-logo-desc {
+  font-size: 9px; color: var(--c-text-3);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  min-height: 11px;
 }
 
+/* Compact badge inside card */
+.tech-card-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 4px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+}
+.tech-card-badge.open-badge {
+  background: rgba(96, 189, 145, 0.10);
+  color: var(--c-cia);
+}
+.tech-card-badge.proprietary-badge {
+  background: rgba(245, 158, 11, 0.10);
+  color: var(--c-warn);
+}
+.tech-card-badge .badge-type {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.open-badge .badge-type {
+  background: var(--c-cia);
+  color: #06061a;
+}
+.proprietary-badge .badge-type {
+  background: var(--c-warn);
+  color: #06061a;
+}
+.tech-card-badge .badge-stat {
+  font-size: 9px;
+  color: var(--c-text-2);
+}
+.tech-card-badge .badge-stat b {
+  color: var(--c-text);
+  font-weight: 800;
+}
+
+/* Tech Filter Bar */
+.tech-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.tech-filter-label {
+  font-size: 11px;
+  color: var(--c-text-3);
+  font-weight: 600;
+  margin-right: 2px;
+}
+.tech-filter-btn {
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--c-line);
+  background: var(--c-bg-2);
+  color: var(--c-text-2);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.tech-filter-btn:hover {
+  border-color: var(--c-cia);
+  color: var(--c-text);
+}
+.tech-filter-btn.active {
+  background: var(--c-cia);
+  color: #06061a;
+  border-color: var(--c-cia);
+}
+.tech-filter-btn.active.prop {
+  background: var(--c-warn);
+  border-color: var(--c-warn);
+}
+.tech-logo-card.filtered-out { display: none; }
+
+@media (max-width: 768px) {
+  .tech-split-container { grid-template-columns: 1fr; }
+  .tech-logos-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+}
 @media (max-width: 768px) {
   .tech-split-container {
     grid-template-columns: 1fr;
