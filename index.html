@@ -1232,28 +1232,71 @@ a { color: inherit; text-decoration: none; }
 
 
 
-/* Sonar pulse animation - 3 concentric expanding rings per city */
-.city-circle-sonar {
+
+/* SONAR RADAR EFFECT for DC locations */
+.cloud-radar-marker {
   position: relative;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none;
 }
-.leaflet-overlay-pane svg path.city-sonar-circle {
-  stroke-dasharray: 4 3;
-  animation: city-pulse 3s ease-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
+.cloud-radar-marker .radar-pulse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--c-cia);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  pointer-events: none;
+  animation: radar-pulse 2.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  will-change: transform, opacity;
 }
-.leaflet-overlay-pane svg path.city-sonar-circle.hub {
-  animation: city-pulse 2.4s ease-out infinite;
-  stroke-dasharray: 5 4;
+.cloud-radar-marker .radar-pulse-2 {
+  animation-delay: 1.4s;
 }
-@keyframes city-pulse {
+
+.cloud-radar-marker .radar-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--c-cia);
+  border: 2px solid #0a0a1a;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 2px var(--c-cia);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.cloud-radar-marker.hub .radar-pulse {
+  border-color: var(--c-yellow);
+  border-width: 2.5px;
+}
+.cloud-radar-marker.hub .radar-dot {
+  background: var(--c-yellow);
+  box-shadow: 0 0 0 2px var(--c-yellow);
+  width: 10px;
+  height: 10px;
+}
+
+@keyframes radar-pulse {
   0% {
-    stroke-dashoffset: 0;
-    stroke-opacity: 1;
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.9;
+    border-width: 3px;
+  }
+  70% {
+    opacity: 0.1;
   }
   100% {
-    stroke-dashoffset: -28;
-    stroke-opacity: 0.3;
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+    border-width: 1px;
   }
 }
 
@@ -2476,22 +2519,36 @@ function buildLeafletMap() {
       const fillColor = getCountryFill(city.count);
       const isHub = city.count >= 10;
       
+      // FILLED CIRCLE (region/zone)
       const circle = L.circle([city.lat, city.lng], {
         radius: finalRadius,
         fillColor: fillColor,
-        fillOpacity: isHub ? 0.6 : 0.45,
+        fillOpacity: isHub ? 0.45 : 0.3,
         color: isHub ? '#ffde59' : '#60bd91',
-        weight: isHub ? 2.5 : 1.5,
-        opacity: 0.85,
-        className: 'city-sonar-circle' + (isHub ? ' hub' : ''),
+        weight: isHub ? 2 : 1.2,
+        opacity: 0.7,
       }).addTo(map);
       
-      // Hover effect
+      // RADAR MARKER at center (sonar effect)
+      const radarIcon = L.divIcon({
+        className: 'cloud-radar-marker' + (isHub ? ' hub' : ''),
+        html: '<div class="radar-pulse"></div>' +
+              '<div class="radar-dot"></div>',
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
+      });
+      const radar = L.marker([city.lat, city.lng], { 
+        icon: radarIcon, 
+        zIndexOffset: 1000,
+        interactive: false,
+      }).addTo(map);
+      
+      // Hover effect on circle (not radar)
       circle.on('mouseover', function() {
-        this.setStyle({ fillOpacity: 0.75, weight: isHub ? 3.5 : 2.5 });
+        this.setStyle({ fillOpacity: 0.55, weight: isHub ? 3 : 2 });
       });
       circle.on('mouseout', function() {
-        this.setStyle({ fillOpacity: isHub ? 0.6 : 0.45, weight: isHub ? 2.5 : 1.5 });
+        this.setStyle({ fillOpacity: isHub ? 0.45 : 0.3, weight: isHub ? 2 : 1.2 });
       });
       
       // Click to fit
