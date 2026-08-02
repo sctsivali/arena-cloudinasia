@@ -3861,22 +3861,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Make all provider names clickable (delegated)
+// Provider clicks now handled by markProviderNames (navigate + open modal)
+// Tech card clicks remain here
 document.addEventListener('click', (e) => {
-  // Find provider name in clicked element or parent
-  const target = e.target.closest('[data-provider], .provider-name-clickable, .arena-provider-name, .tech-name');
-  if (target) {
-    const providerName = target.dataset.provider || target.textContent.trim();
-    if (providerName && providerName.length < 60) {
-      // Check if it's a real provider
-      const exists = DATA.rows.some(r => r.provider === providerName);
-      if (exists) {
-        showProviderModal(providerName);
-        e.preventDefault();
-        return;
-      }
-    }
-  }
-  
   // Find tech card click
   const techCard = e.target.closest('.tech-logo-card[data-tech]');
   if (techCard) {
@@ -3919,6 +3906,25 @@ function markProviderNames() {
         break;
       }
     }
+  });
+  
+  // 3. Add click handler: navigate to Providers page + open modal
+  document.querySelectorAll('.provider-name-clickable').forEach(el => {
+    if (el.dataset.handlerAttached) return;
+    el.dataset.handlerAttached = 'true';
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const providerName = el.dataset.provider;
+      // Navigate to Providers page (index 3)
+      showPage(3);
+      // Wait for page to render, then open modal
+      setTimeout(() => {
+        if (typeof window.openProviderModal === 'function') {
+          window.openProviderModal(providerName);
+        }
+      }, 200);
+    });
   });
 }
 
