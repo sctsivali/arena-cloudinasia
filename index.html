@@ -1677,6 +1677,19 @@ a { color: inherit; text-decoration: none; }
   .tech-split-container { grid-template-columns: 1fr; }
   .tech-logos-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
 }
+
+.provider-check-btn {
+  background: var(--c-cia);
+  color: #06061a;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.provider-check-btn:hover { background: var(--c-yellow); }
 @media (max-width: 768px) {
   .tech-split-container {
     grid-template-columns: 1fr;
@@ -2241,45 +2254,45 @@ a { color: inherit; text-decoration: none; }
 </div>
 </div>
 </div>
-</section>
-<!-- WORLD CLOUD MAP (TOP) -->
-<section class="section" id="cloud-world-map">
-<div class="hero-row">
-<div class="section-label-row">
-<div class="section-icon">
-<svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
-</div>
-<div class="section-label-text">World Cloud Infrastructure Map</div>
-</div>
-</div>
-<p class="section-sub">Geographic distribution of cloud providers. <strong>Drag to pan</strong>, <strong>scroll to zoom</strong>. Country colors = provider count (brighter = more providers).</p>
-<div class="world-map-container" id="worldMapContainer">
-<div id="leafletMap" style="width:100%; height:560px; border-radius:14px;"></div>
-</div>
-<div class="map-legend">
-<div class="legend-item">
-<span class="legend-bubble" style="background:#1a2438; border:1px solid #2a3a4a"></span>
-<span>0 providers</span>
-</div>
-<div class="legend-item">
-<span class="legend-bubble" style="background:#2a4a3a; border:1px solid #60bd91"></span>
-<span>1-3 providers</span>
-</div>
-<div class="legend-item">
-<span class="legend-bubble" style="background:#60bd91; border:1px solid #80d0ab"></span>
-<span>4-8 providers</span>
-</div>
-<div class="legend-item">
-<span class="legend-bubble" style="background:#80d0ab; border:1px solid #a8e3c2"></span>
-<span>9-13 providers</span>
-</div>
-<div class="legend-item">
-<span class="legend-bubble" style="background:#ffde59; border:1px solid #ffde59"></span>
-<span>14+ providers (cloud hub)</span>
-</div>
-</div>
-<div class="map-stats" id="mapStats"></div>
-</section>
+
+
+      <!-- World Cloud Map (in Hero/Overview) -->
+      <div style="margin-top: 24px;">
+        <div class="section-label-row" style="margin-bottom: 12px;">
+          <div class="section-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div class="section-label-text">World Cloud Infrastructure Map</div>
+        </div>
+        <p class="section-sub">Geographic distribution of cloud DCs. Drag to pan, scroll to zoom.</p>
+        <div class="world-map-container" id="worldMapContainer">
+          <div id="leafletMap" style="width:100%; height:560px; border-radius:14px;"></div>
+        </div>
+        <div class="map-legend">
+          <div class="legend-item">
+            <span class="legend-bubble" style="background:#1a2438; border:1px solid #2a3a4a"></span>
+            <span>0 providers</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-bubble" style="background:#2a4a3a; border:1px solid #60bd91"></span>
+            <span>1-3 providers</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-bubble" style="background:#60bd91; border:1px solid #80d0ab"></span>
+            <span>4-8 providers</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-bubble" style="background:#80d0ab; border:1px solid #a8e3c2"></span>
+            <span>9-13 providers</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-bubble" style="background:#ffde59; border:1px solid #ffde59"></span>
+            <span>14+ providers (cloud hub)</span>
+          </div>
+        </div>
+        <div class="map-stats" id="mapStats"></div>
+      </div>
+    </section>
 <!-- OPEN SOURCE LEADERBOARD -->
 <section class="section" id="os-leaderboard">
 <div class="hero-row">
@@ -3886,6 +3899,9 @@ function showProviderModal(providerName) {
   content.innerHTML = `
     <button class="provider-modal-close" onclick="closeProviderModal()">×</button>
     <h2 class="provider-modal-title">${providerName}</h2>
+    <div style="display:flex; gap:8px; margin-bottom:16px;">
+      <button class="provider-check-btn" onclick="checkProviderProducts('${providerName}')">Check All Products</button>
+    </div>
     <div class="provider-modal-stats">
       <div class="provider-stat-card">
         <div class="provider-stat-label">Tiers</div>
@@ -3983,18 +3999,51 @@ document.addEventListener('keydown', e => {
   }
 });
 
+function checkProviderProducts(providerName) {
+  closeProviderModal();
+  const dirIdx = PAGES.findIndex(p => p.id === 'directory');
+  if (dirIdx >= 0) showPage(dirIdx);
+  setTimeout(() => {
+    const search = document.getElementById('dirSearch');
+    if (search) {
+      search.value = providerName;
+      applyDirectoryFilter();
+    }
+  }, 200);
+}
+
+function navigateToDirectoryWithFilter(country) {
+  const dirIdx = PAGES.findIndex(p => p.id === 'directory');
+  if (dirIdx >= 0) showPage(dirIdx);
+  setTimeout(() => {
+    const countrySelect = document.getElementById('dirCountry');
+    if (countrySelect) {
+      countrySelect.value = country;
+      applyDirectoryFilter();
+    }
+  }, 200);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.country-card').forEach(card => {
+    const country = card.dataset.country || card.querySelector('.country-name')?.textContent?.trim();
+    if (country) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => navigateToDirectoryWithFilter(country));
+    }
+  });
+});
+
 // ============== PAGE-BASED NAVIGATION ==============
 const PAGES = [
-  { id: 'hero', title: 'Overview', icon: '🏠' },
-  { id: 'map', title: 'World Map', icon: '🗺️' },
-  { id: 'os-leaderboard', title: 'Open Source Leaderboard', icon: '🛡️' },
-  { id: 'tech-stack', title: 'Technology Stack', icon: '⚙️' },
-  { id: 'providers', title: 'Provider Profiles', icon: '🏢' },
-  { id: 'by-country', title: 'By Country', icon: '🌍' },
-  { id: 'by-tech', title: 'By Technology', icon: '🔧' },
-  { id: 'oss-vs-prop', title: 'OSS vs Proprietary', icon: '⚖️' },
-  { id: 'directory', title: 'Full Directory', icon: '📋' },
-  { id: 'arena', title: 'Arena Compare', icon: '🏆' },
+  { id: 'hero', title: 'Overview' },
+  { id: 'os-leaderboard', title: 'Open Source Leaderboard' },
+  { id: 'tech-stack', title: 'Technology Stack' },
+  { id: 'providers', title: 'Provider Profiles' },
+  { id: 'by-country', title: 'By Country' },
+  { id: 'oss-vs-prop', title: 'OSS vs Proprietary' },
+  { id: 'directory', title: 'Full Directory' },
+  { id: 'arena', title: 'Arena Compare' },
 ];
 
 let currentPageIdx = 0;
@@ -4007,6 +4056,13 @@ function showPage(pageIdx) {
   const page = PAGES[pageIdx];
   const target = document.getElementById(page.id);
   if (target) target.style.display = 'block';
+  
+  // If map is on this page, invalidate size
+  if (page.id === 'hero') {
+    setTimeout(() => {
+      if (window._cloudMap) window._cloudMap.invalidateSize();
+    }, 200);
+  }
   
   // Add page navigation buttons
   injectPageNav(pageIdx);
