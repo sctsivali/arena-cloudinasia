@@ -2341,6 +2341,49 @@ body.sidebar-collapsed .sidebar-toggle-float {
   text-align: center;
 }
 
+
+/* Site footer (last-updated) */
+.site-footer {
+  margin-top: 60px;
+  padding: 32px 48px 24px;
+  background: var(--c-bg-2);
+  border-top: 1px solid var(--c-line);
+  border-radius: 12px 12px 0 0;
+}
+.site-footer-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.site-footer-section {
+  text-align: left;
+}
+.site-footer-brand {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--c-cia);
+  margin-bottom: 6px;
+}
+.site-footer-tag {
+  font-size: 11px;
+  color: var(--c-text-3);
+}
+.site-footer-label {
+  font-size: 10px;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.site-footer-value {
+  font-size: 13px;
+  color: var(--c-text);
+  font-weight: 600;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   :root { --sidebar-w: 200px; }
@@ -2435,6 +2478,10 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div style="margin-bottom:8px;font-weight:700;color:var(--c-text-2)">VMLeaderboard · 2026</div>
 <div>Asia Pacific cloud pricing tracker</div>
 <div style="margin-top:8px;color:var(--c-yellow);font-weight:700">v12.0</div>
+<div style="opacity:0.7;font-size:9px;margin-top:8px;padding-top:6px;border-top:1px solid var(--c-line)">
+  Last updated:<br>
+  <span id="lastUpdatedTime" style="color:var(--c-cia);font-weight:600">--</span>
+</div>
 </div>
 </aside>
 <main class="main">
@@ -2466,7 +2513,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div class="bento-card-eyebrow">Cloud Marketplace</div>
 <div class="bento-card-title">666 Plans Available</div>
 <div class="bento-card-desc">From 82 providers across 22 countries in Asia Pacific. Mix of hyperscaler, local commercial, and sovereign open source stacks.</div>
-<div class="bento-card-stat">
+<div class="bento-card-stat" id="heroMinPrice">
 <div class="v">$1.09</div>
 <div class="l">/month starting</div>
 </div>
@@ -2476,7 +2523,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
 </div>
 <div class="bento-card-eyebrow">Median Price</div>
-<div class="bento-card-stat" style="margin-top:8px">
+<div class="bento-card-stat" id="heroAvgPrice" style="margin-top:8px">
 <div class="v yellow">$63.00</div>
 <div class="l">/month</div>
 </div>
@@ -2486,7 +2533,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
 </div>
 <div class="bento-card-eyebrow">Open Source</div>
-<div class="bento-card-stat" style="margin-top:8px">
+<div class="bento-card-stat" id="heroSovereign" style="margin-top:8px">
 <div class="v green">6</div>
 <div class="l">sovereign</div>
 </div>
@@ -2496,7 +2543,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
 </div>
 <div class="bento-card-eyebrow">Countries</div>
-<div class="bento-card-stat" style="margin-top:8px">
+<div class="bento-card-stat" id="heroAPAC" style="margin-top:8px">
 <div class="v blue">22</div>
 <div class="l">APAC</div>
 </div>
@@ -2506,7 +2553,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
 </div>
 <div class="bento-card-eyebrow">Providers</div>
-<div class="bento-card-stat" style="margin-top:8px">
+<div class="bento-card-stat" id="heroProviders" style="margin-top:8px">
 <div class="v cyan">82</div>
 <div class="l">305 local · 292 global</div>
 </div>
@@ -3201,6 +3248,27 @@ body.sidebar-collapsed .sidebar-toggle-float {
 </div>
 </div>
 </section>
+
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div class="site-footer-section">
+            <div class="site-footer-brand">CloudinAsia</div>
+            <div class="site-footer-tag">Asia Pacific cloud pricing tracker</div>
+          </div>
+          <div class="site-footer-section">
+            <div class="site-footer-label">Last Updated</div>
+            <div class="site-footer-value" id="footerLastUpdated">--</div>
+          </div>
+          <div class="site-footer-section">
+            <div class="site-footer-label">Data Sources</div>
+            <div class="site-footer-value">82 providers · 666 tiers · 23 countries</div>
+          </div>
+          <div class="site-footer-section">
+            <div class="site-footer-label">Coverage</div>
+            <div class="site-footer-value">APAC + Global hyperscalers</div>
+          </div>
+        </div>
+      </footer>
 </main>
 </div>
 <script>
@@ -3996,6 +4064,44 @@ document.querySelectorAll('.nav-item').forEach(item => {
     }
   });
 });
+
+// ========== Update Hero Stats Dynamically ==========
+function updateHeroStats() {
+  if (!DATA || !DATA.rows) return;
+  const rows = DATA.rows;
+  const prices = rows.map(r => r.price_usd_per_month || 0).filter(p => p > 0);
+  const minPrice = prices.length ? Math.min(...prices) : 0;
+  const avgPrice = prices.length ? prices.reduce((a, b) => a + b, 0) / prices.length : 0;
+  const sovereign = rows.filter(r => r.data_residency === 'local' || r.data_residency === 'Indonesia').length;
+  const apacCountries = ['Indonesia', 'Singapore', 'Malaysia', 'Thailand', 'Vietnam', 'Philippines', 'Japan', 'South Korea', 'China', 'Hong Kong', 'Taiwan', 'Australia', 'New Zealand', 'India', 'Myanmar', 'Cambodia', 'Laos', 'Brunei', 'Mongolia'];
+  const apacProviders = [...new Set(rows.filter(r => apacCountries.includes(r.country)).map(r => r.provider))].length;
+  const totalProviders = [...new Set(rows.map(r => r.provider))].length;
+  
+  const set = (id, val) => { const el = document.querySelector('#' + id + ' .v'); if (el) el.textContent = val; };
+  set('heroMinPrice', '$' + minPrice.toFixed(2));
+  set('heroAvgPrice', '$' + avgPrice.toFixed(2));
+  set('heroSovereign', sovereign);
+  set('heroAPAC', apacProviders);
+  set('heroProviders', totalProviders);
+  
+  // Update last updated
+  const lastEl = document.getElementById('lastUpdatedTime');
+  const footerEl = document.getElementById('footerLastUpdated');
+  const now = new Date();
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' };
+  const formatted = now.toLocaleString('id-ID', options) + ' WIB';
+  if (lastEl) lastEl.textContent = formatted;
+  if (footerEl) footerEl.textContent = formatted;
+  
+  // Update data sources in footer
+  const sourcesEl = document.querySelector('[data-sources]');
+  if (sourcesEl) {
+    const countries = [...new Set(rows.map(r => r.country).filter(c => c))].length;
+    sourcesEl.textContent = `${totalProviders} providers · ${rows.length} tiers · ${countries} countries`;
+  }
+}
+
+updateHeroStats();
 
 buildOSLeaderboard();
 buildTechStackBlocks();
