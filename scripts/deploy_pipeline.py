@@ -113,8 +113,43 @@ def regenerate_website_data():
     index_path = WEBROOT / "index.html"
     content = index_path.read_text()
     
-    # Find and replace DATA block - use safe string search instead of regex
-    # DATA block format: const DATA = { ... };.find from "const DATA = {" to ";"
+    # First remove any existing DATA blocks (safety against duplicates)
+    while True:
+        idx = content.find("const DATA = {")
+        if idx == -1:
+            break
+        # Find matching close
+        depth = 0
+        in_string = False
+        escape_next = False
+        i = idx + len("const DATA = ")
+        while i < len(content):
+            c = content[i]
+            if escape_next:
+                escape_next = False
+                i += 1
+                continue
+            if c == "\\":
+                escape_next = True
+                i += 1
+                continue
+            if c == '"':
+                in_string = not in_string
+            if not in_string:
+                if c == "{":
+                    depth += 1
+                elif c == "}":
+                    depth -= 1
+                    if depth == 0:
+                        i += 1
+                        break
+            i += 1
+        # Find semicolon
+        if i < len(content) and content[i] == ";":
+            i += 1
+        content = content[:idx] + content[i:].lstrip()
+    
+    # Now find clean insertion point
     start_marker = "const DATA = {"
     start_idx = content.find(start_marker)
     if start_idx >= 0:
