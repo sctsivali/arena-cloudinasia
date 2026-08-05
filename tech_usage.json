@@ -738,7 +738,7 @@
   "VNPT": {
     "provider": "VNPT",
     "provider_count": 1,
-    "tier_count": 6,
+    "tier_count": 8,
     "providers": [
       "VNPT"
     ]
@@ -746,7 +746,7 @@
   "BizFly Cloud": {
     "provider": "BizFly Cloud",
     "provider_count": 1,
-    "tier_count": 4,
+    "tier_count": 8,
     "providers": [
       "BizFly Cloud"
     ]
@@ -754,7 +754,7 @@
   "1VPS Vietnam": {
     "provider": "1VPS Vietnam",
     "provider_count": 1,
-    "tier_count": 2,
+    "tier_count": 4,
     "providers": [
       "1VPS Vietnam"
     ]
@@ -762,7 +762,7 @@
   "VHost Vietnam": {
     "provider": "VHost Vietnam",
     "provider_count": 1,
-    "tier_count": 2,
+    "tier_count": 4,
     "providers": [
       "VHost Vietnam"
     ]
@@ -770,9 +770,17 @@
   "VietVPS": {
     "provider": "VietVPS",
     "provider_count": 1,
-    "tier_count": 2,
+    "tier_count": 4,
     "providers": [
       "VietVPS"
+    ]
+  },
+  "HostVN": {
+    "provider": "HostVN",
+    "provider_count": 1,
+    "tier_count": 4,
+    "providers": [
+      "HostVN"
     ]
   }
 }
