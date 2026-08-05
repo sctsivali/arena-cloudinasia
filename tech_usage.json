@@ -662,5 +662,21 @@
     "providers": [
       "Telkomsigma Cloud"
     ]
+  },
+  "Dewaweb": {
+    "provider": "Dewaweb",
+    "provider_count": 1,
+    "tier_count": 2,
+    "providers": [
+      "Dewaweb"
+    ]
+  },
+  "Indonesian Cloud": {
+    "provider": "Indonesian Cloud",
+    "provider_count": 1,
+    "tier_count": 2,
+    "providers": [
+      "Indonesian Cloud"
+    ]
   }
 }
