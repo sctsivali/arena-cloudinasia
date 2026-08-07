@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+<!-- cloud-pricing v20260807-1328 -->
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>VMLeaderboard — Asia Pacific Cloud Pricing</title>
@@ -4073,16 +4074,26 @@ function updateHeroStats() {
   const minPrice = prices.length ? Math.min(...prices) : 0;
   const avgPrice = prices.length ? prices.reduce((a, b) => a + b, 0) / prices.length : 0;
   const sovereign = rows.filter(r => r.data_residency === 'local' || r.data_residency === 'Indonesia').length;
+  const globalRows = rows.filter(r => r.data_residency === 'global' || r.data_residency === 'regional').length;
   const apacCountries = ['Indonesia', 'Singapore', 'Malaysia', 'Thailand', 'Vietnam', 'Philippines', 'Japan', 'South Korea', 'China', 'Hong Kong', 'Taiwan', 'Australia', 'New Zealand', 'India', 'Myanmar', 'Cambodia', 'Laos', 'Brunei', 'Mongolia'];
   const apacProviders = [...new Set(rows.filter(r => apacCountries.includes(r.country)).map(r => r.provider))].length;
   const totalProviders = [...new Set(rows.map(r => r.provider))].length;
   
   const set = (id, val) => { const el = document.querySelector('#' + id + ' .v'); if (el) el.textContent = val; };
+  const setL = (id, val) => { const el = document.querySelector('#' + id + ' .l'); if (el) el.textContent = val; };
+  
   set('heroMinPrice', '$' + minPrice.toFixed(2));
   set('heroAvgPrice', '$' + avgPrice.toFixed(2));
   set('heroSovereign', sovereign);
   set('heroAPAC', apacProviders);
   set('heroProviders', totalProviders);
+  
+  // Update labels too
+  setL('heroProviders', sovereign + ' local · ' + globalRows + ' global');
+  setL('heroSovereign', 'sovereign providers');
+  setL('heroAPAC', 'APAC providers');
+  setL('heroAvgPrice', '/month avg');
+  setL('heroMinPrice', '/month starting');
   
   // Update last updated
   const lastEl = document.getElementById('lastUpdatedTime');
@@ -4093,12 +4104,11 @@ function updateHeroStats() {
   if (lastEl) lastEl.textContent = formatted;
   if (footerEl) footerEl.textContent = formatted;
   
-  // Update data sources in footer
-  const sourcesEl = document.querySelector('[data-sources]');
-  if (sourcesEl) {
-    const countries = [...new Set(rows.map(r => r.country).filter(c => c))].length;
-    sourcesEl.textContent = `${totalProviders} providers · ${rows.length} tiers · ${countries} countries`;
-  }
+  // Update data sources in footer (also fix selector)
+  const sourcesEls = document.querySelectorAll('[data-sources], .footer-data-sources');
+  const countries = [...new Set(rows.map(r => r.country).filter(c => c))].length;
+  const sourcesText = `${totalProviders} providers · ${rows.length} tiers · ${countries} countries`;
+  sourcesEls.forEach(el => el.textContent = sourcesText);
 }
 
 updateHeroStats();
