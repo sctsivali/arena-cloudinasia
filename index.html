@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<!-- cloud-pricing v20260807-1328 -->
+<!-- cloud-pricing v20260807-1331 -->
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>VMLeaderboard — Asia Pacific Cloud Pricing</title>
@@ -2490,7 +2490,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <section class="section" id="hero">
 <div class="page-header">
 <h1>Asia Pacific Cloud Infrastructure Leaderboard</h1>
-<p>Cheapest VPS, Container, GPU, and Bare Metal servers across 22 countries. 666 tiers from 82 providers — open source and proprietary, normalized to USD/month.</p>
+<p>Cheapest VPS, Container, GPU, and Bare Metal servers across <span id="heroCountryCount">22</span> countries. <span id="heroTierCount">666</span> tiers from <span id="heroProviderCount">82</span> providers — open source and proprietary, normalized to USD/month.</p>
 </div>
 <div class="hero-row">
 <div class="section-label-row">
@@ -2512,8 +2512,8 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
 </div>
 <div class="bento-card-eyebrow">Cloud Marketplace</div>
-<div class="bento-card-title">666 Plans Available</div>
-<div class="bento-card-desc">From 82 providers across 22 countries in Asia Pacific. Mix of hyperscaler, local commercial, and sovereign open source stacks.</div>
+<div class="bento-card-title" id="heroTotalPlans">666 Plans Available</div>
+<div class="bento-card-desc" id="heroDescription">From 82 providers across 22 countries in Asia Pacific. Mix of hyperscaler, local commercial, and sovereign open source stacks.</div>
 <div class="bento-card-stat" id="heroMinPrice">
 <div class="v">$1.09</div>
 <div class="l">/month starting</div>
@@ -3061,7 +3061,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
 <div class="section-label-text">Browse the Full Catalogue</div>
 </div>
 </div>
-<p class="section-sub">666 plans from 82 providers. Filter by spec, price, region and more.</p>
+<p class="section-sub" id="directorySectionSub">666 plans from 82 providers. Filter by spec, price, region and more.</p>
 <div class="directory-bar">
 <input id="dirSearch" onkeyup="applyDirectoryFilter()" placeholder="Search provider or tier..." type="text"/>
 <select id="dirCountry" onchange="applyDirectoryFilter()">
@@ -3262,7 +3262,7 @@ body.sidebar-collapsed .sidebar-toggle-float {
           </div>
           <div class="site-footer-section">
             <div class="site-footer-label">Data Sources</div>
-            <div class="site-footer-value">82 providers · 666 tiers · 23 countries</div>
+            <div class="site-footer-value" id="footerStats">82 providers · 666 tiers · 23 countries</div>
           </div>
           <div class="site-footer-section">
             <div class="site-footer-label">Coverage</div>
@@ -4109,6 +4109,32 @@ function updateHeroStats() {
   const countries = [...new Set(rows.map(r => r.country).filter(c => c))].length;
   const sourcesText = `${totalProviders} providers · ${rows.length} tiers · ${countries} countries`;
   sourcesEls.forEach(el => el.textContent = sourcesText);
+  
+  // Update bento card title and description
+  const planTitle = document.getElementById('heroTotalPlans');
+  if (planTitle) planTitle.textContent = rows.length + ' Plans Available';
+  
+  const planDesc = document.getElementById('heroDescription');
+  if (planDesc) {
+    const apacLocal = [...new Set(rows.filter(r => r.data_residency === 'local' || r.data_residency === 'Indonesia').map(r => r.provider))].length;
+    planDesc.textContent = `From ${totalProviders} providers across ${countries} countries in Asia Pacific. Mix of hyperscaler, local commercial, and sovereign open source stacks (${apacLocal} sovereign SEA providers).`;
+  }
+  
+  // Update directory section sub
+  const dirSub = document.getElementById('directorySectionSub');
+  if (dirSub) dirSub.textContent = rows.length + ' plans from ' + totalProviders + ' providers. Filter by spec, price, region and more.';
+  
+  // Update footer stats
+  const footerStats = document.getElementById('footerStats');
+  if (footerStats) footerStats.textContent = totalProviders + ' providers · ' + rows.length + ' tiers · ' + countries + ' countries';
+  
+  // Update inline hero paragraph
+  const tierEl = document.getElementById('heroTierCount');
+  if (tierEl) tierEl.textContent = rows.length;
+  const provEl = document.getElementById('heroProviderCount');
+  if (provEl) provEl.textContent = totalProviders;
+  const countryEl = document.getElementById('heroCountryCount');
+  if (countryEl) countryEl.textContent = countries;
 }
 
 updateHeroStats();
