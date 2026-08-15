@@ -26,7 +26,7 @@ import ssl
 # Paths
 DATA_DIR = Path("/home/hermes-prime/.tmp/cloud-pricing/data")
 DB_PATH = DATA_DIR / "database.json"
-WEBROOT = Path("/home/hermes-prime/cloudprovider-id")
+WEBROOT = Path("/home/hermes-prime/arena-cloudinasia")
 INDEX_PATH = WEBROOT / "index.html"
 REPO_DIR = Path("/home/hermes-prime/arena-cloudinasia")
 LOG_PATH = Path("/tmp/pipeline.log")
